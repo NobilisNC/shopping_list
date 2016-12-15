@@ -2,7 +2,9 @@
 {block name=body}
 <body>
 	{validation_errors()}
+
     <form name="inscription" method="post" action="{base_url()}index.php/Accueil/inscription">
+        <fieldset>
 			<legend>Inscription</legend>
 			* Login :  <input name="login" type="text" value="" size="25" required /><br />
 			* Nom  : <input name="nom" type="text" value="" size="25" required /><br />
@@ -17,6 +19,7 @@
 
 			* = Champs obligatoires
         </form>
+    </fieldset>
 </body>
 </html>
 {/block}

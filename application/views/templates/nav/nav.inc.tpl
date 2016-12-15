@@ -4,11 +4,11 @@
 			<li><a href="index">Accueil</a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
-			{if !isset($smarty.session.login)}
-				<li><a href="connexion">Se connecter</a></li>
+			{if $smarty.session.logged_in === TRUE}
+                <li><a href="{base_url()}index.php/home/profil"><span class="fui-user"></span>{$smarty.session.login}</a></li>
+                <li><a href="{base_url()}index.php/home/logout"><span class="fui-lock"></span> Se déconnecter</a></li>
 			{else}
-				<li><a href="#"><span class="fui-user"></span>{$smarty.session.login}</a></li>
-				<li><a href="#"><span class="fui-lock"></span> Se déconnecter</a></li>
+                <li><a href="{base_url()}index.php/accueil/connexion">Se connecter</a></li>
 			{/if}
 		</ul>
 	</div>
