@@ -15,7 +15,7 @@
 			<input type="submit" name="valider" value="Valider">
 			<input type="reset" value="Effacer">
 
-			<a href="index.php/Accueil/inscription"><input type="button" value="J'ai déja un compte" /></a> <br />
+			<a href="connexion"><input type="button" value="J'ai déja un compte" /></a> <br />
 
 			* = Champs obligatoires
         </form>

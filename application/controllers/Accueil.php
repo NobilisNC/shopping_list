@@ -60,20 +60,20 @@ class Accueil extends CI_Controller {
    }
 
    public function login_check($str) {
-       if ($this->utilisateurs_model->valid_login($str) == TRUE) {
-           return TRUE;
-       } else {
+       if ($this->utilisateurs_model->login_existe($str) == TRUE) {
            $this->form_validation->set_message('login_check', 'Ce {field} existe déjà.');
            return FALSE;
+       } else {
+           return TRUE;
        }
    }
 
    public function email_check($str) {
-       if ($this->utilisateurs_model->valid_email($str) == TRUE) {
-           return TRUE;
-       } else {
+       if ($this->utilisateurs_model->email_existe($str) == TRUE) {
            $this->form_validation->set_message('email_check', 'Cette {field} est déjà associée.');
            return FALSE;
+       } else {
+           return TRUE;
        }
    }
 
