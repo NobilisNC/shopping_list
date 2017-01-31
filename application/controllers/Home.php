@@ -1,5 +1,5 @@
 <?php
-include_once('Core_Controller.php');
+include_once('Core.php');
 
 class Home extends Core_Controller {
 
@@ -65,6 +65,7 @@ class Home extends Core_Controller {
        $this->logged_user_only();
            $this->session->unset_userdata('logged_in');
            $this->session->unset_userdata('login');
+           $this->session->unset_userdata('id');
            redirect('accueil/connexion','refresh');
    }
 

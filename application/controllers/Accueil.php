@@ -25,6 +25,7 @@ class Accueil extends CI_Controller {
        if ($this->form_validation->run() == TRUE) {
            $this->session->set_userdata('logged_in', TRUE);
            $this->session->set_userdata('login', $this->input->post('login'));
+           $this->session->set_userdata('id', $this->user_model->id($this->session->userdata('login')));
            redirect('home/index','refresh');
        } else {
            $this->smarty->view('Accueil/connexion.tpl', $data);

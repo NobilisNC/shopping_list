@@ -17,7 +17,7 @@
 {foreach $amis as $ami=>$state}
     <tr>
         <td>{$ami}</td>
-        <td>{$state}</td>
+        <td>{$etat}</td>
         <td><a href="{base_url()}index.php/home/supprimerami?login={$ami}">Supprimer</a></td>
     </tr>
 {/foreach}
