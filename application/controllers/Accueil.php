@@ -4,7 +4,7 @@ class Accueil extends CI_Controller {
 
     public function __construct() {
            parent::__construct();
-           $this->load->model('utilisateurs_model');
+           $this->load->model('user_model');
    }
 
    public function index() {
@@ -48,10 +48,10 @@ class Accueil extends CI_Controller {
                'login' =>  $this->input->post('login'),
                'password' => $this->input->post('password'),
                'mail' => $this->input->post('mail'),
-               'nom' => $this->input->post('nom'),
-               'prenom' => $this->input->post('prenom')
+               'name' => $this->input->post('nom'),
+               'fname' => $this->input->post('prenom')
            );
-           $this->session->set_flashdata('inscription_success', $this->utilisateurs_model->ajouter_Utilisateur($user_data));
+           $this->session->set_flashdata('inscription_success', $this->user_model->addUser($user_data));
            redirect('accueil/connexion', 'refresh');
        } else {
            $this->smarty->view('Accueil/inscription.tpl', $data);
@@ -60,7 +60,7 @@ class Accueil extends CI_Controller {
    }
 
    public function login_check($str) {
-       if ($this->utilisateurs_model->login_existe($str) == TRUE) {
+       if ($this->user_model->login_existe($str) == TRUE) {
            $this->form_validation->set_message('login_check', 'Ce {field} existe déjà.');
            return FALSE;
        } else {
@@ -69,7 +69,7 @@ class Accueil extends CI_Controller {
    }
 
    public function email_check($str) {
-       if ($this->utilisateurs_model->email_existe($str) == TRUE) {
+       if ($this->user_model->email_existe($str) == TRUE) {
            $this->form_validation->set_message('email_check', 'Cette {field} est déjà associée.');
            return FALSE;
        } else {
@@ -79,7 +79,7 @@ class Accueil extends CI_Controller {
 
    public function verifier_infos_connexion($str) {
 
-       if ($this->utilisateurs_model->valid_infos_connexion( $this->input->post('login'), $this->input->post('password') ) == TRUE) {
+       if ($this->user_model->valid_infos_connexion( $this->input->post('login'), $this->input->post('password') ) == TRUE) {
            return TRUE;
        } else {
            $this->form_validation->set_message('verifier_infos_connexion', 'Pseudo/mot de passe non trouvés.');

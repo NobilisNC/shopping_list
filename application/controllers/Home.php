@@ -5,7 +5,7 @@ class Home extends Core_Controller {
 
     public function __construct() {
            parent::__construct();
-           $this->load->model('utilisateurs_model');
+           $this->load->model('user_model');
    }
 
    public function index() {
@@ -29,11 +29,11 @@ class Home extends Core_Controller {
            $this->form_validation->set_rules('new_password_conf', 'confirmation du nouveau mot de passe', 'required|matches[new_password]');
 
            if ($this->form_validation->run() == TRUE) {
-               $this->utilisateurs_model->modifier_mdp($this->session->userdata('login'), $this->input->post('new_password'));
+               $this->user_model->modifier_mdp($this->session->userdata('login'), $this->input->post('new_password'));
                $this->session->set_flashdata('password_changed', true);
            }
 
-           $data = $this->utilisateurs_model->infos($this->session->userdata('login'));
+           $data = $this->user_model->infos($this->session->userdata('login'));
            $this->smarty->view('Home/profil.tpl', $data);
 
    }
@@ -49,12 +49,12 @@ class Home extends Core_Controller {
                $this->form_validation->set_rules('ami_login', 'login_ami', 'required|callback_login_check');
 
            if ($this->form_validation->run() == TRUE) {
-               $this->utilisateurs_model->ajouter_ami($this->session->userdata('login'), $this->input->post('ami_login'));
+               $this->user_model->ajouter_ami($this->session->userdata('login'), $this->input->post('ami_login'));
                $this->session->set_flashdata('new_ami',  $this->input->post('ami_login'));
            }
 
-           $data['amis'] = $this->utilisateurs_model->obtenir_amis($this->session->userdata('login'), TRUE);
-           $data['notifications'] = $this->utilisateurs_model->obtenir_notifications($this->session->userdata('login'));
+           $data['amis'] = $this->user_model->obtenir_amis($this->session->userdata('login'), TRUE);
+           $data['notifications'] = $this->user_model->obtenir_notifications($this->session->userdata('login'));
            $this->smarty->view('Home/ami.tpl',$data);
    }
 
@@ -70,7 +70,7 @@ class Home extends Core_Controller {
 
 
    public function password_check($str) {
-       if ($this->utilisateurs_model->valid_infos_connexion($this->session->userdata('login'), $str) == TRUE) {
+       if ($this->user_model->valid_infos_connexion($this->session->userdata('login'), $str) == TRUE) {
            return TRUE;
        } else {
            $this->form_validation->set_message('password_check', 'Le mot actuel n\'est pas reconnu.');
@@ -84,7 +84,7 @@ class Home extends Core_Controller {
             return FALSE;
        }
 
-       $ami =  $this->utilisateurs_model->sont_amis($str, $this->session->userdata('login'));
+       $ami =  $this->user_model->sont_amis($str, $this->session->userdata('login'));
        if ($ami == 'accepte') {
            $this->form_validation->set_message('login_check', 'Vous êtes déjà amis avec cette personne');
            return FALSE;
@@ -93,7 +93,7 @@ class Home extends Core_Controller {
            return FALSE;
        }
 
-       if ($this->utilisateurs_model->login_existe($str) == TRUE ) {
+       if ($this->user_model->login_existe($str) == TRUE ) {
            return TRUE;
        } else {
            $this->form_validation->set_message('login_check', 'Ce login n\'a pas était trouvé.');
@@ -106,13 +106,13 @@ class Home extends Core_Controller {
 
        if ( in_array(
            $this->input->get('login'),
-           $this->utilisateurs_model->obtenir_notifications($this->session->userdata('login'))
+           $this->user_model->obtenir_notifications($this->session->userdata('login'))
            ) == TRUE ) {
 
            if ($this->input->get('etat') == 'accepte') {
-               $this->utilisateurs_model->ajouter_ami($this->input->get('login'), $this->session->userdata('login'), $this->input->get('etat'));
+               $this->user_model->ajouter_ami($this->input->get('login'), $this->session->userdata('login'), $this->input->get('etat'));
            } elseif($this->input->get('etat') == 'refuser') {
-               $this->utilisateurs_model->supprimer_ami($this->input->get('login'), $this->session->userdata('login'));
+               $this->user_model->supprimer_ami($this->input->get('login'), $this->session->userdata('login'));
            }
 
        } else {
@@ -126,8 +126,8 @@ class Home extends Core_Controller {
    public function supprimerami() {
        $this->logged_user_only();
 
-       if ( $this->utilisateurs_model->sont_amis($this->input->get('login'),$this->session->userdata('login')) == TRUE ) {
-              $this->utilisateurs_model->supprimer_ami($this->input->get('login'), $this->session->userdata('login'), $this->input->get('etat'));
+       if ( $this->user_model->sont_amis($this->input->get('login'),$this->session->userdata('login')) == TRUE ) {
+              $this->user_model->supprimer_ami($this->input->get('login'), $this->session->userdata('login'), $this->input->get('etat'));
        } else {
            $this->session->set_flashdata('error','Une erreur à eue lieu lors de la suppression d\'un ami');
        }
