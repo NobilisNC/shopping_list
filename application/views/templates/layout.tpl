@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
-		<link rel="stylesheet" type="text/css" href="{base_url()}application/static/css/w3.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="http://localhost/css/kickstart.min.css">
+		<link rel="stylesheet" type="text/css" href="http://localhost/css/font-awesome-4.7.0/css/font-awesome.min.css">
 		<meta charset="utf-8" />
 		<title>Gestion de liste de course</title>
 	</head>
 	<body >
-
-    		<header class="w3-container">
-    				{include 'layout/layout_entete.inc.tpl'}
-                <nav class="w3-navbar w3-center">
+    		<header>
+    						{include 'layout/layout_entete.inc.tpl'}
+                <div class="navbar">
                 {include 'nav/nav.inc.tpl'}
-                </nav>
-            </header>
+							</div>
+        </header>
 
-		<div class="w3-container">
+
+		<div>
 			{block name=body}{/block}
 		</div>
 
-		<footer class="w3-container">
+		<footer class="">
+			<center>
 				{include 'layout/layout_pied.inc.tpl'}
+			</center>
 		</footer>
 
+		<script type="text/javascript" src="http://localhost/css/kickstart.min.js"></script>
 	</body>
 </html>

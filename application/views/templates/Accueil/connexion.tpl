@@ -1,26 +1,55 @@
 {extends file="../layout.tpl"}
 {block name=body}
 
+<div class="col-left-1 col-10">
+
     {if isset($not_logged)}
-    <p>Vous devez être connecté pour acceder à la page demandée.</p>
+      <div class="alert alert-red">
+        <p>Vous devez être connecté pour acceder à la page demandée.</p>
+      </div>
     {/if}
+
 
     {if $inscription_success === TRUE}
-    <p>Votre compte à bien été créé. Vous pouvez desormais vous connecter.</p>
+    <div class="alert alert-green">
+      <p>Votre compte à bien été créé. Vous pouvez desormais vous connecter.</p>
+    </div>
     {elseif $inscription_success === FALSE}
-    <p>Une erreur est survenue lors de votre inscription.</p>
+    <div class="alert alert-red">
+      <p>Une erreur est survenue lors de votre inscription.</p>
+    </div>
     {/if}
 
-    {validation_errors()}
-	<form method="post" action="{base_url()}index.php/Accueil/connexion">
-		<fieldset>
+{$errors = validation_errors()}
+    {if $errors}
+    <div class="alert alert-red">
+      {$errors}
+    </div>
+    {/if}
+
+  <center>
+  <div class="">
+	<form class="form" method="post" action="{base_url()}index.php/Accueil/connexion">
+
 			<legend>Connexion</legend>
-			<p>
-				<label for="login">Pseudo :</label><input name="login" type="text" id="pseudo" /><br />
+
+        <div class="form_group">
+				<label for="login">Pseudo :</label>
+        <input name="login" type="text" id="pseudo" />
+      </div>
+      <div class="form_group">
 				<label for="password">Mot de Passe :</label><input type="password" name="password" id="password" />
-			</p>
-		</fieldset>
-		<p><input type="submit" value="Connexion" /></p>
+			</div>
+
+      <div class="form_group-horizontal form_group">
+        <input type="submit" value="Connexion" /></p>
+        <a class="button" href="inscription">Pas encore inscrit ?</a>
+    </div>
+
+
 	</form>
-	<a href="inscription">Pas encore inscrit ?</a>
+</div>
+</center>
+
+</div>
 {/block}

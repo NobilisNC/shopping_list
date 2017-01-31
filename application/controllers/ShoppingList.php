@@ -24,7 +24,12 @@ class ShoppingList extends Core_Controller {
      $this->ShoppingList_model->createEmptyList($id);
 
      redirect('home/list', 'refresh');
+   }
 
+   public function showList(int $id) {
+     $this->logged_user_only();
+
+     $this->smarty->view('List/show.tpl', array('id' => $id));
    }
 
 }
