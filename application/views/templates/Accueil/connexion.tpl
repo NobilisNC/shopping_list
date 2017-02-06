@@ -29,7 +29,7 @@
 
   <center>
   <div class="">
-	<form class="form" method="post" action="{base_url()}index.php/Accueil/connexion">
+	<form class="form" method="post" action="{site_url()}/Accueil/connexion">
 
 			<legend>Connexion</legend>
 

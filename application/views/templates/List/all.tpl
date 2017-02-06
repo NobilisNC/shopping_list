@@ -8,7 +8,7 @@
   </tr>
 {foreach $lists as $list}
 <tr>
-  <td><a href="{{base_url()}}index.php/home/list/show/{{$list->id}}">{{$list->name}}</a></td>
+  <td><a href="{site_url()}/home/list/show/{{$list->id}}">{{$list->name}}</a></td>
   <td>{{$list->date}}</td>
 </tr>
 {/foreach}

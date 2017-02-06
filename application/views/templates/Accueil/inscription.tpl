@@ -12,7 +12,7 @@
 
 	<div class="container col-left-1 col-10">
 		<header>Inscription</header>
-    <form class="form col-20" name="inscription" method="post" action="{base_url()}index.php/Accueil/inscription">
+    <form class="form col-20" name="inscription" method="post" action="{site_url()}/Accueil/inscription">
 
 			<div class="form_group form_group-horizontal">
 				<label class="col-2" for="login">Login :</label>
