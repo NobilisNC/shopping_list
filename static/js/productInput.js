@@ -1,4 +1,4 @@
-var productsInput = function(document, Ajax) {
+var productsInput = function(document, Ajax, deleteProduct) {
   this.__URL__ = '/~nobilis/ProjetTut/index.php/';
 
   this.list = document.querySelector('#productsList');
@@ -72,17 +72,28 @@ var productsInput = function(document, Ajax) {
       let row   = this.list.insertRow(this.list.rows.length - 1);
       let cell1 = row.insertCell();
       let cell2 = row.insertCell();
+      let cell3 = row.insertCell();
+      let span = document.createElement('span');
+      span.dataset.product_id = data.product.id;
+      span.className = 'fa fa-trash';
+      span.addEventListener('click', deleteProduct.delete);
 
       cell1.innerHTML = data.product.name;
       cell2.innerHTML = 1;
+      cell3.append(span);
       row.dataset.product_id = data.product.id;
+
       k$.growl({
         text  : 'Le produit : ' + data.product.name + ' a été ajouté',
         delay : 2000,
         type  : 'alert-green'
       });
 
+      this.resetList();
+      this.field.value ='';
+
     } else {
+
       k$.growl({
         text  : 'Erreur lors de l\'ajout du produit',
         delay : 2000,
@@ -128,4 +139,4 @@ var productsInput = function(document, Ajax) {
 
   };
 
-}(document, Ajax)
+}(document, Ajax, deleteProduct)

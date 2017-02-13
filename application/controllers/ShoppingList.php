@@ -66,9 +66,11 @@ class ShoppingList extends Core_Controller {
    }
 
    public function deleteProduct(int $id_list, int $id_product) {
-      $this->ShoppingList_model->deleteProductFromList($id_list, $id_product);
+      $response = array();
+      $response["status"] = $this->ShoppingList_model->deleteProductFromList($id_list, $id_product);
+      $response["product"] = $this->ShoppingList_model->getProductById($id_product);
 
-      redirect('/home/list/show/'.$id_list);
+      echo json_encode($response);
    }
 
 }

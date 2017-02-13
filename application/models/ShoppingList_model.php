@@ -99,6 +99,7 @@ class ShoppingList_model extends CI_Model {
       public function deleteProductFromList(int $id_list, int $id_product) {
           $this->db->where(array('id_list' => $id_list, 'id_product' => $id_product))
                    ->delete('list_product');
+          return true;
       }
 
       public function getProductById(int $id_prod) {

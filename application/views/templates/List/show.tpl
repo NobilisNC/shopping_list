@@ -2,43 +2,37 @@
 {block name=body}
 <div class="col-left-1 col-10">
 <div class="row">
-<h2 id="title"><span id="listName">{$list->name}</span> <i id="nameEdit" style="vertical-align:middle; font-size:1em;" class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></i></h2>
+<h2 id="title"><span id="listName">{$list->name}</span> <span id="nameEdit" style="vertical-align:middle; font-size:1em;" class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></span></h2>
 </div>
 <div class="row">
 <div class="col-9 container">
   <header>Produits</header>
   <main>
     <table id="productsList" class="table table-blank" data-list_id="{$list->id}">
+      <thead>
       <tr>
         <th>Produit</th>
         <th>Quantité</th>
+        <th></th>
       </tr>
-
+    </thead>
+    <tbody>
     {foreach $products as $product}
-      <tr>
-        <td><center>{$product->name}
-      </center></td>
-        <td><center>{$product->amount}</center></td>
+      <tr data-product_id="{$product->id}">
+        <td>{$product->name}</td>
+        <td>{$product->amount}</td>
+        <td><span class="fa fa-trash deleteProduct" aria-hidden="true" data-product_id="{$product->id}" ></span></td>
       </tr>
     {/foreach}
+  </tbody>
+
     <tr>
-
-      <!--  <td>
-          <center>
-          <div class="tooltip_trigger">
-            <input id="productInput" />
-              <span id="listProduct" class="tooltip tooltip-left">
-
-              </span>
-          </div>
-          </center>
-        </td> -->
         <td>
           <div id="productsInput"></div>
         </td>
-
       <td></td>
     </tr>
+
   </table>
 
 </main>
@@ -52,10 +46,10 @@
 </div>
 
 
-
-
 <script type="text/javascript" src="{base_url()}static/js/ajax.js"></script>
+<script type="text/javascript" src="{base_url()}/static/js/fastInput.js"></script>
 <script type="text/javascript" src="{base_url()}/static/js/productInput.js"></script>
+
 
 <script type="text/javascript">
 var name_bar    = document.getElementById("title");
@@ -65,11 +59,11 @@ var edit_button = document.getElementById("nameEdit");
 var input_name = document.createElement('input');
 input_name.defaultValue = list_name.innerHTML;
 
-var send_name_button = document.createElement('i');
+var send_name_button = document.createElement('span');
 send_name_button.className = "fa fa-check";
 send_name_button.onclick = sendName;
 
-var cancel_button = document.createElement('i');
+var cancel_button = document.createElement('span');
 cancel_button.className = "fa fa-times";
 cancel_button.onclick = resetName;
 
