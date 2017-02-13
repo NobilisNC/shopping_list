@@ -40,7 +40,7 @@
 <div class="container">
   <header>Changer son mot de passe</header>
   </main>
-<form class="form" metdod="post" action="{site_url()}/Home/profil">
+<form class="form" method="post" action="{site_url()}/Home/profil">
 
       <div class="form_group">
       <label for="login">Ancien mot de passe :</label>

@@ -34,6 +34,11 @@ class ShoppingList extends Core_Controller {
      $this->smarty->view('List/show.tpl', array('list' => $list, 'products' => $products));
    }
 
+   public function deleteList(int $id) {
+     $this->ShoppingList_model->deleteList($id);
+     redirect('home/list');
+   }
+
 
    public function changeName(int $id) {
      $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));

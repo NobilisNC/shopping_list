@@ -18,8 +18,15 @@ class ShoppingList_model extends CI_Model {
           'id_user' => $id_user
       );
 
-      return $this->db->insert('list', $data);
+     return $this->db->insert('list', $data);
 
+    }
+
+    /** Delete a list with a specified id
+      *
+      */
+    public function deleteList(int $id_list) {
+      $this->db->delete('list', array( 'id' => $id_list));
     }
 
     /**
@@ -57,17 +64,25 @@ class ShoppingList_model extends CI_Model {
         $this->db->update('list', $data );
     }
 
-
-    public function getProducts(int $id) {
+    /** Return products of a specified list
+      *
+      *
+      */
+    public function getProducts(int $id_list) {
         $this->db->select('name, amount, id')
                  ->from('product')
                  ->join('list_product', 'list_product.id_product = product.id')
-                 ->where('list_product.id_list = '.$id);
+                 ->where('list_product.id_list = '.$id_list);
 
         $query = $this->db->get();
         return $query->result();
     }
 
+    /** Return names of product like param.
+      * Used from Ajax request
+      *
+      *
+      */
     public function getProductsLike(string $name) {
         $this->db->select('id, name')
                  ->from('product')
@@ -96,12 +111,21 @@ class ShoppingList_model extends CI_Model {
            return true;
       }
 
+      /** Delete a product for a specidied list
+        *
+        *
+        */
       public function deleteProductFromList(int $id_list, int $id_product) {
           $this->db->where(array('id_list' => $id_list, 'id_product' => $id_product))
                    ->delete('list_product');
           return true;
       }
 
+      /** Return Product by it ID.
+        *
+        *
+        *
+        */
       public function getProductById(int $id_prod) {
         return $this->db->get_where('product', array('id' => $id_prod))->result()[0];
       }

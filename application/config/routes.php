@@ -55,6 +55,7 @@ $route['home/list/(:num)/addProduct/(:num)'] = 'ShoppingList/addProduct/$1/$2';
 $route['product/get/(.+)'] = 'ShoppingList/getProductsLike/$1';
 $route['home/list/(:num)/changeName'] = 'ShoppingList/changeName/$1';
 $route['home/list/show/(:num)'] = 'ShoppingList/showList/$1';
+$route['home/list/delete/(:num)'] = 'ShoppingList/deleteList/$1';
 $route['home/list/create'] = 'ShoppingList/createList';
 $route['home/list'] = 'ShoppingList/index';
 $route['home/'] = 'home/index';
