@@ -69,16 +69,14 @@ class ShoppingList_model extends CI_Model {
     }
 
     public function getProductsLike(string $name) {
-        $this->db->select('name')
+        $this->db->select('id, name')
                  ->from('product')
-                 ->where("name LIKE '".$name."%'");
+                 ->where("name LIKE '".$name."%'")
+                 ->order_by('name', 'asc');
 
         $query = $this->db->get();
-        $products = array();
-        foreach($query->result() as $p)
-          $products[] = $p->name;
 
-        return $products;
+        return $query->result();
       }
 
       /**
@@ -86,12 +84,7 @@ class ShoppingList_model extends CI_Model {
       *
       * Return True/false if insered or not
       */
-      public function addProductToList(int $id_list, string $product_name ) {
-          $result = $this->db->get_where('product', array('name'=> $product_name));
-          if($result->num_rows() == 0)
-            return false;
-
-           $id_product = $result->result()[0]->id;
+      public function addProductToList(int $id_list, string $id_product ) {
 
            $data = array(
              'id_list' => $id_list,
@@ -106,6 +99,10 @@ class ShoppingList_model extends CI_Model {
       public function deleteProductFromList(int $id_list, int $id_product) {
           $this->db->where(array('id_list' => $id_list, 'id_product' => $id_product))
                    ->delete('list_product');
+      }
+
+      public function getProductById(int $id_prod) {
+        return $this->db->get_where('product', array('id' => $id_prod))->result()[0];
       }
 
 

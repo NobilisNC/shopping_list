@@ -8,7 +8,7 @@
 <div class="col-9 container">
   <header>Produits</header>
   <main>
-    <table id="products" class="table table-blank">
+    <table id="productsList" class="table table-blank" data-list_id="{$list->id}">
       <tr>
         <th>Produit</th>
         <th>Quantité</th>
@@ -17,13 +17,13 @@
     {foreach $products as $product}
       <tr>
         <td><center>{$product->name}
-        <a href="{site_url()}/home/list/{$list->id}/deleteProduct/{$product->id}">delete</a></center></td>
+      </center></td>
         <td><center>{$product->amount}</center></td>
       </tr>
     {/foreach}
     <tr>
 
-        <td>
+      <!--  <td>
           <center>
           <div class="tooltip_trigger">
             <input id="productInput" />
@@ -32,6 +32,9 @@
               </span>
           </div>
           </center>
+        </td> -->
+        <td>
+          <div id="productsInput"></div>
         </td>
 
       <td></td>
@@ -52,69 +55,8 @@
 
 
 <script type="text/javascript" src="{base_url()}static/js/ajax.js"></script>
-<script type="text/javascript">
-  var product_input = document.getElementById("productInput");
-  product_input.addEventListener("input", getProducts);
-  product_input.addEventListener("keypress", submitProduct);
-  var list = document.getElementById("listProduct");
+<script type="text/javascript" src="{base_url()}/static/js/productInput.js"></script>
 
-  function getProducts() {
-    var name = product_input.value;
-    while (list.firstChild) list.removeChild(list.firstChild);
-
-    if(name)
-        Ajax.post({
-            url : '{site_url()}/product/get/',
-            {literal}
-            data : {'fragmented_name' : name},
-            {/literal}
-            success : displayProducts
-          });
-
-
-  }
-
-  function displayProducts(data) {
-
-
-    data.names.forEach(function(product) {
-      var p = document.createElement('p');
-      p.innerHTML = product;
-      list.appendChild(p);
-    });
-  }
-
-  function submitProduct(event) {
-    const key = event.key;
-
-    if(key == 'Enter')
-      Ajax.post({
-        url : '{site_url()}/home/list/{$list->id}/addProduct',
-        {literal}
-        data : {'new_product' : product_input.value},
-        {/literal}
-        success : addProduct
-      })
-  }
-
-  function addProduct(data) {
-    if(data.status) {
-      var list_product = document.getElementById('products');
-
-      var row = list_product.insertRow(list_product.rows.length -1);
-      var cell_name = row.insertCell();
-      var cell_amount = row.insertCell();
-      cell_name.innerHTML = '<center>' + product_input.value + '</center>';
-      cell_amount.innerHTML = '<center>' + '1' + '</center>';
-
-      product_input = document.getElementById("productInput");
-
-    } else {
-      console.log('An error has occured ...');
-    }
-  }
-
-</script>
 <script type="text/javascript">
 var name_bar    = document.getElementById("title");
 var list_name   = document.getElementById("listName");
@@ -172,5 +114,7 @@ function changeName(data) {
 
 
 </script>
+
+
 
 {/block}

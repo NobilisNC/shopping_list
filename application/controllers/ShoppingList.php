@@ -50,19 +50,18 @@ class ShoppingList extends Core_Controller {
       echo json_encode($response);
    }
 
-   public function getProductsLike() {
-     $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
+   public function getProductsLike(string $fragmented_name) {
      $response = array();
-     $response['names'] = $this->ShoppingList_model->getProductsLike($data->fragmented_name);
+     $response['names'] = $this->ShoppingList_model->getProductsLike($fragmented_name);
 
      echo json_encode($response);
    }
 
-   public function addProduct(int $id) {
-     $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
-     $response = array();
+   public function addProduct(int $id_list, int $id_prod) {
 
-     $response["status"] = $this->ShoppingList_model->addProductToList($id, $data->new_product);
+     $response = array();
+     $response["status"] = $this->ShoppingList_model->addProductToList($id_list, $id_prod);
+     $response["product"] = $this->ShoppingList_model->getProductById($id_prod);
      echo json_encode($response);
    }
 

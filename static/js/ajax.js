@@ -1,12 +1,12 @@
- var Ajax = (function(document, window) {
-   /*
-    * options {
-    *    url
-    *    data
-    *    success
-    *   }
-    *
-    */
+ var Ajax = (function(options  = {}) {
+   /**
+     * options {
+     *    url
+     *    data
+     *    success
+     *   }
+     *
+     **/
   this.post = function(options) {
     var xhr = new XMLHttpRequest();
     xhr.open('POST', options.url);

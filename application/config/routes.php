@@ -51,8 +51,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 $route['home/list/(:num)/deleteProduct/(:num)'] = 'ShoppingList/deleteProduct/$1/$2';
-$route['home/list/(:num)/addProduct'] = 'ShoppingList/addProduct/$1';
-$route['product/get'] = 'ShoppingList/getProductsLike';
+$route['home/list/(:num)/addProduct/(:num)'] = 'ShoppingList/addProduct/$1/$2';
+$route['product/get/(.+)'] = 'ShoppingList/getProductsLike/$1';
 $route['home/list/(:num)/changeName'] = 'ShoppingList/changeName/$1';
 $route['home/list/show/(:num)'] = 'ShoppingList/showList/$1';
 $route['home/list/create'] = 'ShoppingList/createList';
