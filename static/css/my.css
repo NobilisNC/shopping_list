@@ -10,3 +10,18 @@ td, .table thead th {
 span.fa {
   cursor: pointer;
 }
+
+.amount {
+  width: 15px;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.table .button {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.no {
+  display: none;
+}

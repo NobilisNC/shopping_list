@@ -76,6 +76,7 @@ var amoutButtons = function(document) {
     buttonAdd = document.createElement('button');
     amount = document.createElement('span');
     amount.innerHTML = node.innerHTML;
+    amount.className = 'amount';
     node.innerHTML = '';
     buttonSub.className = 'button';
     buttonAdd.className = 'button';
@@ -90,7 +91,7 @@ var amoutButtons = function(document) {
     buttonAdd.addEventListener('click', this.send_addAmount);
     buttonSub.addEventListener('click', this.send_subAmount);
 
-
+    this.updateButton(node)
   }
 
   this.add = function(row) {
@@ -120,6 +121,7 @@ var amoutButtons = function(document) {
       return;
     }
 
+
     amount --;
 
     let x = new XMLHttpRequest();
@@ -136,6 +138,15 @@ var amoutButtons = function(document) {
   this.setAmount = function(data, node) {
     if(data.status == true)
       node.innerHTML = data.amount;
+
+      updateButton(node.parentElement);
+  }
+
+  this.updateButton = function(node) {
+    let amount = node.children[1].innerHTML;
+    if (amount == 1)
+      node.children[0].className = 'no';
+
   }
 
   this.init();
