@@ -1,5 +1,5 @@
 var deleteProduct = function(document) {
-  this.__URL__ = '/~nobilis/ProjetTut/index.php/';
+  this.__URL__ = '/PTUT/shopping_list/index.php/';
   this.list = document.querySelector('#productsList');
   console.log(this.list);
 
