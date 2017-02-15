@@ -78,4 +78,12 @@ class ShoppingList extends Core_Controller {
       echo json_encode($response);
    }
 
+   public function setAmount(int $id_list, int $id_product, int $amount) {
+     $response = array();
+     $response["status"] =  $this->ShoppingList_model->setAmount($id_list, $id_product, $amount);
+     $response["product"] = $this->ShoppingList_model->getAmount($id_list, $id_product);
+
+     echo json_encode($response);
+   }
+
 }
