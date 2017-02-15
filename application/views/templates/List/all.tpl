@@ -1,6 +1,5 @@
 {extends file='../layout.tpl'}
 {block name=body}
-
 <div class="col-left-1 col-10">
 <h2>Mes Listes</h2>
 

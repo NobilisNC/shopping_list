@@ -72,8 +72,7 @@ class ShoppingList_model extends CI_Model {
         $this->db->select('name, amount, id')
                  ->from('product')
                  ->join('list_product', 'list_product.id_product = product.id')
-                 ->where('list_product.id_list = '.$id_list)
-                 ->order_by('name');
+                 ->where('list_product.id_list = '.$id_list);
 
         $query = $this->db->get();
         return $query->result();
@@ -131,6 +130,7 @@ class ShoppingList_model extends CI_Model {
         return $this->db->get_where('product', array('id' => $id_prod))->result()[0];
       }
 
+<<<<<<< HEAD
       /** Set the amount of a product in a specified list and specified product
         *
         *
@@ -156,6 +156,16 @@ class ShoppingList_model extends CI_Model {
                             ->get()->result()[0]->amount;
           }
 
+=======
 
+      public function updateNote(int $id_list, string $note) {
+>>>>>>> a161d3c95ef03b6a3fa7335f7bd09b66e4445cf3
 
+        $data = array(
+          'id_list' => $id_list,
+          'note' => $note
+        );
+
+        $this->db->update('list', $data);
+      }
 }
