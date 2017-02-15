@@ -55,3 +55,15 @@ var deleteProduct = function(document) {
     'delete' : this.send_del
   }
 }(document)
+
+
+var amoutButton = function(options = {}) {
+  this.node = options.node;
+  this.id_product = options.product;
+  this.action = options.action;
+
+
+  return {
+
+  };
+}

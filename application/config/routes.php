@@ -50,6 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
+$route['home/list/(:num)/product/(:num)/setAmount/(:num)'] = 'ShoppingList/setAmount/$1/$2/$3';
 $route['home/list/(:num)/deleteProduct/(:num)'] = 'ShoppingList/deleteProduct/$1/$2';
 $route['home/list/(:num)/addProduct/(:num)'] = 'ShoppingList/addProduct/$1/$2';
 $route['product/get/(.+)'] = 'ShoppingList/getProductsLike/$1';
