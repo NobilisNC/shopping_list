@@ -62,6 +62,10 @@ function editableText(options = {}) {
 
     parent = this.field.parentElement;
     parent.replaceChild(this.static_field, this.field);
+    console.log(this.static_field.innerHTML.replace(/\n/g,'').replace(/(<br>)*$/g, ''));
+    this.static_field.innerHTML = this.static_field.innerHTML.replace(/\n/g,'').replace(/(<br>)*$/g, '')
+    console.log(this.static_field.innerHTML);
+
   }
 
   this.edit =  function(e) {
