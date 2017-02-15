@@ -39,7 +39,7 @@
 </div>
 <div class="aside container col-3">
   <header>Infos</header>
-  <main>{$list->date}</main>
+  <main>{$list->note}</main>
 </div>
 
 </div>
