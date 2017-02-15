@@ -85,11 +85,11 @@ class Home extends Core_Controller {
             return FALSE;
        }
 
-       $ami =  $this->user_model->sont_amis($str, $this->session->userdata('login'));
-       if ($ami == 'accepte') {
+       $ami =  $this->user_model->sont_amis($str, $this->session->userdata('id'));
+       if ($ami == 'access') {
            $this->form_validation->set_message('login_check', 'Vous êtes déjà amis avec cette personne');
            return FALSE;
-       } elseif($ami == 'attente') {
+       } elseif($ami == 'waiting') {
             $this->form_validation->set_message('login_check', 'Une invitation a déjà été envoyée.');
            return FALSE;
        }
@@ -101,6 +101,7 @@ class Home extends Core_Controller {
            return FALSE;
        }
    }
+
 
    public function ajouterami() {
        $this->logged_user_only();
@@ -127,7 +128,7 @@ class Home extends Core_Controller {
    public function supprimerami() {
        $this->logged_user_only();
 
-       if ( $this->user_model->sont_amis($this->input->get('login'),$this->session->userdata('login')) == TRUE ) {
+       if ( $this->user_model->sont_amis($this->input->get('login'),$this->session->userdata('id')) == TRUE ) {
               $this->user_model->supprimer_ami($this->input->get('login'), $this->session->userdata('login'), $this->input->get('etat'));
        } else {
            $this->session->set_flashdata('error','Une erreur à eue lieu lors de la suppression d\'un ami');

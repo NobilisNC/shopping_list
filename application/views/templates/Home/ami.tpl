@@ -51,6 +51,13 @@
 </tbody>
 </table>
 
+{$errors = validation_errors()}
+{if $errors}
+<div class="alert alert-red">
+  {$errors}
+</div>
+{/if}
+
 <div class="col-4">
 <form class="form" method="post" action="{site_url()}/Home/amis">
   <div class="form_group">

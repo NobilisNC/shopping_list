@@ -129,9 +129,8 @@ class User_model extends CI_Model {
         $this->db->delete('friend', array('id_give' => $id_2, 'id_get' => $id_1));
     }
 
-    public function sont_amis($login1, $login2, $access = FALSE) {
+    public function sont_amis($login1, int $id2, $access = false) {
         $id1 = $this->id($login1);
-        $id2 = $this->id($login2);
 
         $sql = "SELECT * FROM friend WHERE (( id_give=$id1 AND id_get = $id2 ) OR (id_give = $id2 AND id_get = $id1)) ";
 
