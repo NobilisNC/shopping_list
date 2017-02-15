@@ -40,15 +40,14 @@ class ShoppingList extends Core_Controller {
    }
 
 
-   public function changeName(int $id) {
+   public function updateTitle(int $id) {
      $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
      $response = array();
      if ($this->session->userdata('logged_in') !== TRUE)
          $response['error'] = 'error_not_logged';
     else {
-
-      $this->ShoppingList_model->setName($id, htmlentities($data->new_name));
-      $response['name'] = $this->ShoppingList_model->getListById($id)->name;
+      $this->ShoppingList_model->setName($id, htmlentities($data->data));
+      $response['data'] = $this->ShoppingList_model->getListById($id)->name;
 
     }
 
@@ -57,7 +56,7 @@ class ShoppingList extends Core_Controller {
 
    public function getProductsLike(string $fragmented_name) {
      $response = array();
-     $response['names'] = $this->ShoppingList_model->getProductsLike($fragmented_name);
+     $response['names'] = $this->ShoppingList_model->getProductsLike(htmlentities($fragmented_name));
 
      echo json_encode($response);
    }
@@ -78,7 +77,7 @@ class ShoppingList extends Core_Controller {
       echo json_encode($response);
    }
 
-   public function setAmount(int $id_list, int $id_product, int $amount) {
+   public function updateAmount(int $id_list, int $id_product, int $amount) {
      $response = array();
      $response["status"] =  $this->ShoppingList_model->setAmount($id_list, $id_product, $amount);
      $response["amount"] =  $this->ShoppingList_model->getAmount($id_list, $id_product);
@@ -86,4 +85,15 @@ class ShoppingList extends Core_Controller {
      echo json_encode($response);
    }
 
+
+   public function updateNote(int $id_list) {
+      $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
+
+      $this->ShoppingList_model->updateNote($id_list, htmlentities($data->data));
+
+      $response = array();
+      $response["data"] = $this->ShoppingList_model->getListById($id_list)->note;
+
+      echo json_encode($response);
+   }
 }

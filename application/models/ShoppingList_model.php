@@ -158,13 +158,9 @@ class ShoppingList_model extends CI_Model {
 
 
       public function updateNote(int $id_list, string $note) {
+        $this->db->set('note', $note)
+                 ->where('id', $id_list)
+                 ->update('list');
 
-
-        $data = array(
-          'id_list' => $id_list,
-          'note' => $note
-        );
-
-        $this->db->update('list', $data);
       }
 }

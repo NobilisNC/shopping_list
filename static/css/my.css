@@ -23,5 +23,9 @@ span.fa {
 }
 
 .no {
-  display: none;
+  opacity: 0;
+}
+
+textarea {
+  resize: none;
 }

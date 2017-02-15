@@ -2,7 +2,7 @@
 {block name=body}
 <div class="col-left-1 col-10">
 <div class="row">
-<h2 id="title"><span id="listName">{$list->name}</span> <span id="nameEdit" style="vertical-align:middle; font-size:1em;" class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></span></h2>
+<h2><span id="listName">{$list->name}</span> <span id="nameEdit" style="vertical-align:middle; font-size:1em;" class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></span></h2>
 </div>
 <div class="row">
 <div class="col-9 container">
@@ -38,8 +38,8 @@
 </main>
 </div>
 <div class="aside container col-3">
-  <header>Infos</header>
-  <main>{$list->note}</main>
+  <header>Note<span id="noteEdit" style="vertical-align:middle; font-size:1em;" class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></span></header>
+  <main><span id="note">{$list->note}</span></main>
 </div>
 
 </div>
@@ -47,68 +47,30 @@
 
 
 <script type="text/javascript" src="{base_url()}static/js/ajax.js"></script>
-<script type="text/javascript" src="{base_url()}/static/js/fastInput.js"></script>
+<script type="text/javascript" src="{base_url()}/static/js/amountButtons.js"></script>
+<script type="text/javascript" src="{base_url()}/static/js/deleteButton.js"></script>
 <script type="text/javascript" src="{base_url()}/static/js/productInput.js"></script>
 
+<script type="text/javascript" src="{base_url()}/static/js/editText.js"></script>
 
 <script type="text/javascript">
-var name_bar    = document.getElementById("title");
-var list_name   = document.getElementById("listName");
-var edit_button = document.getElementById("nameEdit");
+let test1 = new editableText(
+    {
+      button : document.querySelector('#nameEdit'),
+      node   : document.querySelector('#listName'),
+      type   : 'text',
+      url    : '{site_url()}/home/list/{$list->id}/title'
+    }
+  );
 
-var input_name = document.createElement('input');
-input_name.defaultValue = list_name.innerHTML;
-
-var send_name_button = document.createElement('span');
-send_name_button.className = "fa fa-check";
-send_name_button.onclick = sendName;
-
-var cancel_button = document.createElement('span');
-cancel_button.className = "fa fa-times";
-cancel_button.onclick = resetName;
-
-
-edit_button.onclick = editName;
-
-
-function editName() {
-    while (name_bar.firstChild) name_bar.removeChild(name_bar.firstChild);
-    name_bar.appendChild(input_name);
-    name_bar.appendChild(send_name_button);
-    name_bar.appendChild(cancel_button);
-
-
-}
-
-function resetName() {
-  while (name_bar.firstChild) name_bar.removeChild(name_bar.firstChild);
-  name_bar.appendChild(list_name);
-  name_bar.appendChild(edit_button);
-}
-
-function sendName() {
-  var new_name = input_name.value;
-
-  Ajax.post({
-        url : '{site_url()}/home/list/{$list->id}/changeName',
-        {literal}
-        data : {'new_name' : input_name.value},
-        {/literal}
-        success : changeName
-  })
-
-
-    resetName();
-}
-
-
-function changeName(data) {
-  listName.innerHTML = data.name;
-}
-
-
+  let test2 = new editableText(
+      {
+        button : document.querySelector('#noteEdit'),
+        node   : document.querySelector('#note'),
+        type   : 'textarea',
+        url    : '{site_url()}/home/list/{$list->id}/note'
+      }
+    );
 </script>
-
-
 
 {/block}

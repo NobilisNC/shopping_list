@@ -62,9 +62,9 @@ var productsInput = function(document, Ajax, deleteProduct, amoutButtons) {
     x.open('GET', this.__URL__ + 'home/list/' + this.list.dataset.list_id + '/addProduct/'+ id_prod, true);
     x.onload = function() {
       if (x.status === 200) {
-          add(JSON.parse(x.responseText));
+          this.add(JSON.parse(x.responseText));
       }
-    }
+    }.bind(this);
     x.send();
   }
 
@@ -77,7 +77,7 @@ var productsInput = function(document, Ajax, deleteProduct, amoutButtons) {
       let span = document.createElement('span');
       span.dataset.product_id = data.product.id;
       span.className = 'fa fa-trash';
-      span.addEventListener('click', deleteProduct.delete);
+      span.addEventListener('click', deleteProduct.delete.bind(this));
 
       cell1.innerHTML = data.product.name;
       cell2.innerHTML = 1;
@@ -116,28 +116,28 @@ var productsInput = function(document, Ajax, deleteProduct, amoutButtons) {
     x.open('GET', this.__URL__ + 'product/get/' + e.target.value, true);
     x.onload = function() {
       if (x.status === 200) {
-          show(JSON.parse(x.responseText));
+          this.show(JSON.parse(x.responseText));
       }
-    }
+    }.bind(this);
     x.send();
   }
 
   this._onKeyDown  = function(e) {
 
     if(e.keyCode == 13) {// Enter
-      send_add();
-    } else if (e.keyCode == 38 && selected > 0 && selected != null) { //up
-      select(selected - 1);
-    } else if (e.keyCode == 40 && selected < productsList.childElementCount - 1 && selected != null) { //Down
-      select(selected + 1);
+      this.send_add();
+    } else if (e.keyCode == 38 && this.selected > 0 && this.selected != null) { //up
+      this.select(this.selected - 1);
+    } else if (e.keyCode == 40 && this.selected < this.productsList.childElementCount - 1 && this.selected != null) { //Down
+      this.select(this.selected + 1);
 
     }
    }
 
 
 
-  this.addEventListener('input', this._input);
-  this.field.addEventListener('keydown', this._onKeyDown);
+  this.field.addEventListener('input', this._input.bind(this));
+  this.field.addEventListener('keydown', this._onKeyDown.bind(this));
 
   return {
 
