@@ -161,6 +161,5 @@ class ShoppingList_model extends CI_Model {
         $this->db->set('note', $note)
                  ->where('id', $id_list)
                  ->update('list');
-
       }
 }

@@ -39,7 +39,7 @@
 </div>
 <div class="aside container col-3">
   <header>Note<span id="noteEdit" style="vertical-align:middle; font-size:1em;" class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></span></header>
-  <main><span id="note">{$list->note}</span></main>
+  <main class="max"><span id="note">{nl2br($list->note)}</span></main>
 </div>
 
 </div>

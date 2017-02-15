@@ -28,4 +28,10 @@ span.fa {
 
 textarea {
   resize: none;
+  overflow: hidden;
+  height : 100%;
+}
+
+main.max {
+  height : 95%;
 }

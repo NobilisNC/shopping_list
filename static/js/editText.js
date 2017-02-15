@@ -65,7 +65,7 @@ function editableText(options = {}) {
   }
 
   this.edit =  function(e) {
-    parent = this.edit_b.parentElement
+    parent = this.edit_b.parentElement;
 
     parent.replaceChild(this.group, this.edit_b);
 
@@ -73,7 +73,7 @@ function editableText(options = {}) {
 
     parent = this.static_field.parentElement;
     parent.replaceChild(this.field, this.static_field);
-    this.field.value = this.static_field.innerHTML;
+    this.field.value = this.static_field.innerHTML.replace(/<br>/g, "\r");
 
   }
 
@@ -94,6 +94,7 @@ function editableText(options = {}) {
   this.edit_b.addEventListener('click', this.edit.bind(this));
   if(this.type == 'text')
     this.field.addEventListener('keydown', this.input.bind(this));
+
 
   return {
 
