@@ -1,7 +1,7 @@
 var deleteProduct = function(document) {
   this.__URL__ = '/~nobilis/ProjetTut/index.php/';
   this.list = document.querySelector('#productsList');
-  console.log(this.list);
+
 
   this.init = function() {
     nodes = document.querySelectorAll(".deleteProduct");
@@ -54,16 +54,93 @@ var deleteProduct = function(document) {
   return {
     'delete' : this.send_del
   }
-}(document)
+}(document);
 
 
-var amoutButton = function(options = {}) {
-  this.node = options.node;
-  this.id_product = options.product;
-  this.action = options.action;
+var amoutButtons = function(document) {
+  this.__URL__ = '/~nobilis/ProjetTut/index.php/';
 
+  this.list = document.querySelector('#productsList');
+
+  this.init = function(){
+    nodes = document.querySelectorAll(".product");
+    nodes.forEach(function(n) {
+      createButtons(n.children[1]);
+    });
+
+
+  }
+
+  this.createButtons = function(node) {
+    buttonSub = document.createElement('button');
+    buttonAdd = document.createElement('button');
+    amount = document.createElement('span');
+    amount.innerHTML = node.innerHTML;
+    node.innerHTML = '';
+    buttonSub.className = 'button';
+    buttonAdd.className = 'button';
+    buttonSub.innerHTML = '-';
+    buttonAdd.innerHTML = '+';
+
+
+    node.insertBefore(buttonSub, node.firstChild);
+    node.append(amount);
+    node.append(buttonAdd);
+
+    buttonAdd.addEventListener('click', this.send_addAmount);
+    buttonSub.addEventListener('click', this.send_subAmount);
+
+
+  }
+
+  this.add = function(row) {
+    createButtons(row.children[1]);
+
+  }
+
+  this.send_addAmount = function(e) {
+    let amount = e.target.previousSibling.innerHTML;
+    amount ++;
+    let x = new XMLHttpRequest();
+    x.open('GET', __URL__ + 'home/list/' + list.dataset.list_id + '/product/'+ e.target.parentElement.parentElement.dataset.product_id + '/amount/' + amount, true);
+    x.onload = function() {
+      if (x.status === 200) {
+          setAmount(JSON.parse(x.responseText), e.target.previousSibling);
+      }
+    }
+    x.send();
+
+
+  }
+
+  this.send_subAmount = function(e) {
+    let amount = e.target.nextSibling.innerHTML;
+    if(amount == 1) {
+
+      return;
+    }
+
+    amount --;
+
+    let x = new XMLHttpRequest();
+    x.open('GET', __URL__ + 'home/list/' + list.dataset.list_id + '/product/'+ e.target.parentElement.parentElement.dataset.product_id + '/amount/' + amount, true);
+    x.onload = function() {
+      if (x.status === 200) {
+          setAmount(JSON.parse(x.responseText), e.target.nextSibling);
+      }
+    }
+    x.send();
+
+  }
+
+  this.setAmount = function(data, node) {
+    if(data.status == true)
+      node.innerHTML = data.amount;
+  }
+
+  this.init();
 
   return {
-
+    add : this.add
   };
-}
+}(document);

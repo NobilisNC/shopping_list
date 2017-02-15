@@ -1,4 +1,4 @@
-var productsInput = function(document, Ajax, deleteProduct) {
+var productsInput = function(document, Ajax, deleteProduct, amoutButtons) {
   this.__URL__ = '/~nobilis/ProjetTut/index.php/';
 
   this.list = document.querySelector('#productsList');
@@ -50,12 +50,12 @@ var productsInput = function(document, Ajax, deleteProduct) {
       li.className = '';
     });
 
-    this.productsList.childNodes[this.selected].className = "selected";
+    this.productsList.children[this.selected].className = "selected";
 
   }
 
   this.send_add = function() {
-    let id_prod = this.productsList.childNodes[this.selected].dataset.internal_id;
+    let id_prod = this.productsList.children[this.selected].dataset.internal_id;
 
     let x = new XMLHttpRequest();
     x.open('GET', this.__URL__ + 'home/list/' + this.list.dataset.list_id + '/addProduct/'+ id_prod, true);
@@ -82,6 +82,9 @@ var productsInput = function(document, Ajax, deleteProduct) {
       cell2.innerHTML = 1;
       cell3.append(span);
       row.dataset.product_id = data.product.id;
+      row.className = 'product';
+
+      amoutButtons.add(row);
 
       k$.growl({
         text  : 'Le produit : ' + data.product.name + ' a été ajouté',
@@ -139,4 +142,4 @@ var productsInput = function(document, Ajax, deleteProduct) {
 
   };
 
-}(document, Ajax, deleteProduct)
+}(document, Ajax, deleteProduct, amoutButtons)

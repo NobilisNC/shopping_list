@@ -18,7 +18,7 @@
     </thead>
     <tbody>
     {foreach $products as $product}
-      <tr data-product_id="{$product->id}">
+      <tr  class="product" data-product_id="{$product->id}">
         <td>{$product->name}</td>
         <td>{$product->amount}</td>
         <td><span class="fa fa-trash deleteProduct" aria-hidden="true" data-product_id="{$product->id}" ></span></td>

@@ -140,7 +140,21 @@ class ShoppingList_model extends CI_Model {
                    ->where('id_list', $id_list)
                    ->where('id_product', $id_product)
                    ->update('list_product');
+
+          return true;
         }
+
+        /** Get amount of a product in a specified list and specified product
+          *
+          *
+          */
+          public function getAmount(int $id_list, int $id_product) {
+            return $this->db->select('amount')
+                            ->from('list_product')
+                            ->where('id_product', $id_product)
+                            ->where('id_list', $id_list)
+                            ->get()->result()[0]->amount;
+          }
 
 
 
