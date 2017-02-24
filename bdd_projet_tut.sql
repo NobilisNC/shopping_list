@@ -85,6 +85,16 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Structure de la table `shop`
+--
+
+CREATE TABLE `shop` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `location` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
 -- Indexes for dumped tables
 --
 
@@ -125,6 +135,12 @@ ALTER TABLE `user`
   ADD UNIQUE KEY `id` (`id`);
 
 --
+-- Index pour la table `shop`
+--
+ALTER TABLE `shop`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -143,6 +159,15 @@ ALTER TABLE `product`
 --
 ALTER TABLE `user`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT pour la table `shop`
+--
+ALTER TABLE `shop`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+  /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+  /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
 --
 -- Constraints for dumped tables
 --

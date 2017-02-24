@@ -66,3 +66,5 @@ $route['(:any)'] = 'accueil/index';
 $route['default_controller'] = 'accueil';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+$route['home/shops'] = 'ShopList/index';
+$route['home/shops/create'] = 'ShopList/createShop';
