@@ -95,6 +95,15 @@ CREATE TABLE `shop` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Structure de la table `user_shops`
+--
+
+CREATE TABLE `user_shops` (
+  `id_shop` bigint(20) UNSIGNED NOT NULL,
+  `id_user` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
 -- Indexes for dumped tables
 --
 
@@ -141,6 +150,14 @@ ALTER TABLE `shop`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `user_shops`
+--
+ALTER TABLE `user_shops`
+  ADD PRIMARY KEY (`id_shop`,`id_user`),
+  ADD KEY `id_shop` (`id_shop`),
+  ADD KEY `id_user` (`id_user`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -167,6 +184,8 @@ ALTER TABLE `shop`
   /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
   /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
   /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+ALTER TABLE `shop` ADD `etat` ENUM('submited','approved') NOT NULL AFTER `location`;
 
 --
 -- Constraints for dumped tables
@@ -195,3 +214,10 @@ ALTER TABLE `list_product`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+--
+-- Contraintes pour la table `user_shops`
+--
+ALTER TABLE `user_shops`
+  ADD CONSTRAINT `FK_ID_SHOP` FOREIGN KEY (`id_shop`) REFERENCES `shop` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_ID_USER` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
