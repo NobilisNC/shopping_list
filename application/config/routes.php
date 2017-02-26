@@ -68,3 +68,5 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['home/shops'] = 'ShopList/index';
 $route['home/shops/create'] = 'ShopList/createShop';
+$route['home/shops/get'] = 'ShopList/getShops';
+$route['home/shops/addToMyShops'] = 'ShopList/addToMyShops';

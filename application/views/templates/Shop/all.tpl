@@ -25,7 +25,32 @@
                 {/foreach}
             </tbody>
         </table>
-        <a class="button" href="{site_url()}/home/shop/create">Ajouter un magasin</a>
+        <form method="post" action="http://localhost/shopping_list/index.php/ShopList/addToMyShops">
+            Shop name : <input type="text" id="shop_dropdown" name="name_shop_to_add" list="json-datalist">
+            <br/><input type="submit" value="Ajouter un magasin">
+        </form>
+        <datalist id="json-datalist"></datalist>
+
+        <script>
+                var dataList = document.getElementById('json-datalist');
+                var input = document.getElementById('shop_dropdown');
+
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function(){
+                    if(this.readyState == 4 && this.status == 200){
+                        var jsonOptions = JSON.parse(xmlhttp.responseText);
+
+                        Array.from(jsonOptions).forEach(function(item) {
+                            var option = document.createElement('option');
+                            option.value = item;
+                            dataList.appendChild(option);
+                        });
+                    }
+                };
+                xmlhttp.open("GET","{site_url()}/home/shops/get?q="+document.getElementById("shop_dropdown").innerHTML,true);
+                xmlhttp.send();
+        </script>
+        <br/>
     </div>
     <br/>
 {/block}

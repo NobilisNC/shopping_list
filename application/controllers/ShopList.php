@@ -23,5 +23,26 @@ class ShopList extends Core_Controller{
         //Cree un nouveau ShopList
         redirect('home/list','refresh');
     }
+
+    public function getShops(){
+            $q = $_REQUEST['q'];
+            $q = strtolower($q);
+            $shop_list = $this->ShopList_model->getShopIn($q);
+            $result = array();
+            foreach($shop_list as $shop)
+            {
+                $result[] = $shop->name.' - '.$shop->location;
+            }
+            echo json_encode($result);
+    }
+
+    public function addToMyShops(){
+        $this->logged_user_only();
+        $id = $this->user_model->id($this->session->userdata('login'));
+
+        $this->ShopList_model->addShopToUser($id,$this->input->post('name_shop_to_add'));
+        redirect('home/shops','refresh');
+    }
 }
+
 ?>
