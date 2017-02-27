@@ -6,11 +6,18 @@ class User_model extends CI_Model {
             $this->load->database();
     }
 
+    /**
+     * Returns
+     *
+     */
     public function id($login) {
         $query = $this->db->get_where('user', array('login' => $login));
         return $query->result()[0]->id;
     }
 
+    /**
+     * Adds the specified user in the database
+     */
     public function addUser($user) {
 
         $data = array(
