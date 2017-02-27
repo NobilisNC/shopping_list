@@ -12,7 +12,7 @@ span.fa {
 }
 
 .amount {
-  width: 15px;
+  width: 3em;
   padding-left: 1em;
   padding-right: 1em;
 }
@@ -24,6 +24,7 @@ span.fa {
 
 .no {
   opacity: 0;
+  cursor: default;
 }
 
 textarea {

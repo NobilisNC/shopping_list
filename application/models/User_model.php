@@ -8,7 +8,8 @@ class User_model extends CI_Model {
 
     public function id($login) {
         $query = $this->db->get_where('user', array('login' => $login));
-        return $query->result()[0]->id;
+
+       return $query->result()[0]->id;
     }
 
     public function addUser($user) {
