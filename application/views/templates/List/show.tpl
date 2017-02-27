@@ -42,6 +42,8 @@
   <main class="max"><span id="note">{nl2br($list->note)}</span></main>
 </div>
 
+<span class="tooltip"></span>
+
 </div>
 </div>
 

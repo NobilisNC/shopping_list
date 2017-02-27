@@ -85,6 +85,11 @@ class Home extends Core_Controller {
             return FALSE;
        }
 
+       if ($this->user_model->login_existe($str) == FALSE ) {
+           $this->form_validation->set_message('login_check', 'Ce login n\'a pas était trouvé.');
+           return FALSE;
+       }
+
        $ami =  $this->user_model->sont_amis($str, $this->session->userdata('id'));
        if ($ami == 'access') {
            $this->form_validation->set_message('login_check', 'Vous êtes déjà amis avec cette personne');
@@ -94,12 +99,8 @@ class Home extends Core_Controller {
            return FALSE;
        }
 
-       if ($this->user_model->login_existe($str) == TRUE ) {
-           return TRUE;
-       } else {
-           $this->form_validation->set_message('login_check', 'Ce login n\'a pas était trouvé.');
-           return FALSE;
-       }
+
+       return TRUE;
    }
 
 
