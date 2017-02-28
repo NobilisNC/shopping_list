@@ -4,10 +4,10 @@
 <h2>Trie</h2>
 
 <p>Choisir la liste à trie : </p>
-
+<ul>
 {foreach $lists as $list}
-<a href="{site_url()}/home/sort/show/{$list->id}">{{$list->name}}</a>
+<li><a href="{site_url()}/home/sort/show/{$list->id}">{{$list->name}}</a><br/></li>
 {/foreach}
-
+</ul>
 </div>
 {/block}
