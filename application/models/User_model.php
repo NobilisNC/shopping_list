@@ -115,7 +115,7 @@ class User_model extends CI_Model {
      *         to the other specified user
      *
      * @param $login_donne_acces - Login of the user currently "adding a friend"
-     * @param $login_a_acces - Login of the user receiving the "friend requet"
+     * @param $login_a_acces - Login of the user receiving the "friend request"
      */
     public function ajouter_ami($login_donne_acces, $login_a_acces) {
         #$query = $this->db->get_where('user', array('login' => $login_donne_acces));
