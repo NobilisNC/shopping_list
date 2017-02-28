@@ -169,7 +169,7 @@ class User_model extends CI_Model {
      *
      * @param $login - A specified user's login
      *
-     *@return $notifications - An array 
+     * @return $notifications - An array
      */
     public function obtenir_notifications($login) {
         $sql = "SELECT login FROM friend JOIN user ON user.id=friend.id_give WHERE id_get=(SELECT id FROM user WHERE  login = '".$login."') AND state = 'waiting'";
@@ -182,9 +182,11 @@ class User_model extends CI_Model {
         return $notifications;
     }
 
-    /**
-    * Delete friend.
-    */
+    /** @brief Delete friend.
+     *
+     * @param $login1 - A specified user's login
+     * @param $login2 - A specified user's login
+     */
     public function supprimer_ami($login1, $login2) {
         $id_1 = $this->id($login1);
         $id_2 = $this->id($login2);
@@ -192,8 +194,11 @@ class User_model extends CI_Model {
         $this->db->delete('friend', array('id_give' => $id_2, 'id_get' => $id_1));
     }
 
-    /**
-     * Returns TRUE if the specified users are friends.
+    /** @brief Verifies if two users are friends
+     *
+     * @param $login1 - A specified user's login
+     * @param int $id2 - A specified user's id
+     * @return Boolean : TRUE if the specified users are friends, FALSE if they are not
      */
     public function sont_amis($login1, int $id2, $access = false) {
         $id1 = $this->id($login1);
