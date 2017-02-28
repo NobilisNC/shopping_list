@@ -6,9 +6,9 @@ class User_model extends CI_Model {
             $this->load->database();
     }
 
-    /**
-     * Returns user id
-     *
+
+    /** \brief Returns user id
+     * @param $login - login of a specified user
      */
     public function id($login) {
         $query = $this->db->get_where('user', array('login' => $login));
@@ -16,8 +16,8 @@ class User_model extends CI_Model {
        return $query->result()[0]->id;
     }
 
-    /**
-     * Adds the specified user in the database
+    /** \brief Adds the specified user in the database
+     * @param $user - an array containing all the information of the user
      */
     public function addUser($user) {
 
@@ -32,12 +32,14 @@ class User_model extends CI_Model {
         return $this->db->insert('user', $data);
     }
 
-    /**
-     * Verifies the login information of the user.
-     * Returns TRUE if the information is valid.
+    /** \brief Verifies the login information of the user.
+     *         Returns TRUE if the information is valid.
+     *
+     * @param $login - login typed by the user
+     * @param $password - password typed by the user
      */
     public function valid_infos_connexion($login, $password) {
-        $query = $this->db->get_where('user' ,array('login' => $login, 'password' => sha1($password)));
+        $query = $this->db->get_where('user', array('login' => $login, 'password' => sha1($password)));
         if($query->num_rows() == 1) {
             return TRUE;
         } else {
@@ -45,8 +47,11 @@ class User_model extends CI_Model {
         }
     }
 
-
-    public function login_existe($str) {
+    /** \brief Verifies if the specified string matches a login in the database
+     *
+     * @param $str - a specified string 
+     */
+    public function login_exists($str) {
         $query = $this->db->get_where('user',array('login' => $str));
         if($query->num_rows() > 0) {
             return TRUE;

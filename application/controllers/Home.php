@@ -85,7 +85,7 @@ class Home extends Core_Controller {
             return FALSE;
        }
 
-       if ($this->user_model->login_existe($str) == FALSE ) {
+       if ($this->user_model->login_exists($str) == FALSE ) {
            $this->form_validation->set_message('login_check', 'Ce login n\'a pas était trouvé.');
            return FALSE;
        }
