@@ -27,5 +27,11 @@
           $this->Admin_model->supprproduct($name_product);
           redirect('home/admin','refresh');
         }
+
+        public function deleteShop(int $id_shop){
+            $this->logged_user_only();
+            $is_deleted = $this->ShopList_model->deleteShop($id_shop);
+            redirect('admin/shop','refresh');
+        }
     }
 ?>
