@@ -1,0 +1,100 @@
+\hypertarget{class_user__model}{}\section{User\+\_\+model Class Reference}
+\label{class_user__model}\index{User\+\_\+model@{User\+\_\+model}}
+Inheritance diagram for User\+\_\+model\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_user__model}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_user__model_ae3c97430ddfbb524172fe62687493762}{id} (\$login)
+\item 
+\hyperlink{class_user__model_abdfab30e2e8e5562e761a2228af18c3b}{add\+User} (\$user)
+\item 
+\hyperlink{class_user__model_ad956699f65b6a767bdf9ce2d251633b2}{valid\+\_\+infos\+\_\+connexion} (\$login, \$password)
+\item 
+\mbox{\Hypertarget{class_user__model_a3204c52d23a035d36787a16d82db1333}\label{class_user__model_a3204c52d23a035d36787a16d82db1333}} 
+{\bfseries login\+\_\+existe} (\$str)
+\item 
+\mbox{\Hypertarget{class_user__model_a4084ea600d7d896ff95d9248a7a25616}\label{class_user__model_a4084ea600d7d896ff95d9248a7a25616}} 
+{\bfseries email\+\_\+existe} (\$str)
+\item 
+\hyperlink{class_user__model_a40e51a5c6fc819d5c0f2e678a124d60e}{infos} (\$login)
+\item 
+\hyperlink{class_user__model_a1e8eb7d545bc221a640bffdebf063e3e}{modifier\+\_\+mdp} (\$login, \$password)
+\item 
+\hyperlink{class_user__model_af67174e59f20721772935e2318be5e4a}{ajouter\+\_\+ami} (\$login\+\_\+donne\+\_\+acces, \$login\+\_\+a\+\_\+acces)
+\item 
+\hyperlink{class_user__model_a778aaa6e58fc26c945fffba005867051}{obtenir\+\_\+amis} (\$login, \$a\+\_\+accepter=F\+A\+L\+SE)
+\item 
+\mbox{\Hypertarget{class_user__model_a30fbd50d8c0d3312dee36d8de939ebca}\label{class_user__model_a30fbd50d8c0d3312dee36d8de939ebca}} 
+{\bfseries obtenir\+\_\+notifications} (\$login)
+\item 
+\hyperlink{class_user__model_a6bac1a29e9d14095868f8d38b2a814b2}{supprimer\+\_\+ami} (\$login1, \$login2)
+\item 
+\hyperlink{class_user__model_a54a357608c9913546f397fad6270e4fb}{sont\+\_\+amis} (\$login1, int \$id2, \$access=false)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_user__model_abdfab30e2e8e5562e761a2228af18c3b}\label{class_user__model_abdfab30e2e8e5562e761a2228af18c3b}} 
+\index{User\+\_\+model@{User\+\_\+model}!add\+User@{add\+User}}
+\index{add\+User@{add\+User}!User\+\_\+model@{User\+\_\+model}}
+\subsubsection{\texorpdfstring{add\+User()}{addUser()}}
+{\footnotesize\ttfamily add\+User (\begin{DoxyParamCaption}\item[{}]{\$user }\end{DoxyParamCaption})}
+
+Adds the specified user in the database \mbox{\Hypertarget{class_user__model_af67174e59f20721772935e2318be5e4a}\label{class_user__model_af67174e59f20721772935e2318be5e4a}} 
+\index{User\+\_\+model@{User\+\_\+model}!ajouter\+\_\+ami@{ajouter\+\_\+ami}}
+\index{ajouter\+\_\+ami@{ajouter\+\_\+ami}!User\+\_\+model@{User\+\_\+model}}
+\subsubsection{\texorpdfstring{ajouter\+\_\+ami()}{ajouter\_ami()}}
+{\footnotesize\ttfamily ajouter\+\_\+ami (\begin{DoxyParamCaption}\item[{}]{\$login\+\_\+donne\+\_\+acces,  }\item[{}]{\$login\+\_\+a\+\_\+acces }\end{DoxyParamCaption})}
+
+Adds a friend. More precisely, the second specified user gets access to the first specified user\textquotesingle{}s lists. \mbox{\Hypertarget{class_user__model_ae3c97430ddfbb524172fe62687493762}\label{class_user__model_ae3c97430ddfbb524172fe62687493762}} 
+\index{User\+\_\+model@{User\+\_\+model}!id@{id}}
+\index{id@{id}!User\+\_\+model@{User\+\_\+model}}
+\subsubsection{\texorpdfstring{id()}{id()}}
+{\footnotesize\ttfamily id (\begin{DoxyParamCaption}\item[{}]{\$login }\end{DoxyParamCaption})}
+
+Returns user id \mbox{\Hypertarget{class_user__model_a40e51a5c6fc819d5c0f2e678a124d60e}\label{class_user__model_a40e51a5c6fc819d5c0f2e678a124d60e}} 
+\index{User\+\_\+model@{User\+\_\+model}!infos@{infos}}
+\index{infos@{infos}!User\+\_\+model@{User\+\_\+model}}
+\subsubsection{\texorpdfstring{infos()}{infos()}}
+{\footnotesize\ttfamily infos (\begin{DoxyParamCaption}\item[{}]{\$login }\end{DoxyParamCaption})}
+
+Returns user\textquotesingle{}s information (login, mail, name and first name). \mbox{\Hypertarget{class_user__model_a1e8eb7d545bc221a640bffdebf063e3e}\label{class_user__model_a1e8eb7d545bc221a640bffdebf063e3e}} 
+\index{User\+\_\+model@{User\+\_\+model}!modifier\+\_\+mdp@{modifier\+\_\+mdp}}
+\index{modifier\+\_\+mdp@{modifier\+\_\+mdp}!User\+\_\+model@{User\+\_\+model}}
+\subsubsection{\texorpdfstring{modifier\+\_\+mdp()}{modifier\_mdp()}}
+{\footnotesize\ttfamily modifier\+\_\+mdp (\begin{DoxyParamCaption}\item[{}]{\$login,  }\item[{}]{\$password }\end{DoxyParamCaption})}
+
+Function used to change the user\textquotesingle{}s password. \mbox{\Hypertarget{class_user__model_a778aaa6e58fc26c945fffba005867051}\label{class_user__model_a778aaa6e58fc26c945fffba005867051}} 
+\index{User\+\_\+model@{User\+\_\+model}!obtenir\+\_\+amis@{obtenir\+\_\+amis}}
+\index{obtenir\+\_\+amis@{obtenir\+\_\+amis}!User\+\_\+model@{User\+\_\+model}}
+\subsubsection{\texorpdfstring{obtenir\+\_\+amis()}{obtenir\_amis()}}
+{\footnotesize\ttfamily obtenir\+\_\+amis (\begin{DoxyParamCaption}\item[{}]{\$login,  }\item[{}]{\$a\+\_\+accepter = {\ttfamily FALSE} }\end{DoxyParamCaption})}
+
+Accept or delete a \char`\"{}friend invitation\char`\"{}. \mbox{\Hypertarget{class_user__model_a54a357608c9913546f397fad6270e4fb}\label{class_user__model_a54a357608c9913546f397fad6270e4fb}} 
+\index{User\+\_\+model@{User\+\_\+model}!sont\+\_\+amis@{sont\+\_\+amis}}
+\index{sont\+\_\+amis@{sont\+\_\+amis}!User\+\_\+model@{User\+\_\+model}}
+\subsubsection{\texorpdfstring{sont\+\_\+amis()}{sont\_amis()}}
+{\footnotesize\ttfamily sont\+\_\+amis (\begin{DoxyParamCaption}\item[{}]{\$login1,  }\item[{int}]{\$id2,  }\item[{}]{\$access = {\ttfamily false} }\end{DoxyParamCaption})}
+
+Returns T\+R\+UE if the specified users are friends. \mbox{\Hypertarget{class_user__model_a6bac1a29e9d14095868f8d38b2a814b2}\label{class_user__model_a6bac1a29e9d14095868f8d38b2a814b2}} 
+\index{User\+\_\+model@{User\+\_\+model}!supprimer\+\_\+ami@{supprimer\+\_\+ami}}
+\index{supprimer\+\_\+ami@{supprimer\+\_\+ami}!User\+\_\+model@{User\+\_\+model}}
+\subsubsection{\texorpdfstring{supprimer\+\_\+ami()}{supprimer\_ami()}}
+{\footnotesize\ttfamily supprimer\+\_\+ami (\begin{DoxyParamCaption}\item[{}]{\$login1,  }\item[{}]{\$login2 }\end{DoxyParamCaption})}
+
+Delete friend. \mbox{\Hypertarget{class_user__model_ad956699f65b6a767bdf9ce2d251633b2}\label{class_user__model_ad956699f65b6a767bdf9ce2d251633b2}} 
+\index{User\+\_\+model@{User\+\_\+model}!valid\+\_\+infos\+\_\+connexion@{valid\+\_\+infos\+\_\+connexion}}
+\index{valid\+\_\+infos\+\_\+connexion@{valid\+\_\+infos\+\_\+connexion}!User\+\_\+model@{User\+\_\+model}}
+\subsubsection{\texorpdfstring{valid\+\_\+infos\+\_\+connexion()}{valid\_infos\_connexion()}}
+{\footnotesize\ttfamily valid\+\_\+infos\+\_\+connexion (\begin{DoxyParamCaption}\item[{}]{\$login,  }\item[{}]{\$password }\end{DoxyParamCaption})}
+
+Verifies the login information of the user. Returns T\+R\+UE if the information is valid. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+application/models/User\+\_\+model.\+php\end{DoxyCompactItemize}

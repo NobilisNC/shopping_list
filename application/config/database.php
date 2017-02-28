@@ -76,9 +76,15 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
+<<<<<<< HEAD
 	'username' => 'admin',
 	'password' => 'admin',
 	'database' => 'projettut',
+=======
+	'username' => 'u_ptut',
+	'password' => 'ptut',
+	'database' => 'u_ptut',
+>>>>>>> 721c9858ebff349e64a73533f337837b45e4d454
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
