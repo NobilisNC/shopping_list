@@ -70,7 +70,7 @@ class Accueil extends CI_Controller {
    }
 
    public function email_check($str) {
-       if ($this->user_model->email_existe($str) == TRUE) {
+       if ($this->user_model->email_exists($str) == TRUE) {
            $this->form_validation->set_message('email_check', 'Cette {field} est déjà associée.');
            return FALSE;
        } else {
@@ -80,7 +80,7 @@ class Accueil extends CI_Controller {
 
    public function verifier_infos_connexion($str) {
 
-       if ($this->user_model->valid_infos_connexion( $this->input->post('login'), $this->input->post('password') ) == TRUE) {
+       if ($this->user_model->valid_connexion_info( $this->input->post('login'), $this->input->post('password') ) == TRUE) {
            return TRUE;
        } else {
            $this->form_validation->set_message('verifier_infos_connexion', 'Pseudo/mot de passe non trouvés.');

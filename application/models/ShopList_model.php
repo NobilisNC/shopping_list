@@ -5,6 +5,12 @@ class ShopList_model extends CI_Model{
         $this->load->database();
     }
 
+   /** @brief Gets the shop list for the specified user
+    *
+    * @param $id_user - A specified user's id
+    *
+    * @return The shop list
+    */
     public function getShops(int $id_user){
         $this->db->from('shop');
         $this->db->join('user_shops','shop.id=user_shops.id_shop');
