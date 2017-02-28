@@ -27,7 +27,7 @@
   </table>
 
   {if $smarty.session.password_changed === TRUE }
-    <p>Mot de passe changé avec succees</p>
+    <p>Mot de passe changé avec succès</p>
   {/if}
 
     {$errors = validation_errors()}

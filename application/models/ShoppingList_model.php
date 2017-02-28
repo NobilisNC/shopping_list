@@ -6,10 +6,9 @@ class ShoppingList_model extends CI_Model {
             $this->load->database();
     }
 
-    /**
-     * Creates an empty List for a specified user
+    /** @brief Creates an empty List for a specified user
      *
-     *
+     * @param $id_user - A specified user's id
      */
     public function createEmptyList(int $id_user) {
       $data = array(
@@ -22,16 +21,19 @@ class ShoppingList_model extends CI_Model {
 
     }
 
-    /**
-     * Delete a list with a specified id
+    /** @brief Delete a list with a specified id
+     *
+     * @param $id_list - A specified list id
      */
     public function deleteList(int $id_list) {
       $this->db->delete('list', array( 'id' => $id_list));
     }
 
-    /**
-     * Get all lists of a specified user(id)
+    /** @brief Get all lists of a specified user id
      *
+     *@param $id - A specified user's id
+     *
+     * @return All lists for this specified user
      */
     public function getLists(int $id){
       $query = $this->db->get_where('list', array('id_user' => $id));
@@ -40,19 +42,21 @@ class ShoppingList_model extends CI_Model {
 
     }
 
-    /**
-     * Get a list by giving it id
+    /** @brief Get a list by giving it id
      *
+     * @param $id - A specified list id
+     *
+     *@return The list
      */
     public function getListById(int $id) {
       $query = $this->db->get_where('list', array('id' => $id));
       return $query->result()[0];
     }
 
-    /**
-     * Set name of a specified list
+    /** @brief Set name of a specified list
      *
-     *
+     * @param $id - A specified list id
+     * @param $name - The new name of the list
      */
     public function setName(int $id, string $name) {
       $data = array (
@@ -63,9 +67,11 @@ class ShoppingList_model extends CI_Model {
         $this->db->update('list', $data );
     }
 
-    /**
-     * Return products of a specified list
+    /** @brief Return products of a specified list
      *
+     * @param $id_list - A specified list id
+     *
+     * @return All the products in the list
      */
     public function getProducts(int $id_list) {
         $this->db->select('name, amount, id')
@@ -77,10 +83,12 @@ class ShoppingList_model extends CI_Model {
         return $query->result();
     }
 
-    /**
-     * Return names of product like param.
-     * Used from Ajax request
+    /** @brief Return names of products giving only the first letters
+     *         Used from Ajax request
      *
+     * @param $name - The beginning of a product name
+     *
+     * @return All product names that start with $name
      */
     public function getProductsLike(string $name) {
         $this->db->select('id, name')
@@ -93,10 +101,12 @@ class ShoppingList_model extends CI_Model {
         return $query->result();
       }
 
-      /**
-       * Add a product to a specidied list
+      /** @brief Adds a product to a specified list
        *
-       * Return True/false if insered or not
+       * @param $id_list - A specified list id
+       * @param $id_product - The id of the product to add
+       *
+       * @return Boolean : True if the product is added, false if it is not.
        */
       public function addProductToList(int $id_list, string $id_product ) {
 
@@ -110,9 +120,12 @@ class ShoppingList_model extends CI_Model {
            return true;
       }
 
-      /**
-       * Delete a product for a specified list
+      /** @brief Deletes a product for a specified list
        *
+       * @param $id_list - A specified list id
+       * @param $id_product - The id of the product to add
+       *
+       * @return Boolean : True if the product is deleted, false if it is not.
        */
       public function deleteProductFromList(int $id_list, int $id_product) {
           $this->db->where(array('id_list' => $id_list, 'id_product' => $id_product))
@@ -120,19 +133,24 @@ class ShoppingList_model extends CI_Model {
           return true;
       }
 
-      /**
-       * Return Product by its ID.
+      /** @brief Gets a product by its id
        *
+       * @param $id_prod - A specified product id
        *
+       * @return The product corresponding to the given id
        */
       public function getProductById(int $id_prod) {
         return $this->db->get_where('product', array('id' => $id_prod))->result()[0];
       }
 
 
-      /**
-       * Set the amount of a specified product in a specified list
+      /** @brief Sets the amount of a specified product in a specified list
        *
+       * @param $id_list - A specified list id
+       * @param $id_product - A specified product id
+       * @param $amount - The amount of product we want to set
+       *
+       * @return Boolean : TRUE if the amount is set, FALSE if it is not
        */
         public function setAmount(int $id_list, int $id_product, int $amount) {
           $this->db->set('amount', $amount)
@@ -143,9 +161,12 @@ class ShoppingList_model extends CI_Model {
           return true;
         }
 
-        /**
-         * Get the amount of a specified product in a specified list
+        /** @brief Gets the amount of a specified product in a specified list
          *
+         * @param $id_list - A specified list id
+         * @param $id_product - A specified product id
+         *
+         * @return : The amount of the specified product in this list
          */
           public function getAmount(int $id_list, int $id_product) {
             return $this->db->select('amount')
@@ -156,9 +177,10 @@ class ShoppingList_model extends CI_Model {
           }
 
 
-        /**
-         * Update note for a product in a specified list
+        /** @brief Updates note in a specified list
          *
+         * @param $id_list - A specified list id
+         * @param $note - The new note for this list
          */
       public function updateNote(int $id_list, string $note) {
         $this->db->set('note', $note)
