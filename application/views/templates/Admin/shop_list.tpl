@@ -2,11 +2,11 @@
 {block name=body}
     <div class="col-left-1 col-10">
 
-        {if $shop_add_success == TRUE}
+        {if $shop_add_success === TRUE}
             <div class="alert alert-green">
                 <p>Le magasin a bien été ajouté</p>
             </div>
-        {elseif $shop_add_success == FALSE}
+        {elseif $shop_add_success === FALSE}
             <div class="alert alert-red">
                 <p>Le magasin existe déjà dans notre Base de donnée</p>
             </div>
