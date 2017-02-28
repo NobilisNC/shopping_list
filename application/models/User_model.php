@@ -149,8 +149,8 @@ class User_model extends CI_Model {
     }
 
     /**
-     * Delete friend.
-     */
+    * Delete friend.
+    */
     public function supprimer_ami($login1, $login2) {
         $id_1 = $this->id($login1);
         $id_2 = $this->id($login2);
