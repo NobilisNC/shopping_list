@@ -70,3 +70,4 @@ $route['home/shops'] = 'ShopList/index';
 $route['home/shops/create'] = 'ShopList/createShop';
 $route['home/shops/get'] = 'ShopList/getShops';
 $route['home/shops/addToMyShops'] = 'ShopList/addToMyShops';
+$route['admin/shop'] = 'Admin/index';

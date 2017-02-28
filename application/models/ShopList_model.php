@@ -15,6 +15,7 @@ class ShopList_model extends CI_Model{
     }
 
     public function getAllShops(){
+        $this->db->order_by('name', 'asc');
         $query = $this->db->get('shop');
         return $query->result();
     }
@@ -55,6 +56,11 @@ class ShopList_model extends CI_Model{
         } else {
                     $this->db->insert('user_shops', $data);
         }
+    }
+
+    public function deleteShop(int $id_shop){
+        $this->db->where('id',$id_shop);
+        $this->db->delete('shop');
     }
 }
 ?>
