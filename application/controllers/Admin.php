@@ -36,13 +36,13 @@
         $exp=$this->input->post('exp');
         $weight=$this->input->post('weight');
         $vol=$this->input->post('volume');
-        $this->Product_model->addproduct($name,$exp,$weight,$vol);
+        $this->Product_model->add_product($name,$exp,$weight,$vol);
         redirect('admin/createProduct','refresh');
         }
 
         public function eraseProduct(int $id_product){
           $this->logged_user_only();
-          $this->Product_model->supprproduct($name_product);
+          $this->Product_model->delete_product($name_product);
           redirect('admin/product','refresh');
         }
 

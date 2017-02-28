@@ -6,7 +6,7 @@ class ShoppingList_model extends CI_Model {
             $this->load->database();
     }
 
-    /** @brief Creates an empty List for a specified user
+    /** @brief Creates an empty list for a specified user
      *
      * @param $id_user - A specified user's id
      */
