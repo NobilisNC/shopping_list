@@ -12,7 +12,7 @@
 
     {if $inscription_success === TRUE}
     <div class="alert alert-green">
-      <p>Votre compte à bien été créé. Vous pouvez desormais vous connecter.</p>
+      <p>Votre compte a bien été créé. Vous pouvez désormais vous connecter.</p>
     </div>
     {elseif $inscription_success === FALSE}
     <div class="alert alert-red">
