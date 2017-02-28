@@ -15,6 +15,19 @@
             $this->smarty->view('Admin/shop_list.tpl',$data);
         }
 
+        public function createProduct(){
+        $this->logged_user_only();
+        $name_addproduct=$this->input->post('name_addproduct');
+        $this->AddProduct_model->addproduct($name_addproduct);
+        redirect('home/admin','refresh');
+        }
+
+        public function eraseProduct(){
+          $this->logged_user_only();
+          $this->Admin_model->supprproduct($name_product);
+          redirect('home/admin','refresh');
+        }
+
         public function deleteShop(int $id_shop){
             $this->logged_user_only();
             $is_deleted = $this->ShopList_model->deleteShop($id_shop);
