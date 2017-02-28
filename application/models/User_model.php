@@ -10,7 +10,7 @@ class User_model extends CI_Model {
     /** \brief Returns user id
      * @param $login - login of a specified user
      *
-     * @return 
+     * @return An User
      */
     public function id($login) {
         $query = $this->db->get_where('user', array('login' => $login));
@@ -34,7 +34,7 @@ class User_model extends CI_Model {
         return $this->db->insert('user', $data);
     }
 
-    /** \brief Verifies the login information of the user.
+    /** @brief Verifies the login information of the user.
      *
      * @param $login - login typed by the user
      * @param $password - password typed by the user
@@ -50,7 +50,7 @@ class User_model extends CI_Model {
         }
     }
 
-    /** \brief Verifies if the specified string matches a login in the database
+    /** @brief Verifies if the specified string matches a login in the database
      *
      * @param $str - a specified string
      *
