@@ -1,5 +1,5 @@
 var amoutButtons = function(document) {
-  this.__URL__ = '/~nobilis/ProjetTut/index.php/';
+  this.__URL__ = '~nobilis/ProjetTut/index.php/';
 
   this.list = document.querySelector('#productsList');
 

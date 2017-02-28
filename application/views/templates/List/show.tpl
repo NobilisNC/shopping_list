@@ -42,18 +42,16 @@
   <main class="max"><span id="note">{nl2br($list->note)}</span></main>
 </div>
 
-<span class="tooltip"></span>
-
 </div>
 </div>
 
-
+<script type="text/javascript" src="{base_url()}static/js/he.js"></script>
 <script type="text/javascript" src="{base_url()}static/js/ajax.js"></script>
-<script type="text/javascript" src="{base_url()}/static/js/amountButtons.js"></script>
-<script type="text/javascript" src="{base_url()}/static/js/deleteButton.js"></script>
-<script type="text/javascript" src="{base_url()}/static/js/productInput.js"></script>
+<script type="text/javascript" src="{base_url()}static/js/amountButtons.js"></script>
+<script type="text/javascript" src="{base_url()}static/js/deleteButton.js"></script>
+<script type="text/javascript" src="{base_url()}static/js/productInput.js"></script>
 
-<script type="text/javascript" src="{base_url()}/static/js/editText.js"></script>
+<script type="text/javascript" src="{base_url()}static/js/editText.js"></script>
 
 <script type="text/javascript">
 let test1 = new editableText(

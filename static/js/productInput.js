@@ -9,23 +9,26 @@ var productsInput = function(document, Ajax, deleteProduct, amoutButtons) {
     return;
   }
 
+  this.layout = document.createElement('div');
+  this.layout.className = 'layout_abs';
+
+  this.node.append(this.layout);
+
   this.field = this.node.querySelector('input#productsInputField');
   if(this.field == null) {
     this.field = document.createElement('input');
     this.field.idName = 'productsInputField';
-    this.node.append(this.field);
+    this.layout.append(this.field);
   }
 
   this.tooltip_box = document.createElement('div');
-  //this.tooltip_box.className = 'tooltip_trigger';
-  this.tooltip  = document.createElement('div');
-  //this.tooltip.className = 'tooltip'
+  this.tooltip_box.className = 'tooltip_box';
+
 
   this.productsList = document.createElement('ul');
-  this.tooltip.append(this.productsList);
+  this.tooltip_box.append(this.productsList);
 
-  this.tooltip_box.append(this.tooltip);
-  this.node.append(this.tooltip_box);
+  this.layout.append(this.tooltip_box);
 
   this.products = [];
   this.selected = null;
@@ -34,6 +37,7 @@ var productsInput = function(document, Ajax, deleteProduct, amoutButtons) {
     this.products = [];
     this.selected = null;
     this.productsList.innerHTML =  '';
+    this.tooltip_box.className = "no";
   }
 
   this.show = function(data) {
@@ -47,8 +51,11 @@ var productsInput = function(document, Ajax, deleteProduct, amoutButtons) {
       productsList.append(line);
     });
 
-    if(products.length > 0)
+    if(products.length > 0) {
       this.select();
+      this.tooltip_box.className = '';
+    }
+
   }
 
   this.select = function(id) {
@@ -144,6 +151,7 @@ var productsInput = function(document, Ajax, deleteProduct, amoutButtons) {
 
   this.field.addEventListener('input', this._input.bind(this));
   this.field.addEventListener('keydown', this._onKeyDown.bind(this));
+  this.resetList();
 
   return {
 

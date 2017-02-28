@@ -7,7 +7,6 @@ function editableText(options = {}) {
   this.static_field = options.node;
 
   if(this.type == 'textarea') {
-    console.log('caca');
     this.field = document.createElement('textarea');
     this.field.className = this.type_data;
   } else {
@@ -62,10 +61,7 @@ function editableText(options = {}) {
 
     parent = this.field.parentElement;
     parent.replaceChild(this.static_field, this.field);
-    console.log(this.static_field.innerHTML.replace(/\n/g,'').replace(/(<br>)*$/g, ''));
-    this.static_field.innerHTML = this.static_field.innerHTML.replace(/\n/g,'').replace(/(<br>)*$/g, '')
-    console.log(this.static_field.innerHTML);
-
+    this.static_field.innerHTML = this.static_field.innerHTML.replace(/\n/g,'').replace(/(<br>)*$/g, '');
   }
 
   this.edit =  function(e) {
@@ -77,7 +73,7 @@ function editableText(options = {}) {
 
     parent = this.static_field.parentElement;
     parent.replaceChild(this.field, this.static_field);
-    this.field.value = this.static_field.innerHTML.replace(/<br>/g, "\r");
+    this.field.value = he.decode(this.static_field.innerHTML.replace(/<br>/g, "\r"));
 
   }
 
