@@ -29,10 +29,41 @@ span.fa {
 
 textarea {
   resize: none;
-  overflow: hidden;
   height : 100%;
 }
 
 main.max {
   height : 95%;
+}
+
+#productsInput {
+  position: relative;
+  text-align: center;
+}
+
+#productsInput input {
+}
+
+.layout_abs {
+  position: absolute;
+  top : 0;
+  width : 100%;
+}
+.layout_abs input {
+  position: relative;
+  width: inherit;
+}
+
+.layout_abs ul {
+  padding-left: 0;
+  list-style-type: none;
+  background-color: white;
+  border-color: lightgray;
+  border-style: solid;
+  border-width: thin;
+}
+
+.layout_abs ul li {
+  text-align: left;
+
 }
