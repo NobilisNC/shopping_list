@@ -46,6 +46,18 @@ class ShopList_model extends CI_Model{
         return $query->result();
     }
 
+    public function addShop($shop_data)
+    {
+        $query = $this->db->get_where('shop',$shop_data);
+
+        if($query->num_rows() > 0){
+            return FALSE;
+        }else{
+            $this->db->insert('shop',$shop_data);
+            return TRUE;
+        }
+    }
+
     /** @brief Adds a shop to a specified user's shop list
      *
      * @param $user_id - A specified user's id

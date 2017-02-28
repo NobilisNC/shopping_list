@@ -61,6 +61,7 @@ $route['home/shops/addToMyShops'] = 'ShopList/addToMyShops';
 
 $route['admin/shop'] = 'Admin/index';
 $route['admin/shop/delete/(:num)'] = 'Admin/deleteShop/$1';
+$route['admin/shop/addShop'] = 'Admin/addShop';
 
 $route['home/list/(:num)/note'] = 'ShoppingList/updateNote/$1';
 $route['home/list/(:num)/product/(:num)/amount/(:num)'] = 'ShoppingList/updateAmount/$1/$2/$3';
