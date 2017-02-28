@@ -2,6 +2,8 @@ application/views/templates_c/*
 application/config/config.php
 application/config/database.php
 
+doc
+
  OS generated files #
 ######################
 .DS_Store
