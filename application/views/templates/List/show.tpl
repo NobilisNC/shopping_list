@@ -45,7 +45,7 @@
 </div>
 </div>
 
-
+<script type="text/javascript" src="{base_url()}static/js/he.js"></script>
 <script type="text/javascript" src="{base_url()}static/js/ajax.js"></script>
 <script type="text/javascript" src="{base_url()}static/js/amountButtons.js"></script>
 <script type="text/javascript" src="{base_url()}static/js/deleteButton.js"></script>

@@ -92,7 +92,7 @@ class ShoppingList extends Core_Controller {
       $this->ShoppingList_model->updateNote($id_list, htmlentities($data->data));
 
       $response = array();
-      $response["data"] = nl2br($this->ShoppingList_model->getListById($id_list)->note);
+      $response["data"] = html_entity_decode(nl2br($this->ShoppingList_model->getListById($id_list)->note));
 
 
       echo json_encode($response);
