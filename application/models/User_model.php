@@ -6,9 +6,11 @@ class User_model extends CI_Model {
             $this->load->database();
     }
 
-    /**
-     * Returns user id
+
+    /** @brief Returns user id
+     * @param $login - A specified user login
      *
+     * @return id - The user's id
      */
     public function id($login) {
         $query = $this->db->get_where('user', array('login' => $login));
@@ -16,8 +18,8 @@ class User_model extends CI_Model {
        return $query->result()[0]->id;
     }
 
-    /**
-     * Adds the specified user in the database
+    /** @brief Adds the specified user in the database
+     * @param $user - an array containing all the user's information
      */
     public function addUser($user) {
 
@@ -32,12 +34,15 @@ class User_model extends CI_Model {
         return $this->db->insert('user', $data);
     }
 
-    /**
-     * Verifies the login information of the user.
-     * Returns TRUE if the information is valid.
+    /** @brief Verifies the login information of the user.
+     *
+     * @param $login - login typed by the user
+     * @param $password - password typed by the user
+     *
+     * @return Boolean - TRUE if the information is valid, FALSE if it is not
      */
     public function valid_infos_connexion($login, $password) {
-        $query = $this->db->get_where('user' ,array('login' => $login, 'password' => sha1($password)));
+        $query = $this->db->get_where('user', array('login' => $login, 'password' => sha1($password)));
         if($query->num_rows() == 1) {
             return TRUE;
         } else {
@@ -45,8 +50,13 @@ class User_model extends CI_Model {
         }
     }
 
-
-    public function login_existe($str) {
+    /** @brief Verifies if the specified string matches a login in the database
+     *
+     * @param $str - a specified string
+     *
+     * @return Boolean - TRUE if this login exists, FALSE if it doesn't
+     */
+    public function login_exists($str) {
         $query = $this->db->get_where('user',array('login' => $str));
         if($query->num_rows() > 0) {
             return TRUE;
@@ -54,6 +64,13 @@ class User_model extends CI_Model {
             return FALSE;
         }
     }
+
+    /** @brief Verifies if the specified string matches an email in the database
+     *
+     * @param $str - a specified string
+     *
+     * @return Boolean - TRUE if this email exists, FALSE if it doesn't
+     */
 
     public function email_existe($str) {
         $query = $this->db->get_where('user',array('mail' => strtolower($str)));
@@ -64,8 +81,11 @@ class User_model extends CI_Model {
         }
     }
 
-    /**
-     *  Returns user's information (login, mail, name and first name).
+    /** @brief Gets the information of the user with the specified login
+     *
+     * @param $login - a specified login
+     *
+     * @return $personnal_infos - An array containing the user's personnal info
      */
     public function infos($login) {
         $query = $this->db->get_where('user', array('login' => $login));
@@ -79,8 +99,10 @@ class User_model extends CI_Model {
         return $personnal_infos;
         }
 
-      /**
-       * Function used to change the user's password.
+      /** @brief Changes the user's password
+       *
+       * @param $login - A specified user login
+       * @param $password - The new, modified password
        */
     public function modifier_mdp($login, $password) {
         $this->db->set('password', sha1($password));
@@ -88,10 +110,12 @@ class User_model extends CI_Model {
         $this->db->update('user');
     }
 
-    /**
-     * Adds a friend.
-     * More precisely, the second specified user gets access to the first specified
-     * user's lists.
+    /** @brief Adds a friend.
+     *         More precisely, the first specified user gives access to his shopping lists
+     *         to the other specified user
+     *
+     * @param $login_donne_acces - Login of the user currently "adding a friend"
+     * @param $login_a_acces - Login of the user receiving the "friend requet"
      */
     public function ajouter_ami($login_donne_acces, $login_a_acces) {
         #$query = $this->db->get_where('user', array('login' => $login_donne_acces));
@@ -118,8 +142,12 @@ class User_model extends CI_Model {
         }
     }
 
-    /**
-     * Accept or delete a "friend invitation".
+    /** @brief Accept or delete a "friend invitation".
+     *
+     * @param $login - A specified user login
+     * @param $a_accepter - Boolean : FALSE until the invitation is accepted
+     *
+     * @return $friends - 
      */
     public function obtenir_amis($login, $a_accepter = FALSE) {
         $id = $this->id($login);

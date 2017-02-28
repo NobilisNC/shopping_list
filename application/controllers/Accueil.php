@@ -61,7 +61,7 @@ class Accueil extends CI_Controller {
    }
 
    public function login_check($str) {
-       if ($this->user_model->login_existe($str) == TRUE) {
+       if ($this->user_model->login_exists($str) == TRUE) {
            $this->form_validation->set_message('login_check', 'Ce {field} existe déjà.');
            return FALSE;
        } else {

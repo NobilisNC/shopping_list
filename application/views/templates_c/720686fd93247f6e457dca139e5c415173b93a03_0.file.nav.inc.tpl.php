@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-02-15 07:39:17
+/* Smarty version 3.1.30, created on 2017-02-28 15:13:13
   from "C:\UwAmp\www\PTUT\shopping_list\application\views\templates\nav\nav.inc.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_58a405a54f6801_41794901',
+  'unifunc' => 'content_58b59389ba65e7_04694504',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '720686fd93247f6e457dca139e5c415173b93a03' => 
     array (
       0 => 'C:\\UwAmp\\www\\PTUT\\shopping_list\\application\\views\\templates\\nav\\nav.inc.tpl',
-      1 => 1487142801,
+      1 => 1488206053,
       2 => 'file',
     ),
   ),
@@ -20,11 +20,12 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58a405a54f6801_41794901 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58b59389ba65e7_04694504 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <nav>
 <ul class="">
-	<li><a href="index">Accueil</a></li>
+	<li><a href="<?php echo site_url();?>
+/index">Accueil</a></li>
 </ul>
 <ul>
 	<?php if ($_SESSION['logged_in'] === TRUE) {?>

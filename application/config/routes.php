@@ -58,20 +58,31 @@ $route['home/shops/create'] = 'ShopList/createShop';
 $route['home/shops/deleteFromMyShops/(:num)'] = 'ShopList/deleteFromMyShops/$1';
 $route['home/shops/get'] = 'ShopList/getShops';
 $route['home/shops/addToMyShops'] = 'ShopList/addToMyShops';
+
 $route['admin/shop'] = 'Admin/index';
 $route['admin/shop/delete/(:num)'] = 'Admin/deleteShop/$1';
+
 $route['home/list/(:num)/note'] = 'ShoppingList/updateNote/$1';
 $route['home/list/(:num)/product/(:num)/amount/(:num)'] = 'ShoppingList/updateAmount/$1/$2/$3';
 $route['home/list/(:num)/deleteProduct/(:num)'] = 'ShoppingList/deleteProduct/$1/$2';
 $route['home/list/(:num)/addProduct/(:num)'] = 'ShoppingList/addProduct/$1/$2';
+
 $route['product/get/(.+)'] = 'ShoppingList/getProductsLike/$1';
+
 $route['home/list/(:num)/title'] = 'ShoppingList/updateTitle/$1';
 $route['home/list/show/(:num)'] = 'ShoppingList/showList/$1';
 $route['home/list/delete/(:num)'] = 'ShoppingList/deleteList/$1';
 $route['home/list/create'] = 'ShoppingList/createList';
 $route['home/list'] = 'ShoppingList/index';
+
+$route['home/sort'] = 'Sort/index';
+$route['home/sort/show/(:num)'] = 'Sort/showListSort/$1';
+$route['home/sort/sortWeight/(:num)'] = 'Sort/sortWeight/$1';
+$route['home/sort/sortColdness/(:num)'] = 'Sort/sortColdness/$1';
+
 $route['home/'] = 'home/index';
 $route['accueil/'] = 'accueil/index';
+
 $route['(:any)'] = 'accueil/index';
 $route['default_controller'] = 'accueil';
 $route['404_override'] = '';

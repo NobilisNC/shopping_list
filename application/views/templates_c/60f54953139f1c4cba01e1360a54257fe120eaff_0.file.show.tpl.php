@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-02-15 08:18:00
+/* Smarty version 3.1.30, created on 2017-02-28 15:14:37
   from "C:\UwAmp\www\PTUT\shopping_list\application\views\templates\List\show.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_58a40eb8298c09_20230556',
+  'unifunc' => 'content_58b593dd180098_04212435',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '60f54953139f1c4cba01e1360a54257fe120eaff' => 
     array (
       0 => 'C:\\UwAmp\\www\\PTUT\\shopping_list\\application\\views\\templates\\List\\show.tpl',
-      1 => 1487146675,
+      1 => 1488291938,
       2 => 'file',
     ),
   ),
@@ -21,27 +21,27 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../layout.tpl' => 1,
   ),
 ),false)) {
-function content_58a40eb8298c09_20230556 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58b593dd180098_04212435 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1980058a40eb8296c02_37765394', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_3208158b593dd17ae26_88101391', 'body');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:../layout.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_1980058a40eb8296c02_37765394 extends Smarty_Internal_Block
+class Block_3208158b593dd17ae26_88101391 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 <div class="col-left-1 col-10">
 <div class="row">
-<h2 id="title"><span id="listName"><?php echo $_smarty_tpl->tpl_vars['list']->value->name;?>
+<h2><span id="listName"><?php echo $_smarty_tpl->tpl_vars['list']->value->name;?>
 </span> <span id="nameEdit" style="vertical-align:middle; font-size:1em;" class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></span></h2>
 </div>
 <div class="row">
@@ -63,7 +63,7 @@ $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->t
 if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['product']->value) {
 ?>
-      <tr data-product_id="<?php echo $_smarty_tpl->tpl_vars['product']->value->id;?>
+      <tr  class="product" data-product_id="<?php echo $_smarty_tpl->tpl_vars['product']->value->id;?>
 ">
         <td><?php echo $_smarty_tpl->tpl_vars['product']->value->name;?>
 </td>
@@ -92,92 +92,65 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 </main>
 </div>
 <div class="aside container col-3">
-  <header>Infos</header>
-  <main><?php echo $_smarty_tpl->tpl_vars['list']->value->note;?>
-</main>
+  <header>Note<span id="noteEdit" style="vertical-align:middle; font-size:1em;" class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></span></header>
+  <main class="max"><span id="note"><?php echo nl2br($_smarty_tpl->tpl_vars['list']->value->note);?>
+</span></main>
 </div>
 
 </div>
 </div>
 
-
+<?php echo '<script'; ?>
+ type="text/javascript" src="<?php echo base_url();?>
+static/js/he.js"><?php echo '</script'; ?>
+>
 <?php echo '<script'; ?>
  type="text/javascript" src="<?php echo base_url();?>
 static/js/ajax.js"><?php echo '</script'; ?>
 >
 <?php echo '<script'; ?>
  type="text/javascript" src="<?php echo base_url();?>
-/static/js/fastInput.js"><?php echo '</script'; ?>
+static/js/amountButtons.js"><?php echo '</script'; ?>
 >
 <?php echo '<script'; ?>
  type="text/javascript" src="<?php echo base_url();?>
-/static/js/productInput.js"><?php echo '</script'; ?>
+static/js/deleteButton.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ type="text/javascript" src="<?php echo base_url();?>
+static/js/productInput.js"><?php echo '</script'; ?>
 >
 
+<?php echo '<script'; ?>
+ type="text/javascript" src="<?php echo base_url();?>
+static/js/editText.js"><?php echo '</script'; ?>
+>
 
 <?php echo '<script'; ?>
  type="text/javascript">
-var name_bar    = document.getElementById("title");
-var list_name   = document.getElementById("listName");
-var edit_button = document.getElementById("nameEdit");
-
-var input_name = document.createElement('input');
-input_name.defaultValue = list_name.innerHTML;
-
-var send_name_button = document.createElement('span');
-send_name_button.className = "fa fa-check";
-send_name_button.onclick = sendName;
-
-var cancel_button = document.createElement('span');
-cancel_button.className = "fa fa-times";
-cancel_button.onclick = resetName;
-
-
-edit_button.onclick = editName;
-
-
-function editName() {
-    while (name_bar.firstChild) name_bar.removeChild(name_bar.firstChild);
-    name_bar.appendChild(input_name);
-    name_bar.appendChild(send_name_button);
-    name_bar.appendChild(cancel_button);
-
-
-}
-
-function resetName() {
-  while (name_bar.firstChild) name_bar.removeChild(name_bar.firstChild);
-  name_bar.appendChild(list_name);
-  name_bar.appendChild(edit_button);
-}
-
-function sendName() {
-  var new_name = input_name.value;
-
-  Ajax.post({
-        url : '<?php echo site_url();?>
+let test1 = new editableText(
+    {
+      button : document.querySelector('#nameEdit'),
+      node   : document.querySelector('#listName'),
+      type   : 'text',
+      url    : '<?php echo site_url();?>
 /home/list/<?php echo $_smarty_tpl->tpl_vars['list']->value->id;?>
-/changeName',
-        
-        data : {'new_name' : input_name.value},
-        
-        success : changeName
-  })
+/title'
+    }
+  );
 
-
-    resetName();
-}
-
-
-function changeName(data) {
-  listName.innerHTML = data.name;
-}
-
-
+  let test2 = new editableText(
+      {
+        button : document.querySelector('#noteEdit'),
+        node   : document.querySelector('#note'),
+        type   : 'textarea',
+        url    : '<?php echo site_url();?>
+/home/list/<?php echo $_smarty_tpl->tpl_vars['list']->value->id;?>
+/note'
+      }
+    );
 <?php echo '</script'; ?>
 >
-
-
 
 <?php
 }
