@@ -30,6 +30,18 @@ class ShopList_model extends CI_Model{
         return $query->result();
     }
 
+    public function addShop($shop_data)
+    {
+        $query = $this->db->get_where('shop',$shop_data);
+
+        if($query->num_rows() > 0){
+            return FALSE;
+        }else{
+            $this->db->insert('shop',$shop_data);
+            return TRUE;
+        }
+    }
+
     public function addShopToUser($user_id,$shop_name){
 
         $shop_information = explode(" - ",$this->input->post('name_shop_to_add'));
