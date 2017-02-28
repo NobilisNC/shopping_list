@@ -22,7 +22,7 @@
                         <td>{{$product->coldness}}</td>
                         <td>{{$product->weight}}</td>
                         <td>{{$product->volume}}</td>
-                        <td><a href="{site_url()}/admin/product/eraseProduct/{{$product->id}}">
+                        <td><a href="{site_url()}/admin/product/deleteProduct/{{$product->id}}">
                             <span class="fa fa-trash" aria-hidden="true" data-product_id="{$product->id}" ></span>
                         </a></td>
                     </tr>
@@ -38,7 +38,7 @@
             </div>
             {/if}
 
-        <form method="post" action="{site_url()}/Admin/createProduct">
+        <form method="post" action="{site_url()}/admin/product/create">
         Product name : <input type="text"  name="name" list="json-datalist">
         Expiration (0-5) : <select name="exp">
                                   <option value="0">0</option>

@@ -33,18 +33,20 @@
         $this->form_validation->set_rules('weight', 'poids', 'required');
         $this->form_validation->set_rules('volume', 'volume', 'required');
 
+        $product_data = array(
+            'name' => $this->input->post('name'),
+            'coldness' => $this->input->post('exp'),
+            'weight' => $this->input->post('weight'),
+            'volume' => $this->input->post('volume')
+        );
 
-        $name=$this->input->post('name');
-        $exp=$this->input->post('exp');
-        $weight=$this->input->post('weight');
-        $vol=$this->input->post('volume');
-        $this->Product_model->addproduct($name,$exp,$weight,$vol);
-        redirect('admin/createProduct','refresh');
+        $this->Product_model->addproduct($product_data);
+        redirect('admin/product','refresh');
         }
 
-        public function eraseProduct(int $id_product){
+        public function deleteProduct(int $id_product){
           $this->logged_user_only();
-          $this->Product_model->supprproduct($name_product);
+          $this->Product_model->deleteProduct($id_product);
           redirect('admin/product','refresh');
         }
 

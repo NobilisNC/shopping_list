@@ -10,19 +10,13 @@ class Product_model extends CI_Model{
         return $query->result();
     }
 
-    public function addproduct($name,$exp,$weight,$vol){
-      $data = array(
-        'name' => $name ,
-        'coldness' => $exp,
-        'weight' => $weight,
-        'volume' => $vol
-      );
-
-        return $this->db->insert('product',$data);
+    public function addproduct($product_data){
+        return $this->db->insert('product',$product_data);
     }
 
-    public function supprproduct($name){
-      return $this->delete('product',$name);
+    public function deleteProduct($id_product){
+      return $this->db->where('id',$id_product)
+                    ->delete('product');
     }
 }
 ?>

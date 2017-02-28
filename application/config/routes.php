@@ -51,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['admin/product'] = 'Admin/product_index';
 $route['admin/product/create'] = 'Admin/createProduct';
-$route['admin/product/supprProduct/(:num)'] = 'Admin/supprProduct/$1';
+$route['admin/product/deleteProduct/(:num)'] = 'Admin/deleteProduct/$1';
 $route['admin/product/get'] = 'Admin/getProduct';
 $route['home/shops'] = 'ShopList/index';
 $route['home/shops/create'] = 'ShopList/createShop';
