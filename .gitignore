@@ -1,6 +1,6 @@
 application/views/templates_c/*
-application/config/config.php
 application/config/database.php
+application/config/config.php
 
 doc
 
