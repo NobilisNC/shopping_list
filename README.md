@@ -7,6 +7,8 @@ Dans le dossier config :
 * database.php : votre configuration de BDD. (script à la racine)
 
 
+
+
 Dans le dossier static/js :
 * modifier ```this.__URL__``` 
 
