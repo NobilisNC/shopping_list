@@ -21,9 +21,9 @@ class ShopList extends Core_Controller{
     public function createShop(){
         $this->logged_user_only();
         //Cree un nouveau ShopList
-        redirect('home/list','refresh');
+        redirect('home/shops','refresh');
     }
-
+    
     public function getShops(){
             $q = $_REQUEST['q'];
             $q = strtolower($q);
@@ -41,6 +41,13 @@ class ShopList extends Core_Controller{
         $id = $this->user_model->id($this->session->userdata('login'));
 
         $this->ShopList_model->addShopToUser($id,$this->input->post('name_shop_to_add'));
+        redirect('home/shops','refresh');
+    }
+
+    public function deleteFromMyShops(int $id_shop){
+        $this->logged_user_only();
+        $id_user = $this->user_model->id($this->session->userdata('login'));
+        $is_deleted = $this->ShopList_model->deleteFromMyShops($id_shop,$id_user);
         redirect('home/shops','refresh');
     }
 }

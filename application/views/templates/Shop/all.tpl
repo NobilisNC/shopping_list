@@ -17,8 +17,8 @@
                         <td>{{$shop->name}}</td>
                         <td>{{$shop->location}}</td>
                         <td>
-                            <a href="#">
-                                <span class="fa fa-trash" aria-hidden="true" data-product_id="{$product->id}" ></span>
+                            <a href="{site_url()}/home/shops/deleteFromMyShops/{{$shop->id}}">
+                                <span style="font-size:1.5em;" class="fa fa-trash" aria-hidden="true" data-product_id="{$product->id}" ></span>
                             </a>
                         </td>
                     </tr>

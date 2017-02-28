@@ -9,6 +9,8 @@ class User_model extends CI_Model {
 
     /** \brief Returns user id
      * @param $login - login of a specified user
+     *
+     * @return 
      */
     public function id($login) {
         $query = $this->db->get_where('user', array('login' => $login));
@@ -33,10 +35,11 @@ class User_model extends CI_Model {
     }
 
     /** \brief Verifies the login information of the user.
-     *         Returns TRUE if the information is valid.
      *
      * @param $login - login typed by the user
      * @param $password - password typed by the user
+     *
+     * @return Boolean - TRUE if the information is valid, FALSE if it is not
      */
     public function valid_infos_connexion($login, $password) {
         $query = $this->db->get_where('user', array('login' => $login, 'password' => sha1($password)));
@@ -49,7 +52,9 @@ class User_model extends CI_Model {
 
     /** \brief Verifies if the specified string matches a login in the database
      *
-     * @param $str - a specified string 
+     * @param $str - a specified string
+     *
+     * @return - Boolean : TRUE if this login exists, FALSE if it doesn't
      */
     public function login_exists($str) {
         $query = $this->db->get_where('user',array('login' => $str));
@@ -60,6 +65,13 @@ class User_model extends CI_Model {
         }
     }
 
+    /** \brief Verifies if the specified string matches an email in the database
+     *
+     * @param $str - a specified string
+     *
+     * @return - Boolean : TRUE if this email exists, FALSE if it doesn't
+     */
+
     public function email_existe($str) {
         $query = $this->db->get_where('user',array('mail' => strtolower($str)));
         if($query->num_rows() > 0) {
@@ -69,8 +81,11 @@ class User_model extends CI_Model {
         }
     }
 
-    /**
-     *  Returns user's information (login, mail, name and first name).
+    /** \brief Gets the information of the user with the specified login
+     *
+     * @param $login - a specified login
+     *
+     * @return -
      */
     public function infos($login) {
         $query = $this->db->get_where('user', array('login' => $login));

@@ -42,10 +42,10 @@ class ShopList_model extends CI_Model{
                   ->where('location',$location);
 
         $query = $this->db->get();
-        $shop_id = $query->result()[0];
+        $shop_id = $query->result();
 
         $data = array (
-                'id_shop' => $shop_id->id,
+                'id_shop' => $shop_id[0]->id,
                 'id_user' => $user_id
         );
 
@@ -61,6 +61,12 @@ class ShopList_model extends CI_Model{
     public function deleteShop(int $id_shop){
         $this->db->where('id',$id_shop);
         $this->db->delete('shop');
+    }
+
+    public function deleteFromMyShops(int $id_shop,int $id_user){
+        $this->db->where('id_shop',$id_shop)
+        ->where('id_user',$id_user)
+        ->delete('user_shops');
     }
 }
 ?>
