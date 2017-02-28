@@ -5,6 +5,13 @@
 <h2><span id="listName">{$list->name}</span> <span id="nameEdit" style="vertical-align:middle; font-size:1em;" class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></span></h2>
 </div>
 <div class="row">
+  <p>Choix du tri :  </p>
+  <select name="Tri" size="1">
+    <option>Poids</option>
+    <option>Péremption</option>
+  </select>
+</div>
+<div class="row">
 <div class="col-9 container">
   <header>Produits</header>
   <main>
@@ -47,11 +54,11 @@
 
 
 <script type="text/javascript" src="{base_url()}static/js/ajax.js"></script>
-<script type="text/javascript" src="{base_url()}/static/js/amountButtons.js"></script>
-<script type="text/javascript" src="{base_url()}/static/js/deleteButton.js"></script>
-<script type="text/javascript" src="{base_url()}/static/js/productInput.js"></script>
+<script type="text/javascript" src="{base_url()}static/js/amountButtons.js"></script>
+<script type="text/javascript" src="{base_url()}static/js/deleteButton.js"></script>
+<script type="text/javascript" src="{base_url()}static/js/productInput.js"></script>
 
-<script type="text/javascript" src="{base_url()}/static/js/editText.js"></script>
+<script type="text/javascript" src="{base_url()}static/js/editText.js"></script>
 
 <script type="text/javascript">
 let test1 = new editableText(

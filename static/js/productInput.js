@@ -1,5 +1,5 @@
 var productsInput = function(document, Ajax, deleteProduct, amoutButtons) {
-  this.__URL__ = '/~nobilis/ProjetTut/index.php/';
+  this.__URL__ = '/index.php/';
 
 
   this.list = document.querySelector('#productsList');

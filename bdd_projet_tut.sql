@@ -7,6 +7,9 @@
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
+-- CREATE DATABASE IF NOT EXISTS `bdd_projet_tut`
+-- USE bdd_projet_tut;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -66,7 +69,9 @@ CREATE TABLE `list_product` (
 
 CREATE TABLE `product` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `expiration` tinyint UNSIGNED NOT NULL DEFAULT '0',
+  `weight` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
