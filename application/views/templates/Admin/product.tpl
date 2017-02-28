@@ -30,6 +30,14 @@
             </tbody>
         </table>
         <h2>Ajouter un Produit</h2>
+
+        {$errors = validation_errors()}
+            {if $errors}
+            <div class="alert alert-red">
+              {$errors}
+            </div>
+            {/if}
+            
         <form method="post" action="{site_url()}/Admin/createProduct">
         Product name : <input type="text"  name="name" list="json-datalist">
         Expiration (0-5) : <select name="exp">

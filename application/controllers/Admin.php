@@ -37,7 +37,7 @@
         $weight=$this->input->post('weight');
         $vol=$this->input->post('volume');
         $this->Product_model->addproduct($name,$exp,$weight,$vol);
-        redirect('admin/product','refresh');
+        redirect('admin/createProduct','refresh');
         }
 
         public function eraseProduct(int $id_product){
