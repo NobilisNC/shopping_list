@@ -36,16 +36,16 @@ class ShopList_model extends CI_Model{
         $name = $shop_information[0];
         $location = $shop_information[1];
 
-        $this->db->select('id');
-        $this->db->from('shop');
-        $this->db->where('name',$name);
-        $this->db->where('location',$location);
+        $this->db->select('id')
+                  ->from('shop')
+                  ->where('name',$name)
+                  ->where('location',$location);
 
         $query = $this->db->get();
-        $shop_id = $query->result();
+        $shop_id = $query->result()[0];
 
         $data = array (
-                'id_shop' => $shop_id[0]->id,
+                'id_shop' => $shop_id->id,
                 'id_user' => $user_id
         );
 

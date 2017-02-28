@@ -16,10 +16,16 @@ var productsInput = function(document, Ajax, deleteProduct, amoutButtons) {
     this.node.append(this.field);
   }
 
+  this.tooltip_box = document.createElement('div');
+  //this.tooltip_box.className = 'tooltip_trigger';
   this.tooltip  = document.createElement('div');
-  this.node.append(this.tooltip);
+  //this.tooltip.className = 'tooltip'
+
   this.productsList = document.createElement('ul');
   this.tooltip.append(this.productsList);
+
+  this.tooltip_box.append(this.tooltip);
+  this.node.append(this.tooltip_box);
 
   this.products = [];
   this.selected = null;

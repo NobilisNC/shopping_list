@@ -7,10 +7,10 @@ class ShoppingList_model extends CI_Model {
     }
 
     /**
-    * Create an empty List for a specified user
-    *
-    *
-    */
+     * Creates an empty List for a specified user
+     *
+     *
+     */
     public function createEmptyList(int $id_user) {
       $data = array(
           'name' => 'Empty List',
@@ -22,17 +22,17 @@ class ShoppingList_model extends CI_Model {
 
     }
 
-    /** Delete a list with a specified id
-      *
-      */
+    /**
+     * Delete a list with a specified id
+     */
     public function deleteList(int $id_list) {
       $this->db->delete('list', array( 'id' => $id_list));
     }
 
     /**
-    * Get all lists of a specified user(id)
-    *
-    */
+     * Get all lists of a specified user(id)
+     *
+     */
     public function getLists(int $id){
       $query = $this->db->get_where('list', array('id_user' => $id));
 
@@ -41,20 +41,19 @@ class ShoppingList_model extends CI_Model {
     }
 
     /**
-    * Get a list by giving it id
-    *
-    *
-    */
+     * Get a list by giving it id
+     *
+     */
     public function getListById(int $id) {
       $query = $this->db->get_where('list', array('id' => $id));
       return $query->result()[0];
     }
 
     /**
-    * Set name of a specified list
-    *
-    *
-    */
+     * Set name of a specified list
+     *
+     *
+     */
     public function setName(int $id, string $name) {
       $data = array (
         'name' => $name
@@ -64,10 +63,10 @@ class ShoppingList_model extends CI_Model {
         $this->db->update('list', $data );
     }
 
-    /** Return products of a specified list
-      *
-      *
-      */
+    /**
+     * Return products of a specified list
+     *
+     */
     public function getProducts(int $id_list) {
         $this->db->select('name, amount, id')
                  ->from('product')
@@ -78,11 +77,11 @@ class ShoppingList_model extends CI_Model {
         return $query->result();
     }
 
-    /** Return names of product like param.
-      * Used from Ajax request
-      *
-      *
-      */
+    /**
+     * Return names of product like param.
+     * Used from Ajax request
+     *
+     */
     public function getProductsLike(string $name) {
         $this->db->select('id, name')
                  ->from('product')
@@ -95,10 +94,10 @@ class ShoppingList_model extends CI_Model {
       }
 
       /**
-      * Add a product to a specidied list
-      *
-      * Return True/false if insered or not
-      */
+       * Add a product to a specidied list
+       *
+       * Return True/false if insered or not
+       */
       public function addProductToList(int $id_list, string $id_product ) {
 
            $data = array(
@@ -111,30 +110,30 @@ class ShoppingList_model extends CI_Model {
            return true;
       }
 
-      /** Delete a product for a specidied list
-        *
-        *
-        */
+      /**
+       * Delete a product for a specified list
+       *
+       */
       public function deleteProductFromList(int $id_list, int $id_product) {
           $this->db->where(array('id_list' => $id_list, 'id_product' => $id_product))
                    ->delete('list_product');
           return true;
       }
 
-      /** Return Product by it ID.
-        *
-        *
-        *
-        */
+      /**
+       * Return Product by its ID.
+       *
+       *
+       */
       public function getProductById(int $id_prod) {
         return $this->db->get_where('product', array('id' => $id_prod))->result()[0];
       }
 
 
-      /** Set the amount of a product in a specified list and specified product
-        *
-        *
-        */
+      /**
+       * Set the amount of a specified product in a specified list
+       *
+       */
         public function setAmount(int $id_list, int $id_product, int $amount) {
           $this->db->set('amount', $amount)
                    ->where('id_list', $id_list)
@@ -144,10 +143,10 @@ class ShoppingList_model extends CI_Model {
           return true;
         }
 
-        /** Get amount of a product in a specified list and specified product
-          *
-          *
-          */
+        /**
+         * Get the amount of a specified product in a specified list
+         *
+         */
           public function getAmount(int $id_list, int $id_product) {
             return $this->db->select('amount')
                             ->from('list_product')
@@ -157,6 +156,10 @@ class ShoppingList_model extends CI_Model {
           }
 
 
+        /**
+         * Update note for a product in a specified list
+         *
+         */
       public function updateNote(int $id_list, string $note) {
         $this->db->set('note', $note)
                  ->where('id', $id_list)

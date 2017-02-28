@@ -6,11 +6,19 @@ class User_model extends CI_Model {
             $this->load->database();
     }
 
+    /**
+     * Returns user id
+     *
+     */
     public function id($login) {
         $query = $this->db->get_where('user', array('login' => $login));
-        return $query->result()[0]->id;
+
+       return $query->result()[0]->id;
     }
 
+    /**
+     * Adds the specified user in the database
+     */
     public function addUser($user) {
 
         $data = array(
@@ -24,6 +32,10 @@ class User_model extends CI_Model {
         return $this->db->insert('user', $data);
     }
 
+    /**
+     * Verifies the login information of the user.
+     * Returns TRUE if the information is valid.
+     */
     public function valid_infos_connexion($login, $password) {
         $query = $this->db->get_where('user' ,array('login' => $login, 'password' => sha1($password)));
         if($query->num_rows() == 1) {
@@ -32,6 +44,7 @@ class User_model extends CI_Model {
             return FALSE;
         }
     }
+
 
     public function login_existe($str) {
         $query = $this->db->get_where('user',array('login' => $str));
@@ -51,7 +64,9 @@ class User_model extends CI_Model {
         }
     }
 
-
+    /**
+     *  Returns user's information (login, mail, name and first name).
+     */
     public function infos($login) {
         $query = $this->db->get_where('user', array('login' => $login));
         $result = $query->result()[0];
@@ -64,12 +79,20 @@ class User_model extends CI_Model {
         return $personnal_infos;
         }
 
+      /**
+       * Function used to change the user's password.
+       */
     public function modifier_mdp($login, $password) {
         $this->db->set('password', sha1($password));
         $this->db->where('login', $login);
         $this->db->update('user');
     }
 
+    /**
+     * Adds a friend.
+     * More precisely, the second specified user gets access to the first specified
+     * user's lists.
+     */
     public function ajouter_ami($login_donne_acces, $login_a_acces) {
         #$query = $this->db->get_where('user', array('login' => $login_donne_acces));
         $id_1 = $this->id($login_donne_acces);
@@ -89,12 +112,15 @@ class User_model extends CI_Model {
             $data['state'] = 'access';
             $this->db->replace('friend',$data);
 
-        } else { // Sinon on créer le lien avec l'état 'waiting'
+        } else { // Sinon on crée le lien avec l'état 'waiting'
                     $this->db->insert('friend', $data);
 
         }
     }
 
+    /**
+     * Accept or delete a "friend invitation".
+     */
     public function obtenir_amis($login, $a_accepter = FALSE) {
         $id = $this->id($login);
         if ($a_accepter == TRUE) {
@@ -122,6 +148,9 @@ class User_model extends CI_Model {
         return $notifications;
     }
 
+    /**
+     * Delete friend.
+     */
     public function supprimer_ami($login1, $login2) {
         $id_1 = $this->id($login1);
         $id_2 = $this->id($login2);
@@ -129,6 +158,9 @@ class User_model extends CI_Model {
         $this->db->delete('friend', array('id_give' => $id_2, 'id_get' => $id_1));
     }
 
+    /**
+     * Returns TRUE if the specified users are friends.
+     */
     public function sont_amis($login1, int $id2, $access = false) {
         $id1 = $this->id($login1);
 

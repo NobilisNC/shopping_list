@@ -25,7 +25,7 @@
                 {/foreach}
             </tbody>
         </table>
-        <form method="post" action="http://localhost/shopping_list/index.php/ShopList/addToMyShops">
+        <form method="post" action="{site_url()}/ShopList/addToMyShops">
             Shop name : <input type="text" id="shop_dropdown" name="name_shop_to_add" list="json-datalist">
             <br/><input type="submit" value="Ajouter un magasin">
         </form>

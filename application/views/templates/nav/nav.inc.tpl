@@ -1,6 +1,6 @@
 <nav>
 <ul class="">
-	<li><a href="index">Accueil</a></li>
+	<li><a href="{site_url()}/index">Accueil</a></li>
 </ul>
 <ul>
 	{if $smarty.session.logged_in === TRUE}
