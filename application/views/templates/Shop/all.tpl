@@ -26,12 +26,20 @@
             </tbody>
         </table>
         <form method="post" action="{site_url()}/ShopList/addToMyShops">
-            Shop name : <input type="text" id="shop_dropdown" name="name_shop_to_add" list="json-datalist" autocomplete="off">
+            Shop name : <input type="text" id="shop_dropdown" name="name_shop_to_add" list="json-datalist" autocomplete="off" onkeyup="searchHint(this.value)">
             <br/><input type="submit" value="Ajouter un magasin">
         </form>
         <datalist id="json-datalist"></datalist>
 
         <script>
+            function removeOptions(object_with_selections)
+            {
+                while(object_with_selections.firstChild){
+                    object_with_selections.removeChild(object_with_selections.firstChild)
+                }
+            }
+
+            function searchHint(str){
                 var dataList = document.getElementById('json-datalist');
                 var input = document.getElementById('shop_dropdown');
 
@@ -39,7 +47,7 @@
                 xmlhttp.onreadystatechange = function(){
                     if(this.readyState == 4 && this.status == 200){
                         var jsonOptions = JSON.parse(xmlhttp.responseText);
-
+                        removeOptions(document.getElementById('json-datalist'));
                         Array.from(jsonOptions).forEach(function(item) {
                             var option = document.createElement('option');
                             option.value = item;
@@ -47,8 +55,9 @@
                         });
                     }
                 };
-                xmlhttp.open("GET","{site_url()}/home/shops/get?q="+document.getElementById("shop_dropdown").innerHTML,true);
+                xmlhttp.open("GET","{site_url()}/home/shops/get?q="+str,true);
                 xmlhttp.send();
+            }
         </script>
         <br/>
     </div>
