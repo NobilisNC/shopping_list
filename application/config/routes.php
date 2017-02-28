@@ -51,9 +51,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['home/shops'] = 'ShopList/index';
 $route['home/shops/create'] = 'ShopList/createShop';
+$route['home/shops/deleteFromMyShops/(:num)'] = 'ShopList/deleteFromMyShops/$1';
 $route['home/shops/get'] = 'ShopList/getShops';
 $route['home/shops/addToMyShops'] = 'ShopList/addToMyShops';
 $route['admin/shop'] = 'Admin/index';
+$route['admin/shop/delete/(:num)'] = 'Admin/deleteShop/$1';
 $route['home/list/(:num)/note'] = 'ShoppingList/updateNote/$1';
 $route['home/list/(:num)/product/(:num)/amount/(:num)'] = 'ShoppingList/updateAmount/$1/$2/$3';
 $route['home/list/(:num)/deleteProduct/(:num)'] = 'ShoppingList/deleteProduct/$1/$2';

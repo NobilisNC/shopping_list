@@ -14,5 +14,11 @@
             $data['shop_list'] = $this->ShopList_model->getAllShops();
             $this->smarty->view('Admin/shop_list.tpl',$data);
         }
+
+        public function deleteShop(int $id_shop){
+            $this->logged_user_only();
+            $is_deleted = $this->ShopList_model->deleteShop($id_shop);
+            redirect('admin/shop','refresh');
+        }
     }
 ?>
