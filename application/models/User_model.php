@@ -147,7 +147,7 @@ class User_model extends CI_Model {
      * @param $login - A specified user login
      * @param $a_accepter - Boolean : FALSE until the invitation is accepted
      *
-     * @return $friends - 
+     * @return $friends - An array containing the user's friends
      */
     public function obtenir_amis($login, $a_accepter = FALSE) {
         $id = $this->id($login);
@@ -165,6 +165,12 @@ class User_model extends CI_Model {
         return $friends;
     }
 
+    /** @brief Get notifications for friend requests
+     *
+     * @param $login - A specified user's login
+     *
+     *@return $notifications - An array 
+     */
     public function obtenir_notifications($login) {
         $sql = "SELECT login FROM friend JOIN user ON user.id=friend.id_give WHERE id_get=(SELECT id FROM user WHERE  login = '".$login."') AND state = 'waiting'";
         $query = $this->db->query($sql);
