@@ -71,6 +71,11 @@ $route['home/list/delete/(:num)'] = 'ShoppingList/deleteList/$1';
 $route['home/list/create'] = 'ShoppingList/createList';
 $route['home/list'] = 'ShoppingList/index';
 
+$route['home/sort'] = 'Sort/index';
+$route['home/sort/show/(:num)'] = 'Sort/showListSort/$1';
+$route['home/sort/sortWeight/(:num)'] = 'Sort/sortWeight/$1';
+$route['home/sort/sortColdness/(:num)'] = 'Sort/sortColdness/$1';
+
 $route['home/'] = 'home/index';
 $route['accueil/'] = 'accueil/index';
 
