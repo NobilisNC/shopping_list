@@ -26,7 +26,7 @@
             </tbody>
         </table>
         <form method="post" action="{site_url()}/ShopList/addToMyShops">
-            Shop name : <input type="text" id="shop_dropdown" name="name_shop_to_add" list="json-datalist">
+            Shop name : <input type="text" id="shop_dropdown" name="name_shop_to_add" list="json-datalist" autocomplete="off">
             <br/><input type="submit" value="Ajouter un magasin">
         </form>
         <datalist id="json-datalist"></datalist>
