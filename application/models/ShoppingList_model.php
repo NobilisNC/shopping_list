@@ -16,7 +16,7 @@ class ShoppingList_model extends CI_Model {
           'date' => date('Y/m/d'),
           'id_user' => $id_user
       );
-
+      ///@todo - Doit renvoyer un booléen
      return $this->db->insert('list', $data);
 
     }

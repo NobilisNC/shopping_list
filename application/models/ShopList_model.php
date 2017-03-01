@@ -9,7 +9,7 @@ class ShopList_model extends CI_Model{
     *
     * @param $user_id - A specified user's id
     *
-    * @return The shop list
+    * @return The shop list for the specified user
     */
     public function getShops(int $user_id){
         $this->db->from('shop');
@@ -46,6 +46,12 @@ class ShopList_model extends CI_Model{
         return $query->result();
     }
 
+    /** @brief Adds a shop in the database
+     *
+     * @param $shop_data - An array containing the information about the shop
+     *
+     * @return Boolean : TRUE if the shop is added, FALSE if it is not (probably already in the database)
+     */
     public function addShop($shop_data)
     {
         $query = $this->db->get_where('shop',$shop_data);
@@ -103,7 +109,7 @@ class ShopList_model extends CI_Model{
     /** @brief Deletes a specified shop from a specified user's shop list
     *
     * @param $shop_id - A specified shop id
-    * @param $user_id
+    * @param $user_id - A specified user's id
     */
     public function deleteFromMyShops(int $shop_id,int $user_id){
         $this->db->where('id_shop',$shop_id)
