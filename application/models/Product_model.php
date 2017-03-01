@@ -35,5 +35,16 @@ class Product_model extends CI_Model{
        return $this->db->where('id',$id_product)
                      ->delete('product');
     }
+
+
+    public function name_exist($name) {
+      $query = $this->db->get_where('product', array('name' => $name));
+
+      if($query->num_rows() > 0)
+          return TRUE;
+      else
+          return FALSE;
+
+    }
 }
 ?>
