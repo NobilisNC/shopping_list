@@ -20,7 +20,7 @@
         public function product_index(){
             $this->logged_user_only();
             $this->load->library('form_validation');
-            $data['products'] = $this->Product_model->getProduct();
+            $data['products'] = $this->Product_model->getAllProduct();
             $this->smarty->view('Admin/product.tpl',$data);
         }
 
