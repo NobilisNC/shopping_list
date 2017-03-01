@@ -8,7 +8,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Nom</th>
-                    <th>Expiration</th>
+                    <th>Fraicheur</th>
                     <th>Poids</th>
                     <th>Volume</th>
                     <th></th>
@@ -41,12 +41,12 @@
         <form method="post" action="{site_url()}/admin/product/create">
         Product name : <input type="text"  name="name" list="json-datalist">
         Expiration (0-5) : <select name="exp">
-                                  <option value="0">0</option>
-                                  <option value="1">1</option>
-                                  <option value="2">2</option>
-                                  <option value="3">3</option>
-                                  <option value="4">4</option>
-                                  <option value="5">5</option>
+                                  <option value="0">0 [Non alimentaire]</option>
+                                  <option value="1">1 [Conserves - Condiments]</option>
+                                  <option value="2">2 [Céréales et dérivés]</option>
+                                  <option value="3">3 [Fruit - Légume]</option>
+                                  <option value="4">4 [Garder au frais]</option>
+                                  <option value="5">5 [Surgelé]</option>
                           </select> </br>
       Weight : <input type="text"  name="weight" list="json-datalist">
       Volume : <input type="text"  name="volume" list="json-datalist">
