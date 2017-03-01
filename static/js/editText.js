@@ -1,5 +1,5 @@
 function editableText(options = {}) {
-  this.__URL__ = '/~nobilis/ProjetTut/index.php/';
+  this.__URL__ = window.__URL__;
 
   this.type = options.type || 'text';
   this.type_data = options.type_data || '';
