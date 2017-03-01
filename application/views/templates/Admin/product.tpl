@@ -2,33 +2,36 @@
 {block name=body}
     <div class="col-left-1 col-10">
         <h2>Gestion des Produits</h2>
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nom</th>
-                    <th>Fraicheur</th>
-                    <th>Poids</th>
-                    <th>Volume</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {foreach $products as $product}
+        {if !empty($products)}
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>{{$product->id}}</td>
-                        <td>{{$product->name}}</td>
-                        <td>{{$product->coldness}}</td>
-                        <td>{{$product->weight}}</td>
-                        <td>{{$product->volume}}</td>
-                        <td><a href="{site_url()}/admin/product/deleteProduct/{{$product->id}}">
-                            <span class="fa fa-trash" aria-hidden="true" data-product_id="{$product->id}" ></span>
-                        </a></td>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Fraicheur</th>
+                        <th>Poids</th>
+                        <th>Volume</th>
+                        <th></th>
                     </tr>
-                {/foreach}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {foreach $products as $product}
+                        <tr>
+                            <td>{{$product->id}}</td>
+                            <td>{{$product->name}}</td>
+                            <td>{{$product->coldness}}</td>
+                            <td>{{$product->weight}}</td>
+                            <td>{{$product->volume}}</td>
+                            <td><a href="{site_url()}/admin/product/deleteProduct/{{$product->id}}">
+                                <span class="fa fa-trash" aria-hidden="true" data-product_id="{$product->id}" ></span>
+                            </a></td>
+                        </tr>
+                    {/foreach}
+                </tbody>
+            </table>
+        {else}
+            <p>Aucun Produit</p>
+        {/if}
         <h2>Ajouter un Produit</h2>
 
         {{$errors = validation_errors()}}

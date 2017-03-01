@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-$config['base_url'] = 'http://localhost/~nobilis/ProjetTut/';
+$config['base_url'] = 'http://localhost/shopping_list';
 
 /*
 |--------------------------------------------------------------------------
