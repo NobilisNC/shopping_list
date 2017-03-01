@@ -23,9 +23,9 @@ class ShopList extends Core_Controller{
         //Cree un nouveau ShopList
         redirect('home/shops','refresh');
     }
-    
+
     public function getShops(){
-            $q = $_REQUEST['q'];
+            $q = $this->input->get('q');
             $q = strtolower($q);
             $shop_list = $this->ShopList_model->getShopIn($q);
             $result = array();

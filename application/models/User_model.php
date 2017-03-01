@@ -7,10 +7,10 @@ class User_model extends CI_Model {
     }
 
 
-    /** \brief Returns user id
-     * @param $login - login of a specified user
+    /** @brief Returns user id
+     * @param $login - A specified user login
      *
-     * @return An User
+     * @return id - The user's id
      */
     public function id($login) {
         $query = $this->db->get_where('user', array('login' => $login));
@@ -18,8 +18,8 @@ class User_model extends CI_Model {
        return $query->result()[0]->id;
     }
 
-    /** \brief Adds the specified user in the database
-     * @param $user - an array containing all the information of the user
+    /** @brief Adds the specified user in the database
+     * @param $user - an array containing all the user's information
      */
     public function addUser($user) {
 
@@ -41,7 +41,7 @@ class User_model extends CI_Model {
      *
      * @return Boolean - TRUE if the information is valid, FALSE if it is not
      */
-    public function valid_infos_connexion($login, $password) {
+    public function valid_connexion_info($login, $password) {
         $query = $this->db->get_where('user', array('login' => $login, 'password' => sha1($password)));
         if($query->num_rows() == 1) {
             return TRUE;
@@ -54,7 +54,7 @@ class User_model extends CI_Model {
      *
      * @param $str - a specified string
      *
-     * @return - Boolean : TRUE if this login exists, FALSE if it doesn't
+     * @return Boolean - TRUE if this login exists, FALSE if it doesn't
      */
     public function login_exists($str) {
         $query = $this->db->get_where('user',array('login' => $str));
@@ -65,14 +65,14 @@ class User_model extends CI_Model {
         }
     }
 
-    /** \brief Verifies if the specified string matches an email in the database
+    /** @brief Verifies if the specified string matches an email in the database
      *
      * @param $str - a specified string
      *
-     * @return - Boolean : TRUE if this email exists, FALSE if it doesn't
+     * @return Boolean - TRUE if this email exists, FALSE if it doesn't
      */
 
-    public function email_existe($str) {
+    public function email_exists($str) {
         $query = $this->db->get_where('user',array('mail' => strtolower($str)));
         if($query->num_rows() > 0) {
             return TRUE;
@@ -81,13 +81,13 @@ class User_model extends CI_Model {
         }
     }
 
-    /** \brief Gets the information of the user with the specified login
+    /** @brief Gets the information of the user with the specified login
      *
      * @param $login - a specified login
      *
-     * @return -
+     * @return $personnal_infos - An array containing the user's personnal info
      */
-    public function infos($login) {
+    public function info($login) {
         $query = $this->db->get_where('user', array('login' => $login));
         $result = $query->result()[0];
         $personnal_infos = array (
@@ -99,21 +99,25 @@ class User_model extends CI_Model {
         return $personnal_infos;
         }
 
-      /**
-       * Function used to change the user's password.
+      /** @brief Changes the user's password
+       *
+       * @param $login - A specified user login
+       * @param $password - The new, modified password
        */
-    public function modifier_mdp($login, $password) {
+    public function change_pwd($login, $password) {
         $this->db->set('password', sha1($password));
         $this->db->where('login', $login);
         $this->db->update('user');
     }
 
-    /**
-     * Adds a friend.
-     * More precisely, the second specified user gets access to the first specified
-     * user's lists.
+    /** @brief Adds a friend.
+     *         More precisely, the first specified user gives access to his shopping lists
+     *         to the other specified user
+     *
+     * @param $login_donne_acces - Login of the user currently "adding a friend"
+     * @param $login_a_acces - Login of the user receiving the "friend request"
      */
-    public function ajouter_ami($login_donne_acces, $login_a_acces) {
+    public function add_friend($login_donne_acces, $login_a_acces) {
         #$query = $this->db->get_where('user', array('login' => $login_donne_acces));
         $id_1 = $this->id($login_donne_acces);
         #$query = $this->db->get_where('user', array('login'=> $login_a_acces));
@@ -138,10 +142,14 @@ class User_model extends CI_Model {
         }
     }
 
-    /**
-     * Accept or delete a "friend invitation".
+    /** @brief Accept or delete a "friend invitation".
+     *
+     * @param $login - A specified user login
+     * @param $a_accepter - Boolean : FALSE until the invitation is accepted
+     *
+     * @return $friends - An array containing the user's friends
      */
-    public function obtenir_amis($login, $a_accepter = FALSE) {
+    public function get_friends($login, $a_accepter = FALSE) {
         $id = $this->id($login);
         if ($a_accepter == TRUE) {
             $sql = "SELECT login, state FROM `friend` JOIN user ON friend.id_get=user.id WHERE friend.id_give=$id  UNION SELECT login,state FROM `friend` JOIN user ON friend.id_give=user.id WHERE friend.id_get=$id AND state = 'access' ORDER BY state";
@@ -157,7 +165,13 @@ class User_model extends CI_Model {
         return $friends;
     }
 
-    public function obtenir_notifications($login) {
+    /** @brief Get notifications for friend requests
+     *
+     * @param $login - A specified user's login
+     *
+     * @return $notifications - An array
+     */
+    public function get_notifications($login) {
         $sql = "SELECT login FROM friend JOIN user ON user.id=friend.id_give WHERE id_get=(SELECT id FROM user WHERE  login = '".$login."') AND state = 'waiting'";
         $query = $this->db->query($sql);
 
@@ -168,20 +182,25 @@ class User_model extends CI_Model {
         return $notifications;
     }
 
-    /**
-    * Delete friend.
-    */
-    public function supprimer_ami($login1, $login2) {
+    /** @brief Delete friend.
+     *
+     * @param $login1 - A specified user's login
+     * @param $login2 - A specified user's login
+     */
+    public function delete_friend($login1, $login2) {
         $id_1 = $this->id($login1);
         $id_2 = $this->id($login2);
         $this->db->delete('friend', array('id_give' => $id_1, 'id_get' => $id_2));
         $this->db->delete('friend', array('id_give' => $id_2, 'id_get' => $id_1));
     }
 
-    /**
-     * Returns TRUE if the specified users are friends.
+    /** @brief Verifies if two users are friends
+     *
+     * @param $login1 - A specified user's login
+     * @param int $id2 - A specified user's id
+     * @return Boolean : TRUE if the specified users are friends, FALSE if they are not
      */
-    public function sont_amis($login1, int $id2, $access = false) {
+    public function are_friends($login1, int $id2, $access = false) {
         $id1 = $this->id($login1);
 
         $sql = "SELECT * FROM friend WHERE (( id_give=$id1 AND id_get = $id2 ) OR (id_give = $id2 AND id_get = $id1)) ";

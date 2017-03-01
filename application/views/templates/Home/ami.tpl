@@ -10,7 +10,7 @@
 
     <p><span class="label label-blue" style="vertical-align:middle;">
       <i class="fa fa-bell" ></i>Invitation !</span>
-      L'utilisateur "<em>{$notif}</em>" souhaite vous donnez accès à ses listes
+      L'utilisateur "<em>{$notif}</em>" souhaite vous donner accès à ses listes
     </p>
 
       <a href="{site_url()}/home/ajouterami?login={$notif}&etat=accepte">

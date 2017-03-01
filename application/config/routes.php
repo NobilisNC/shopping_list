@@ -49,6 +49,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
+$route['admin/product'] = 'Admin/product_index';
+$route['admin/product/create'] = 'Admin/createProduct';
+$route['admin/product/deleteProduct/(:num)'] = 'Admin/deleteProduct/$1';
+$route['admin/product/get'] = 'Admin/getProduct';
 $route['home/shops'] = 'ShopList/index';
 $route['home/shops/create'] = 'ShopList/createShop';
 $route['home/shops/deleteFromMyShops/(:num)'] = 'ShopList/deleteFromMyShops/$1';
@@ -57,6 +61,7 @@ $route['home/shops/addToMyShops'] = 'ShopList/addToMyShops';
 
 $route['admin/shop'] = 'Admin/index';
 $route['admin/shop/delete/(:num)'] = 'Admin/deleteShop/$1';
+$route['admin/shop/addShop'] = 'Admin/addShop';
 
 $route['home/list/(:num)/note'] = 'ShoppingList/updateNote/$1';
 $route['home/list/(:num)/product/(:num)/amount/(:num)'] = 'ShoppingList/updateAmount/$1/$2/$3';

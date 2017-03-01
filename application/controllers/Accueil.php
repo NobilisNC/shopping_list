@@ -19,7 +19,7 @@ class Accueil extends CI_Controller {
        $this->load->helper('form');
        $this->load->library('form_validation');
 
-       $this->form_validation->set_rules('login', 'login', 'required|callback_verifier_infos_connexion');
+       $this->form_validation->set_rules('login', 'login', 'required|callback_verify_connexion_info');
        $this->form_validation->set_rules('password', 'mot de passe', 'required');
 
        if ($this->form_validation->run() == TRUE) {
@@ -70,20 +70,20 @@ class Accueil extends CI_Controller {
    }
 
    public function email_check($str) {
-       if ($this->user_model->email_existe($str) == TRUE) {
-           $this->form_validation->set_message('email_check', 'Cette {field} est déjà associée.');
+       if ($this->user_model->email_exists($str) == TRUE) {
+           $this->form_validation->set_message('email_check', 'Cet {field} est déjà associée.');
            return FALSE;
        } else {
            return TRUE;
        }
    }
 
-   public function verifier_infos_connexion($str) {
+   public function verify_connexion_info($str) {
 
-       if ($this->user_model->valid_infos_connexion( $this->input->post('login'), $this->input->post('password') ) == TRUE) {
+       if ($this->user_model->valid_connexion_info( $this->input->post('login'), $this->input->post('password') ) == TRUE) {
            return TRUE;
        } else {
-           $this->form_validation->set_message('verifier_infos_connexion', 'Pseudo/mot de passe non trouvés.');
+           $this->form_validation->set_message('verify_connexion_info', 'Pseudo/mot de passe non trouvés.');
            return FALSE;
        }
 

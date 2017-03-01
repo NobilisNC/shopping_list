@@ -6,7 +6,7 @@
 </div>
 <div class="row">
 <div class="col-10 container">
-<a href="{site_url()}/home/sort/sortWeight/{$list->id}"><button>Tri sur Poids</button></a>
+<a href="{site_url()}/home/sort/sortWeight/{$list->id}"><button>Tri sur poids</button></a>
 <a href="{site_url()}/home/sort/sortColdness/{$list->id}"><button>Tri sur fraicheur</button></a>
 </div>
 </div>

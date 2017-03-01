@@ -6,9 +6,11 @@ class Sort_model extends CI_Model {
             $this->load->database();
     }
 
-    /**
-     * Get all lists of a specified user(id)
+    /** @brief Gets all lists of a specified user (id)
      *
+     * @param $id - A specified user's id
+     *
+     * @return All the specified user's lists
      */
     public function getLists(int $id){
       $query = $this->db->get_where('list', array('id_user' => $id));
@@ -17,18 +19,22 @@ class Sort_model extends CI_Model {
 
     }
 
-    /**
-     * Get a list by giving it id
+    /** @brief Gets a list by its id
      *
+     * @param $id - A specified list id
+     *
+     * @return If found, the list with the specified id
      */
     public function getListById(int $id) {
       $query = $this->db->get_where('list', array('id' => $id));
       return $query->result()[0];
     }
 
-    /**
-     * Return products of a specified list
+    /** @brief Gets all the products of a specified list
      *
+     * @param $id_list - A specified list id
+     *
+     * @return All the products from the list
      */
     public function getProducts(int $id_list) {
         $this->db->select('name, amount, id, weight, coldness')
