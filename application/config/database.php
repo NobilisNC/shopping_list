@@ -78,7 +78,7 @@ $db['default'] = array(
 	'hostname' => 'localhost',
 	'username' => 'u_ptut',
 	'password' => 'ptut',
-	'database' => 'u_ptut',
+	'database' => 'bdd_projet_tut',
     /*
 	'username' => 'u_ptut',
 	'password' => 'ptut',

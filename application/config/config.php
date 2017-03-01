@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 
-$config['base_url'] = 'http://localhost/~nobilis/ProjetTut/';
+$config['base_url'] = 'http://localhost:8888/';
 /* Tom = $config['base_url'] = 'http://localhost/~nobilis/ProjetTut/';
  *
  */
