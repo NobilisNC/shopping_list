@@ -54,6 +54,9 @@
 <script type="text/javascript" src="{base_url()}static/js/editText.js"></script>
 
 <script type="text/javascript">
+
+window.__URL__ = '{site_url()}/';
+
 let test1 = new editableText(
     {
       button : document.querySelector('#nameEdit'),

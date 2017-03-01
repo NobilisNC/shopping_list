@@ -1,5 +1,5 @@
-var amoutButtons = function(document) {
-  this.__URL__ = '~nobilis/ProjetTut/index.php/';
+var amoutButtons = function(document, window) {
+  this.__URL__ = window.__URL__;
 
   this.list = document.querySelector('#productsList');
 
@@ -96,4 +96,4 @@ var amoutButtons = function(document) {
   return {
     add : this.add
   };
-}(document);
+}(document, window);

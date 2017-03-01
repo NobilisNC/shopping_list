@@ -1,5 +1,5 @@
-var productsInput = function(document, Ajax, deleteProduct, amoutButtons) {
-  this.__URL__ = '/~nobilis/ProjetTut/index.php/';
+var productsInput = function(document, window, deleteProduct, amoutButtons) {
+  this.__URL__ = window.__URL__;
 
 
   this.list = document.querySelector('#productsList');
@@ -157,4 +157,4 @@ var productsInput = function(document, Ajax, deleteProduct, amoutButtons) {
 
   };
 
-}(document, Ajax, deleteProduct, amoutButtons)
+}(document, window, deleteProduct, amoutButtons)

@@ -1,5 +1,5 @@
-var deleteProduct = function(document) {
-  this.__URL__ = '~nobilis/ProjetTut/index.php/';
+var deleteProduct = function(document, window) {
+  this.__URL__ = window.__URL__;
   this.list = document.querySelector('#productsList');
 
 
@@ -54,4 +54,4 @@ var deleteProduct = function(document) {
   return {
     'delete' : this.send_del
   }
-}(document);
+}(document, window);
