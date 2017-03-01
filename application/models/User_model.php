@@ -8,6 +8,7 @@ class User_model extends CI_Model {
 
 
     /** @brief Returns user id
+     *
      * @param $login - A specified user login
      *
      * @return id - The user's id
@@ -19,6 +20,7 @@ class User_model extends CI_Model {
     }
 
     /** @brief Adds the specified user in the database
+     *
      * @param $user - an array containing all the user's information
      */
     public function addUser($user) {
@@ -30,7 +32,7 @@ class User_model extends CI_Model {
             'name' => $user['name'],
             'fname' => $user['fname']
         );
-
+        ///@todo Doit renvoyer un booléen
         return $this->db->insert('user', $data);
     }
 

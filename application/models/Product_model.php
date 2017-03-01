@@ -5,11 +5,11 @@ class Product_model extends CI_Model{
         $this->load->database();
     }
 
-   /** @brief Gets product
+   /** @brief Gets all products
     *
-    *
+    * @return The list of all products in the database
     */
-    public function getProduct(){
+    public function getAllProduct(){
         $query = $this->db->get('product');
         return $query->result();
     }
@@ -22,6 +22,7 @@ class Product_model extends CI_Model{
      * @param $vol - The product's volume
      */
      public function addproduct($product_data){
+       ///@todo Doit renvoyer un booléen
          return $this->db->insert('product',$product_data);
      }
 
@@ -30,6 +31,7 @@ class Product_model extends CI_Model{
      * @param $name - The products name
      */
      public function deleteProduct($id_product){
+       ///@todo Doit renvoyer un booléen
        return $this->db->where('id',$id_product)
                      ->delete('product');
     }
