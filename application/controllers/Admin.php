@@ -19,29 +19,31 @@
 
         public function product_index(){
             $this->logged_user_only();
+
+            $data = array();
+
+            $this->load->helper('form');
             $this->load->library('form_validation');
+
+            $this->form_validation->set_rules('name', 'Nom', 'required|callback_product_name_check');
+            $this->form_validation->set_rules('weight', 'poids', 'required');
+            //$this->form_validation->set_rules('volume', 'volume', 'required');
+
+
+
+
+            if ($this->form_validation->run() == TRUE) {
+              $product_data = array(
+                  'name' => $this->input->post('name'),
+                  'coldness' => $this->input->post('exp'),
+                  'weight' => $this->input->post('weight'),
+                  'volume' => 0
+              );
+              $this->Product_model->addproduct($product_data);
+            }
             $data['products'] = $this->Product_model->getAllProduct();
+
             $this->smarty->view('Admin/product.tpl',$data);
-        }
-
-        public function createProduct(){
-        $this->logged_user_only();
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-
-        $this->form_validation->set_rules('name', 'Nom', 'required|callback_product_name_check');
-        $this->form_validation->set_rules('weight', 'poids', 'required');
-        $this->form_validation->set_rules('volume', 'volume', 'required');
-
-        $product_data = array(
-            'name' => $this->input->post('name'),
-            'coldness' => $this->input->post('exp'),
-            'weight' => $this->input->post('weight'),
-            'volume' => $this->input->post('volume')
-        );
-
-        $this->Product_model->addproduct($product_data);
-        redirect('admin/product','refresh');
         }
 
         public function deleteProduct(int $id_product){
@@ -51,8 +53,11 @@
         }
 
         public function product_name_check($name) {
-          if()
-
+          if($this->Product_model->name_exist($name)) {
+              $this->form_validation->set_message('product_name_check', 'Ce {field} existe déjà.');
+              return FALSE;
+          } else
+            return TRUE;
         }
 
 
