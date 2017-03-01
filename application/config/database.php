@@ -79,6 +79,11 @@ $db['default'] = array(
 	'username' => 'u_ptut',
 	'password' => 'ptut',
 	'database' => 'u_ptut',
+    /*
+	'username' => 'u_ptut',
+	'password' => 'ptut',
+	'database' => 'u_ptut',
+    */
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
