@@ -29,7 +29,7 @@
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('name', 'name', 'required');
+        $this->form_validation->set_rules('name', 'Nom', 'required|callback_product_name_check');
         $this->form_validation->set_rules('weight', 'poids', 'required');
         $this->form_validation->set_rules('volume', 'volume', 'required');
 
@@ -49,6 +49,16 @@
           $this->Product_model->deleteProduct($id_product);
           redirect('admin/product','refresh');
         }
+
+        public function product_name_check($name) {
+          if()
+
+        }
+
+
+
+
+
 
         public function deleteShop(int $id_shop){
             $this->logged_user_only();
