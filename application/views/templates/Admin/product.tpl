@@ -48,7 +48,7 @@
                                   <option value="4">4 [Garder au frais]</option>
                                   <option value="5">5 [Surgelé]</option>
                           </select> </br>
-      Weight : <input type="text"  name="weight" list="json-datalist">
+      Weight (kg) : <input type="text"  name="weight" list="json-datalist">
       Volume : <input type="text"  name="volume" list="json-datalist">
         <br/><input type="submit" name="addproduct" value="Ajouter un produit">
     </form>

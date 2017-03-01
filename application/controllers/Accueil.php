@@ -6,12 +6,20 @@ class Accueil extends CI_Controller {
            parent::__construct();
            $this->load->model('user_model');
    }
-
+   /** @brief Affiche l'accueil
+    *
+    * @todo A faire
+    */
    public function index() {
        $data = array();
        $this->smarty->view( 'Accueil/accueil.tpl', $data );
    }
 
+   /** @brief Affiche la page de connexion
+    *
+    * @detail Affiche le formulaire de connexion, les boutons de connexion
+    *         et de redirection vers le formulaire d'inscription
+    */
    public function connexion() {
        $data = array();
        $data['inscription_success'] = $this->session->flashdata('inscription_success');
@@ -32,6 +40,11 @@ class Accueil extends CI_Controller {
        }
    }
 
+   /** @brief Affiche la page d'inscription
+    *
+    * @detail
+    *
+    */
    public function inscription() {
        $data = array();
        $this->load->helper('form');
