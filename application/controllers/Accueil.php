@@ -73,9 +73,12 @@ class Accueil extends CI_Controller {
 
    }
 
-   /** @brief Verifies if the provided login is correct
+   /** @brief Verifies if the provided login is already used
     *
+    * @detail Calls login_exists($str)
     *
+    * @return Boolean : TRUE if the login is valid (isn't already used),
+    *                   FALSE if the login isn't valid (already used)
     */
    public function login_check($str) {
        if ($this->user_model->login_exists($str) == TRUE) {
@@ -86,6 +89,13 @@ class Accueil extends CI_Controller {
        }
    }
 
+   /** @brief Verifies if the provided email is already used
+    *
+    * @detail Calls email_exists($str)
+    *
+    * @return Boolean : TRUE if the email is valid (isn't already used),
+    *                   FALSE if the email isn't valid (already used)
+    */
    public function email_check($str) {
        if ($this->user_model->email_exists($str) == TRUE) {
            $this->form_validation->set_message('email_check', 'Cet {field} est déjà associée.');
@@ -95,6 +105,14 @@ class Accueil extends CI_Controller {
        }
    }
 
+
+   /** @brief Verifies if the provided connexion info is valid
+   *
+   * @detail Calls valid_connexion_info($login, $password) to check if it matches
+   *         the database.
+   *
+   * @return Boolean : TRUE if the info is valid, FALSE if it isn't.
+   */
    public function verify_connexion_info($str) {
 
        if ($this->user_model->valid_connexion_info( $this->input->post('login'), $this->input->post('password') ) == TRUE) {

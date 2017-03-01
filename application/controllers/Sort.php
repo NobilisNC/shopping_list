@@ -33,7 +33,7 @@ class Sort extends Core_Controller {
       $products = $this->Sort_model->getProducts($id);
 
       function comparer($a, $b) {
-        return ($a->weight > $b->weight);
+        return ($a->weight < $b->weight);
       }
 
       usort($products, 'comparer');
