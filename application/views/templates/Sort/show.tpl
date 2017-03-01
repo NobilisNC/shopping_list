@@ -2,7 +2,7 @@
 {block name=body}
 <div class="col-left-1 col-10">
 <div class="row">
-<h2>Trie</h2>
+<h2>Tri</h2>
 </div>
 <div class="row">
 <div class="col-10 container">

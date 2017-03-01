@@ -1,7 +1,7 @@
 {extends file='../layout.tpl'}
 {block name=body}
 <div class="col-left-1 col-10">
-<h2>Trie</h2>
+<h2>Tri</h2>
 
 <p>Choisir la liste à trier : </p>
 <ul>
