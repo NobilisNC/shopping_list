@@ -24,11 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-<<<<<<< HEAD
 $config['base_url'] = 'http://localhost/PTUT/shopping_list/';
-=======
-$config['base_url'] = 'http://localhost/shopping_list';
->>>>>>> 19d1721ee9fa898a203ef78b679a67f50022419c
 
 /*
 |--------------------------------------------------------------------------
