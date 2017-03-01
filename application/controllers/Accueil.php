@@ -6,7 +6,7 @@ class Accueil extends CI_Controller {
            parent::__construct();
            $this->load->model('user_model');
    }
-   /** @brief Affiche l'accueil
+   /** @brief Displays home page
     *
     * @todo A faire
     */
@@ -15,10 +15,10 @@ class Accueil extends CI_Controller {
        $this->smarty->view( 'Accueil/accueil.tpl', $data );
    }
 
-   /** @brief Affiche la page de connexion
+   /** @brief Displays login page
     *
-    * @detail Affiche le formulaire de connexion, les boutons de connexion
-    *         et de redirection vers le formulaire d'inscription
+    * @detail Diplays login form, login button and a button to redirect
+    *         an unregistered user to inscription page.
     */
    public function connexion() {
        $data = array();
@@ -40,10 +40,10 @@ class Accueil extends CI_Controller {
        }
    }
 
-   /** @brief Affiche la page d'inscription
+   /** @brief Displays inscription page
     *
-    * @detail
-    *
+    * @detail Displays insription form, validation button, clear button
+    *  and a redirection to login page button
     */
    public function inscription() {
        $data = array();
@@ -73,6 +73,10 @@ class Accueil extends CI_Controller {
 
    }
 
+   /** @brief Verifies if the provided login is correct
+    *
+    *
+    */
    public function login_check($str) {
        if ($this->user_model->login_exists($str) == TRUE) {
            $this->form_validation->set_message('login_check', 'Ce {field} existe déjà.');
