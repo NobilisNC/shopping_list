@@ -29,9 +29,6 @@
             $this->form_validation->set_rules('weight', 'poids', 'required');
             //$this->form_validation->set_rules('volume', 'volume', 'required');
 
-
-
-
             if ($this->form_validation->run() == TRUE) {
               $product_data = array(
                   'name' => $this->input->post('name'),
@@ -58,6 +55,18 @@
               return FALSE;
           } else
             return TRUE;
+        }
+
+        public function updateProductName(int $id){
+            $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
+            $response = array();
+            if($this->session->userdata('logged_in') !== TRUE)
+                $response['error'] = 'error_not_logged';
+            else{
+                $this->Product_model->setName($id,htmlentities($data->data));
+                $response['data'] = $this->Product_model->getProductById($id)->name;
+            }
+            echo json_encode($response);
         }
 
 

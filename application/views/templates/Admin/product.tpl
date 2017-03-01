@@ -16,7 +16,7 @@
                 <tbody>
                     {foreach $products as $product}
                         <tr>
-                            <td>{{$product->name}}</td>
+                            <td><span id="productNode{$product->id}">{$product->name}</span><span id="productButton{$product->id}" class="fa fa-pencil-square-o fa-fw"></span></td>
                             <td>{{$product->coldness}}</td>
                             <td>{{$product->weight}}</td>
                             <td><a href="{site_url()}/admin/product/deleteProduct/{{$product->id}}">
@@ -68,4 +68,21 @@
     </form>
   </div>
     </div>
+    <script type="text/javascript" src="{base_url()}static/js/he.js"></script>
+    <script type="text/javascript" src="{base_url()}static/js/editText.js"></script>
+
+    <script type="text/javascript">
+
+    window.__URL__ = '{site_url()}/';
+{foreach $products as $product}
+    let test{$product->id} = new editableText(
+        {
+          button : document.querySelector('#productButton{$product->id}'),
+          node   : document.querySelector('#productNode{$product->id}'),
+          type   : 'text',
+          url    : '{site_url()}/admin/product/{$product->id}/title'
+        }
+      );
+{/foreach}
+    </script>
 {/block}

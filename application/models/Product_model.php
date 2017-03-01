@@ -14,6 +14,10 @@ class Product_model extends CI_Model{
         return $query->result();
     }
 
+    public function getProductById($id){
+        return $this->db->get_where('product', array('id' => $id))->result()[0];
+    }
+
     /** @brief Creates and adds a product in the database
      *
      * @param $name - The product's name
@@ -45,6 +49,11 @@ class Product_model extends CI_Model{
       else
           return FALSE;
 
+    }
+
+    public function setName($id_product,$new_name){
+        $this->db->where('id',$id_product);
+        $this->db->update('product',array('name' => $new_name));
     }
 }
 ?>
