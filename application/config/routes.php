@@ -53,7 +53,7 @@ $route['admin/product'] = 'Admin/product_index';
 $route['admin/product/deleteProduct/(:num)'] = 'Admin/deleteProduct/$1';
 $route['admin/product/get'] = 'Admin/getProduct';
 $route['admin/product/(:num)/title'] = 'Admin/updateProductName/$1';
-$route['admin/shop'] = 'Admin/index';
+$route['admin/shop'] = 'Admin/shop_index';
 $route['admin/shop/delete/(:num)'] = 'Admin/deleteShop/$1';
 $route['admin/shop/addShop'] = 'Admin/addShop';
 
