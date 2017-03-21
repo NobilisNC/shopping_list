@@ -9,6 +9,10 @@ class ShoppingList extends Core_Controller {
            $this->load->model('ShoppingList_model');
    }
 
+   /** @brief Displays all the lists of the logged user
+   *
+   * @detail Calls getLists($id) from ShoppingList_model
+   */
    public function index() {
       $this->logged_user_only();
 
@@ -17,6 +21,12 @@ class ShoppingList extends Core_Controller {
       $this->smarty->view('List/all.tpl', $data);
    }
 
+
+   /** @brief
+   *
+   *
+   *
+   */
    public function createList() {
      $this->logged_user_only();
      $id = $this->user_model->id($this->session->userdata('login'));

@@ -9,6 +9,10 @@ class Sort extends Core_Controller {
            $this->load->model('Sort_model');
    }
 
+   /** @brief Displays the lists of the logged user
+   *
+   * @detail Calls getLists($id) from Sort_model
+   */
    public function index() {
       $this->logged_user_only();
 
@@ -17,6 +21,11 @@ class Sort extends Core_Controller {
       $this->smarty->view('Sort/all.tpl', $data);
    }
 
+   /** @brief Displays a selected list
+   *
+   * @detail Calls getListById($id) and getProducts($id) from Sort_model
+   *          to display the list
+   */
    public function showListSort(int $id) {
       $this->logged_user_only();
 
@@ -26,6 +35,12 @@ class Sort extends Core_Controller {
       $this->smarty->view('Sort/show.tpl', array('list' => $list, 'products' => $products));
    }
 
+   /** @brief Display the specified list sorted by weight
+   *
+   * @detail Calls getListById($id) and getProducts($id) from Sort_model
+   *          to display the list. Creates a function comparer($a, $b)
+   *          that compares two products weights and returns a boolean
+   */
    public function sortWeight(int $id) {
       $this->logged_user_only();
 
@@ -41,6 +56,12 @@ class Sort extends Core_Controller {
       $this->smarty->view('Sort/show.tpl', array('list' => $list, 'products' => $products));
    }
 
+   /** @brief Display the specified list sorted by coldness
+   *
+   * @detail Calls getListById($id) and getProducts($id) from Sort_model
+   *          to display the list. Creates a function comparer($a, $b)
+   *          that compares two products coldness and returns a boolean
+   */
    public function sortColdness(int $id) {
       $this->logged_user_only();
 

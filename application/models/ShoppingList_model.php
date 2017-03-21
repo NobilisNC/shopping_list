@@ -31,7 +31,7 @@ class ShoppingList_model extends CI_Model {
 
     /** @brief Get all lists of a specified user id
      *
-     *@param $id - A specified user's id
+     * @param $id - A specified user's id
      *
      * @return All lists for this specified user
      */
