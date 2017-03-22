@@ -16,13 +16,13 @@
 class AJAX {
 
   function __construct() {
-    $this->response = [];
-    $this->response['data'] = [];
-    $this->response['errors'] = [];
+    $this->response = array();
+    $this->response['data'] = array();
+    $this->response['errors']= array();
 
     $this->response = (object)$this->response;
 
-    $this->response->data = [];
+    $this->response->data = array();
     $this->response->errors['numbers'] = 0;
 
     // {'reponse' => ['data' => [], 'errors' => [] ]}

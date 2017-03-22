@@ -51,6 +51,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['ajax/test'] = 'accueil/test_AJAX';
 
+$route['API/start/(:num)'] = 'API_smartphone/useList/$1';
+$route['API/stop/(:num)'] = 'API_smartphone/stopList/$1';
+$route['API/info/(:num)'] = 'API_smartphone/getList/$1';
+$route['API/list/(:num)/check/(:num)'] = 'API_smartphone/checkProduct/$1/$2';
+$route['API/list/(:num)/uncheck/(:num)'] = 'API_smartphone/uncheckProduct/$1/$2';
+
 $route['admin/product'] = 'Admin/product_index';
 $route['admin/product/deleteProduct/(:num)'] = 'Admin/deleteProduct/$1';
 $route['admin/product/get'] = 'Admin/getProduct';

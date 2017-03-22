@@ -187,4 +187,13 @@ class ShoppingList_model extends CI_Model {
                  ->where('id', $id_list)
                  ->update('list');
       }
+
+      public function isOwner(int $id_list, int $id_user) {
+        $result = $this->db->get_where('list', array('id' => $id_list, 'id_user' => $id_user));
+
+        if($result->num_rows() > 0)
+          return true;
+        else
+          return false;
+      }
 }
