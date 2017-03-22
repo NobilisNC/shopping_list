@@ -15,7 +15,6 @@ class Home extends Core_Controller {
            #notification
            $data = array();
            $this->smarty->view('Home/index.tpl', $data);
-
    }
 
    public function profil() {
