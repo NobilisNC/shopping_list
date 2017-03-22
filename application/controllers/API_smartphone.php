@@ -108,7 +108,6 @@
 
         public function friendAddProduct(int $id_list, int $id_product) {
           $this->logged_user_only();
-          
 
         }
   }
