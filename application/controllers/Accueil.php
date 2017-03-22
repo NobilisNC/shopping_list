@@ -128,5 +128,16 @@ class Accueil extends CI_Controller {
 
    }
 
+   public function test_AJAX() {
+     $test = new AJAX();
+
+
+     $test->setError('Plouf');
+     $test->addData('status', 'OK');
+     $test->addData('tata', array("plouf" => "caca", "pif" => "paf"));
+
+     $test->send();
+   }
+
 
 }

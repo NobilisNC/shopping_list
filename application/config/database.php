@@ -77,9 +77,14 @@ $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 
-	'username' => 'bdd_projet_tut',
-	'password' => 'shopping',
-	'database' => 'bdd_projet_tut',
+	'username' => 'u_ptut',
+	'password' => 'ptut',
+	'database' => 'u_ptut',
+    /*
+	'username' => 'u_ptut',
+	'password' => 'ptut',
+	'database' => 'u_tptut',
+    */
 
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
