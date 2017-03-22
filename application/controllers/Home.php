@@ -82,6 +82,7 @@ class Home extends Core_Controller {
    public function logout() {
        $this->logged_user_only();
            $this->session->unset_userdata('logged_in');
+           $this->session->unset_userdata('logged_admin');
            $this->session->unset_userdata('login');
            $this->session->unset_userdata('id');
            redirect('accueil/connexion','refresh');

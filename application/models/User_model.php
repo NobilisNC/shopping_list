@@ -52,6 +52,15 @@ class User_model extends CI_Model {
         }
     }
 
+    public function valid_admin_rights($id) {
+        $query = $this->db->get_where('user',array('id' => $id));
+        if($query->result()[0]->isAdmin == TRUE){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+
     /** @brief Verifies if the specified string matches a login in the database
      *
      * @param $str - a specified string

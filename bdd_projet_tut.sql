@@ -191,6 +191,7 @@ ALTER TABLE `shop`
   /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 ALTER TABLE `shop` ADD `etat` ENUM('submited','approved') NOT NULL AFTER `location`;
+ALTER TABLE `user`  ADD `isAdmin` BOOLEAN NOT NULL DEFAULT FALSE  AFTER `fname`;
 
 --
 -- Constraints for dumped tables

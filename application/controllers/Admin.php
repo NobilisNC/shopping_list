@@ -16,6 +16,7 @@
          */
         public function shop_index(){
             $this->logged_user_only();
+            $this->admin_user_only();
             $data['shop_add_success'] = $this->session->flashdata('shop_add_success');
             $data['shop_list'] = $this->ShopList_model->getAllShops();
             $this->smarty->view('Admin/shop_list.tpl',$data);
@@ -28,6 +29,7 @@
         */
         public function product_index(){
             $this->logged_user_only();
+            $this->admin_user_only();
 
             $data = array();
 
@@ -59,6 +61,7 @@
         */
         public function deleteProduct(int $id_product){
           $this->logged_user_only();
+          $this->admin_user_only();
           $this->Product_model->deleteProduct($id_product);
           redirect('admin/product','refresh');
         }
@@ -95,17 +98,19 @@
 
         /** @brief Deletes the specified shop
         *
-        * 
+        *
         *
         */
         public function deleteShop(int $id_shop){
             $this->logged_user_only();
+            $this->admin_user_only();
             $is_deleted = $this->ShopList_model->deleteShop($id_shop);
             redirect('admin/shop','refresh');
         }
 
         public function addShop(){
             $this->logged_user_only();
+            $this->admin_user_only();
             $data = array();
             $this->load->helper('form');
             $this->load->library('form_validation');

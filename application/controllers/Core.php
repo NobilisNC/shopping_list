@@ -13,6 +13,10 @@ class Core_Controller extends CI_Controller {
        }
    }
 
-
-
+   protected function admin_user_only(){
+       if($this->session->userdata('logged_admin') !== TRUE){
+           $this->session->set_flashdata('not_admin','');
+           redirect('accueil/index');
+       }
+   }
 }
