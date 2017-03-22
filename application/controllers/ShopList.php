@@ -64,8 +64,8 @@ class ShopList extends Core_Controller{
 
     /** @brief Deletes the specified shop from the logged user shop list
     *
-    *
-    *
+    * @detail Calls deleteFromMyShops($id_shop, $id_user) from ShopList_model
+    *         and refreshes the page  
     */
     public function deleteFromMyShops(int $id_shop){
         $this->logged_user_only();
