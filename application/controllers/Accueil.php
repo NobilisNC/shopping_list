@@ -77,6 +77,8 @@ class Accueil extends CI_Controller {
     *
     * @detail Calls login_exists($str)
     *
+    * @param $str - the login you check
+    *
     * @return Boolean : TRUE if the login is valid (isn't already used),
     *                   FALSE if the login isn't valid (already used)
     */
@@ -92,6 +94,8 @@ class Accueil extends CI_Controller {
    /** @brief Verifies if the provided email is already used
     *
     * @detail Calls email_exists($str)
+    *
+    * @param $str - The email you check
     *
     * @return Boolean : TRUE if the email is valid (isn't already used),
     *                   FALSE if the email isn't valid (already used)
