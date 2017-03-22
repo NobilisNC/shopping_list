@@ -16,6 +16,7 @@
          */
         public function shop_index(){
             $this->logged_user_only();
+            $this->admin_user_only();
             $data['shop_add_success'] = $this->session->flashdata('shop_add_success');
             $data['shop_list'] = $this->ShopList_model->getAllShops();
             $this->smarty->view('Admin/shop_list.tpl',$data);
@@ -95,7 +96,7 @@
 
         /** @brief Deletes the specified shop
         *
-        * 
+        *
         *
         */
         public function deleteShop(int $id_shop){
