@@ -34,6 +34,11 @@ class Accueil extends CI_Controller {
            $this->session->set_userdata('logged_in', TRUE);
            $this->session->set_userdata('login', $this->input->post('login'));
            $this->session->set_userdata('id', $this->user_model->id($this->session->userdata('login')));
+           //Verification si l utilisateur est administrateur
+           $isAdmin = $this->verify_admin_rights($this->session->userdata('id'));
+           if($isAdmin == TRUE){
+            $this->session->set_userdata('logged_admin',TRUE);
+            }
            redirect('home/index','refresh');
        } else {
            $this->smarty->view('Accueil/connexion.tpl', $data);
@@ -128,6 +133,14 @@ class Accueil extends CI_Controller {
            return FALSE;
        }
 
+   }
+
+   public function verify_admin_rights(int $id) {
+       if($this->user_model->valid_admin_rights($id) == TRUE){
+           return TRUE;
+       }else {
+           return FALSE;
+       }
    }
 
    public function test_AJAX() {
