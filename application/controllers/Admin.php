@@ -29,6 +29,7 @@
         */
         public function product_index(){
             $this->logged_user_only();
+            $this->admin_user_only();
 
             $data = array();
 
@@ -60,6 +61,7 @@
         */
         public function deleteProduct(int $id_product){
           $this->logged_user_only();
+          $this->admin_user_only();
           $this->Product_model->deleteProduct($id_product);
           redirect('admin/product','refresh');
         }
@@ -101,12 +103,14 @@
         */
         public function deleteShop(int $id_shop){
             $this->logged_user_only();
+            $this->admin_user_only();
             $is_deleted = $this->ShopList_model->deleteShop($id_shop);
             redirect('admin/shop','refresh');
         }
 
         public function addShop(){
             $this->logged_user_only();
+            $this->admin_user_only();
             $data = array();
             $this->load->helper('form');
             $this->load->library('form_validation');
