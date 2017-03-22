@@ -9,6 +9,10 @@ class ShoppingList extends Core_Controller {
            $this->load->model('ShoppingList_model');
    }
 
+   /** @brief Displays all the lists of the logged user
+   *
+   * @detail Calls getLists($id) from ShoppingList_model
+   */
    public function index() {
       $this->logged_user_only();
 
@@ -17,6 +21,12 @@ class ShoppingList extends Core_Controller {
       $this->smarty->view('List/all.tpl', $data);
    }
 
+
+   /** @brief Creates a new list for the logged user
+   *
+   * @detail Calls createEmptyList($id_user) from ShoppingList_model
+   *        Refreshes the page.
+   */
    public function createList() {
      $this->logged_user_only();
      $id = $this->user_model->id($this->session->userdata('login'));
@@ -26,6 +36,13 @@ class ShoppingList extends Core_Controller {
      redirect('home/list', 'refresh');
    }
 
+   /** @brief Displays the specified list
+   *
+   * @param - int $id : a specified list id
+   *
+   * @detail Calls getListById($id) and getProducts($id) from ShoppingList_model
+   *         to display the list
+   */
    public function showList(int $id) {
      $this->logged_user_only();
      $list = $this->ShoppingList_model->getListById($id);
@@ -34,12 +51,22 @@ class ShoppingList extends Core_Controller {
      $this->smarty->view('List/show.tpl', array('list' => $list, 'products' => $products));
    }
 
+   /** @brief Deletes the specified list
+   *
+   * @detail Calls deleteList($id) from ShoppingList_model.
+   *         Redirects to home/list after the deletion
+   */
    public function deleteList(int $id) {
      $this->ShoppingList_model->deleteList($id);
      redirect('home/list');
    }
 
-
+   /** @brief Updates the name of the specified list
+   *
+   * @detail Calls setName($id, $name) from ShoppingList_model
+   *
+   *
+   */
    public function updateTitle(int $id) {
      $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
      $response = array();
@@ -54,6 +81,12 @@ class ShoppingList extends Core_Controller {
       echo json_encode($response);
    }
 
+   /** @brief
+   *
+   *
+   *
+   *
+   */
    public function getProductsLike(string $fragmented_name) {
      $response = array();
      $response['names'] = $this->ShoppingList_model->getProductsLike(htmlentities($fragmented_name));

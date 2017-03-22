@@ -10,13 +10,22 @@
             $this->load->model('user_model');
         }
 
-        public function index(){
+        /** @brief Displays the list of all the shops in the database
+         *
+         * @detail Calls getAllShops() from ShopList_model
+         */
+        public function shop_index(){
             $this->logged_user_only();
             $data['shop_add_success'] = $this->session->flashdata('shop_add_success');
             $data['shop_list'] = $this->ShopList_model->getAllShops();
             $this->smarty->view('Admin/shop_list.tpl',$data);
         }
 
+       /** @brief Displays the list of all the products in the database
+        *
+        * @detail
+        *
+        */
         public function product_index(){
             $this->logged_user_only();
 
@@ -43,12 +52,23 @@
             $this->smarty->view('Admin/product.tpl',$data);
         }
 
+       /** @brief Allows the admin to delete a product
+        *
+        * @detail Calls deleteProduct($id_product) from Product_model
+        *         then refreshes the page
+        */
         public function deleteProduct(int $id_product){
           $this->logged_user_only();
           $this->Product_model->deleteProduct($id_product);
           redirect('admin/product','refresh');
         }
 
+       /** @brief Checks if the specified product already exists in the database
+        *
+        * @detail Calls name_exist($name) from Product_model
+        *
+        * @return A boolean : FALSE if the product already exists, TRUE if it doesn't
+        */
         public function product_name_check($name) {
           if($this->Product_model->name_exist($name)) {
               $this->form_validation->set_message('product_name_check', 'Ce {field} existe déjà.');
@@ -57,6 +77,10 @@
             return TRUE;
         }
 
+        /** @brief Updates a specified product's name
+        *
+        *
+        */
         public function updateProductName(int $id){
             $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
             $response = array();
@@ -69,11 +93,11 @@
             echo json_encode($response);
         }
 
-
-
-
-
-
+        /** @brief Deletes the specified shop
+        *
+        * 
+        *
+        */
         public function deleteShop(int $id_shop){
             $this->logged_user_only();
             $is_deleted = $this->ShopList_model->deleteShop($id_shop);
