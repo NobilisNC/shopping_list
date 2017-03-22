@@ -188,12 +188,17 @@ class ShoppingList_model extends CI_Model {
                  ->update('list');
       }
 
+      /** @brief Verifies if the specified user is the owner of the
+      *          specified list
+      *
+      * @return Boolean - TRUE if the user is the owner, FALSE if he's not
+      */
       public function isOwner(int $id_list, int $id_user) {
         $result = $this->db->get_where('list', array('id' => $id_list, 'id_user' => $id_user));
 
         if($result->num_rows() > 0)
-          return true;
+          return TRUE;
         else
-          return false;
+          return FALSE;
       }
 }

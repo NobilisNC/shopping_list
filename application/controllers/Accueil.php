@@ -110,12 +110,14 @@ class Accueil extends CI_Controller {
    }
 
 
-   /** @brief Verifies if the provided connexion info is valid
+   /** @brief Verifies if the provided connexion information is valid
    *
-   * @detail Calls valid_connexion_info($login, $password) to check if it matches
-   *         the database.
+   * @detail Calls valid_connexion_info($login, $password) from user_model
+   *        to check if it matches the database.
    *
-   * @return Boolean : TRUE if the info is valid, FALSE if it isn't.
+   * @param $str ?
+   *
+   * @return Boolean : TRUE if the information is valid, FALSE if it isn't.
    */
    public function verify_connexion_info($str) {
 
