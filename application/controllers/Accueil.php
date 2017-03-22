@@ -148,10 +148,31 @@ class Accueil extends CI_Controller {
 
 
      $test->setError('Plouf');
+     $test->setError('Plaf');
      $test->addData('status', 'OK');
      $test->addData('tata', array("plouf" => "caca", "pif" => "paf"));
 
      $test->send();
+
+     /* JSON : 
+     {
+        "data": 
+        {
+          "status":"OK",
+          "tata":
+          {
+              "plouf":"caca",
+              "pif":"paf"
+          }
+        },
+        "errors":
+        {
+            "numbers":2,
+            "0":"Plouf",
+            "1":"Plaf"
+        }
+     }
+     */
    }
 
 
