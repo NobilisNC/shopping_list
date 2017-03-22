@@ -10,7 +10,7 @@ class UseList_model extends CI_Model {
      *
      *
      *
-    **/
+     **/
     public function useList(int $id_list) {
       //Create instance of `use_list`
       $this->db->insert('use_list', array('id_list' => $id_list));
@@ -36,7 +36,7 @@ class UseList_model extends CI_Model {
 
 
     public function getProducts(int $id) {
-      $this->db->select(array('id', 'name', 'amount', 'checked', 'modif'))
+      $this->db->select(array('id', 'name', 'amount', 'checked', 'modif', 'weight', 'coldness'))
                ->from('use_list_product')
                ->join('list_product', 'use_list_product.id_product = list_product.id_product')
                ->join('product', 'use_list_product.id_product = product.id')
