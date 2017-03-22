@@ -58,6 +58,8 @@
         *
         * @detail Calls deleteProduct($id_product) from Product_model
         *         then refreshes the page
+        *
+        * @param $id_product - The id of the product to be deleted
         */
         public function deleteProduct(int $id_product){
           $this->logged_user_only();
@@ -69,6 +71,8 @@
        /** @brief Checks if the specified product already exists in the database
         *
         * @detail Calls name_exist($name) from Product_model
+        *
+        * @param $name - The name to check
         *
         * @return A boolean : FALSE if the product already exists, TRUE if it doesn't
         */
@@ -82,7 +86,7 @@
 
         /** @brief Updates a specified product's name
         *
-        *
+        * @param $id - A specified product id
         */
         public function updateProductName(int $id){
             $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
@@ -98,8 +102,10 @@
 
         /** @brief Deletes the specified shop
         *
+        * @detail Calls deleteShop($id_shop) from ShopList_model.
+        *         Refreshes the page once the shop is deleted
         *
-        *
+        * @param $id_shop - The id of the shop to be deleted
         */
         public function deleteShop(int $id_shop){
             $this->logged_user_only();
@@ -108,6 +114,12 @@
             redirect('admin/shop','refresh');
         }
 
+        /** @brief Displays the "add a shop" page
+        *
+        * @detail Displays a form to add a new shop. If the form is completed,
+        *         it will create a new shop with the provided information
+        *         in the database (calls addShop($shop_data) from ShopList_model)
+        */
         public function addShop(){
             $this->logged_user_only();
             $this->admin_user_only();

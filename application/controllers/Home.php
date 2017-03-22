@@ -114,6 +114,10 @@ class Home extends Core_Controller {
    *          existing login, no invitation already sent to this login).
    *          Calls login_exists($str) and are_friends($str, $login) from
    *          user_model.
+   *
+   * @param $str - The login typed by the user
+   *
+   * @return Boolean : returns TRUE if the type login is valid, else returns FALSE
    */
    public function login_check($str) {
        if ($str == $this->session->userdata('login')) {
@@ -140,6 +144,12 @@ class Home extends Core_Controller {
    }
 
 
+   /** @brief Adds a friend to the logged user friend list from a notification
+   *
+   * @detail Checks if the user has notifications. If he has, he can choose
+   *         to accept or to delete them
+   *
+   */
    public function ajouterami() {
        $this->logged_user_only();
 
@@ -162,6 +172,13 @@ class Home extends Core_Controller {
        redirect('home/amis', 'refresh');
    }
 
+   /** @brief Deletes a friend from the logged user friend list
+   *
+   * @detail Checks if the logged user and the friend to be deleted
+   *         actually are friends (calls are_friends($login, $id) from user_model).
+   *         If they are, deletes the friend (calls delete_friend($login1, $login2) from user_model).
+   *         Refreshes the page.
+   */
    public function supprimerami() {
        $this->logged_user_only();
 
