@@ -47,10 +47,15 @@ class Product_model extends CI_Model{
                      ->delete('product');
     }
 
-    /** @brief Verifies if
+    /** @brief Verifies if the specified name exists in the database
     *
+    * @detail When you try to add a product in the database, verifies
+    *       if it already exists.
     *
+    * @param $name - A product name
     *
+    * @return Boolean - TRUE if the name doesn't exist (and the product is added)
+    *                   FALSE if the name already exists (and the product isn't added)
     */
     public function name_exist($name) {
       $query = $this->db->get_where('product', array('name' => $name));
@@ -62,6 +67,11 @@ class Product_model extends CI_Model{
 
     }
 
+    /** @detail Changes the name of a specified product
+    *
+    * @param $id_product - A specified product id
+    * @param $new_name - The new name for the specified product
+    */
     public function setName($id_product,$new_name){
         $this->db->where('id',$id_product);
         $this->db->update('product',array('name' => $new_name));
