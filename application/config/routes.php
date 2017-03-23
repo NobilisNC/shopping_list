@@ -71,6 +71,9 @@ $route['admin/product/(:num)/title'] = 'Admin/updateProductName/$1';
 $route['admin/shop'] = 'Admin/shop_index';
 $route['admin/shop/delete/(:num)'] = 'Admin/deleteShop/$1';
 $route['admin/shop/addShop'] = 'Admin/addShop';
+$route['admin/users'] = 'Admin/user_management_index';
+$route['admin/users/addAdmin'] = 'Admin/addAdmin';
+$route['admin/users/(:num)/login'] = 'Admin/updateUserLogin/$1';
 
 $route['home/shops'] = 'ShopList/index';
 $route['home/shops/create'] = 'ShopList/createShop';

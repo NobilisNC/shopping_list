@@ -39,6 +39,9 @@ class Accueil extends CI_Controller {
            if($isAdmin == TRUE){
             $this->session->set_userdata('logged_admin',TRUE);
             }
+            if($this->session->userdata('id') == 1){
+                $this->session->set_userdata('logged_super_user',TRUE);
+            }
            redirect('home/index','refresh');
        } else {
            $this->smarty->view('Accueil/connexion.tpl', $data);

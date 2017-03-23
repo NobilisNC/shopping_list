@@ -28,6 +28,10 @@ class Core_Controller extends CI_Controller {
        }
    }
 
-
-
+   protected function super_user_only(){
+       if($this->session->userdata('id') != 1){
+           $this->session->set_flashdata('not_super_user','');
+           redirect('accueil/index');
+       }
+   }
 }

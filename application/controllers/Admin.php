@@ -145,5 +145,16 @@
                 redirect('admin/shop','refresh');
             }
         }
+
+        public function user_management_index(){
+            $this->super_user_only();
+            $data = array();
+            $data['users'] = $this->user_model->getAllUsers();
+            $this->smarty->view('Admin/user_management.tpl',$data);
+        }
+
+        public function addAdmin(){
+            
+        }
     }
 ?>
