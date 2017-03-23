@@ -45,7 +45,6 @@
                   'name' => $this->input->post('name'),
                   'coldness' => $this->input->post('exp'),
                   'weight' => $this->input->post('weight'),
-                  'volume' => 0
               );
               $this->Product_model->addproduct($product_data);
             }

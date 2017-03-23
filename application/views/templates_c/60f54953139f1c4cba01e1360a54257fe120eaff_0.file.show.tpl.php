@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-02-28 15:14:37
+/* Smarty version 3.1.30, created on 2017-03-23 09:02:41
   from "C:\UwAmp\www\PTUT\shopping_list\application\views\templates\List\show.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_58b593dd180098_04212435',
+  'unifunc' => 'content_58d38f3161e2d2_36904462',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '60f54953139f1c4cba01e1360a54257fe120eaff' => 
     array (
       0 => 'C:\\UwAmp\\www\\PTUT\\shopping_list\\application\\views\\templates\\List\\show.tpl',
-      1 => 1488291938,
+      1 => 1488364115,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../layout.tpl' => 1,
   ),
 ),false)) {
-function content_58b593dd180098_04212435 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58d38f3161e2d2_36904462 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_3208158b593dd17ae26_88101391', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_2368858d38f3161bd58_61226626', 'body');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:../layout.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_3208158b593dd17ae26_88101391 extends Smarty_Internal_Block
+class Block_2368858d38f3161bd58_61226626 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -128,6 +128,10 @@ static/js/editText.js"><?php echo '</script'; ?>
 
 <?php echo '<script'; ?>
  type="text/javascript">
+
+window.__URL__ = '<?php echo site_url();?>
+/';
+
 let test1 = new editableText(
     {
       button : document.querySelector('#nameEdit'),

@@ -16,11 +16,11 @@
 				</li>
 	{if $smarty.session.logged_admin === TRUE}
 	<li><a href="{site_url()}/admin/shop_index">
-		<i class="fa fa-user-plus" aria-hidden="true"></i>
+		<i class="fa fa-shopping-basket" aria-hidden="true"></i>
 		Gérer les Magasins</a>
 	</li>
 	<li><a href="{site_url()}/admin/product_index">
-		<i class="fa fa-user-plus" aria-hidden="true"></i>
+		<i class="fa fa-cutlery" aria-hidden="true"></i>
 		Gérer les Produits</a>
 	</li>
 	{/if}
