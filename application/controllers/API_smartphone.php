@@ -182,7 +182,7 @@
           else {
             $lists = $this->ShoppingList_model->getLists($this->session->userdata('id'));
 
-            $response->addData('products', $lists);
+            $response->addData('lists', $lists);
           }
           $response->send();
         }
@@ -200,7 +200,7 @@
           else {
             $shops = $this->ShopList_model->getAllShops();
 
-            $response->addData('products', $shops);
+            $response->addData('shops', $shops);
           }
           $response->send();
         }
