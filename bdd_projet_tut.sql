@@ -273,5 +273,36 @@ ALTER TABLE `use_list_product`
   ADD CONSTRAINT `FK_USE_LIST_PRODUCT_LIST_ID` FOREIGN KEY (`id_list`) REFERENCES `use_list` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_USE_LIST_PRODUCT_PRODUCT_ID` FOREIGN KEY (`id_product`) REFERENCES `product` (`id`);
 
+--
+-- Table structure for table `shop_product`
+--
+
+CREATE TABLE `shop_product` (
+  `id_shop` bigint(20) UNSIGNED NOT NULL,
+  `id_product` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `shop_product`
+--
+ALTER TABLE `shop_product`
+  ADD PRIMARY KEY (`id_shop`,`id_product`),
+  ADD KEY `FK_PRODUCT_SHOP_2` (`id_product`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `shop_product`
+--
+ALTER TABLE `shop_product`
+  ADD CONSTRAINT `FK_PRODUCT_SHOP` FOREIGN KEY (`id_shop`) REFERENCES `shop` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_PRODUCT_SHOP_2` FOREIGN KEY (`id_product`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 
 INSERT INTO `user` VALUES (1,'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'admin@admin.fr', 'admin', 'admin', 1);
