@@ -46,6 +46,10 @@ class ShopList_model extends CI_Model{
         return $query->result();
     }
 
+    public function getShopById($id){
+        return $this->db->get_where('shop', array('id' => $id))->result()[0];
+    }
+
     /** @brief Adds a shop in the database
      *
      * @param $shop_data - An array containing the information about the shop
@@ -115,6 +119,16 @@ class ShopList_model extends CI_Model{
         $this->db->where('id_shop',$shop_id)
         ->where('id_user',$user_id)
         ->delete('user_shops');
+    }
+
+    public function setName($id_shop,$new_name){
+        $this->db->where('id',$id_shop);
+        $this->db->update('shop',array('name' => $new_name));
+    }
+
+    public function setLocation($id_shop,$new_location){
+        $this->db->where('id',$id_shop);
+        $this->db->update('shop',array('location' => $new_location));
     }
 }
 ?>

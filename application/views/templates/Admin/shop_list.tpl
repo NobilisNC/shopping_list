@@ -25,8 +25,8 @@
             <tbody>
                 {foreach $shop_list as $shop}
                     <tr>
-                        <td>{{$shop->name}}</td>
-                        <td>{{$shop->location}}</td>
+                        <td><span id="shopNameNode{$shop->id}">{$shop->name}</span><span id="shopNameButton{$shop->id}" class="fa fa-pencil-square-o fa-fw"></span></td>
+                        <td><span id="shopLocationNode{$shop->id}">{$shop->location}</span><span id="shopLocationButton{$shop->id}" class="fa fa-pencil-square-o fa-fw"></span></td>
                         <td>
                             <a href="{site_url()}/admin/shop/delete/{{$shop->id}}">
                                 <span class="fa fa-trash" aria-hidden="true" data-product_id="{$product->id}" ></span>
@@ -45,4 +45,33 @@
             <br/><input type="submit" name="confirm_add_shop" value="Ajouter Magasin">
         </form>
     </div>
+
+    <script type="text/javascript" src="{base_url()}static/js/he.js"></script>
+    <script type="text/javascript" src="{base_url()}static/js/editText.js"></script>
+
+    <script type="text/javascript">
+
+    window.__URL__ = '{site_url()}/';
+    {foreach $shop_list as $shop}
+        let shopName{$shop->id} = new editableText(
+            {
+              button : document.querySelector('#shopNameButton{$shop->id}'),
+              node   : document.querySelector('#shopNameNode{$shop->id}'),
+              type   : 'text',
+              url    : '{site_url()}/admin/shop/{$shop->id}/name'
+            }
+          );
+    {/foreach}
+
+    {foreach $shop_list as $shop}
+        let shopLocation{$shop->id} = new editableText(
+            {
+              button : document.querySelector('#shopLocationButton{$shop->id}'),
+              node   : document.querySelector('#shopLocationNode{$shop->id}'),
+              type   : 'text',
+              url    : '{site_url()}/admin/shop/{$shop->id}/location'
+            }
+          );
+    {/foreach}
+    </script>
 {/block}

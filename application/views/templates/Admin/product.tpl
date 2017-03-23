@@ -16,9 +16,9 @@
                 <tbody>
                     {foreach $products as $product}
                         <tr>
-                            <td><span id="productNode{$product->id}">{$product->name}</span><span id="productButton{$product->id}" class="fa fa-pencil-square-o fa-fw"></span></td>
-                            <td>{{$product->coldness}}</td>
-                            <td>{{$product->weight}}</td>
+                            <td><span id="productNameNode{$product->id}">{$product->name}</span><span id="productNameButton{$product->id}" class="fa fa-pencil-square-o fa-fw"></span></td>
+                            <td><span id="productColdnessNode{$product->id}">{$product->coldness}</span><span id="productColdnessButton{$product->id}" class="fa fa-pencil-square-o fa-fw"></span></td>
+                            <td><span id="productWeightNode{$product->id}">{$product->weight}</span><span id="productWeightButton{$product->id}" class="fa fa-pencil-square-o fa-fw"></span></td>
                             <td><a href="{site_url()}/admin/product/deleteProduct/{{$product->id}}">
                                 <span class="fa fa-trash" aria-hidden="true" data-product_id="{$product->id}" ></span>
                             </a></td>
@@ -67,7 +67,7 @@
       <input type="submit" name="addproduct" value="Ajouter un produit">
     </form>
   </div>
-    </div>
+</div>
     <script type="text/javascript" src="{base_url()}static/js/he.js"></script>
     <script type="text/javascript" src="{base_url()}static/js/editText.js"></script>
 
@@ -75,12 +75,34 @@
 
     window.__URL__ = '{site_url()}/';
 {foreach $products as $product}
-    let test{$product->id} = new editableText(
+    let productName{$product->id} = new editableText(
         {
-          button : document.querySelector('#productButton{$product->id}'),
-          node   : document.querySelector('#productNode{$product->id}'),
+          button : document.querySelector('#productNameButton{$product->id}'),
+          node   : document.querySelector('#productNameNode{$product->id}'),
           type   : 'text',
           url    : '{site_url()}/admin/product/{$product->id}/title'
+        }
+      );
+{/foreach}
+
+{foreach $products as $product}
+    let productColdness{$product->id} = new editableText(
+        {
+          button : document.querySelector('#productColdnessButton{$product->id}'),
+          node   : document.querySelector('#productColdnessNode{$product->id}'),
+          type   : 'text',
+          url    : '{site_url()}/admin/product/{$product->id}/coldness'
+        }
+      );
+{/foreach}
+
+{foreach $products as $product}
+    let productWeight{$product->id} = new editableText(
+        {
+          button : document.querySelector('#productWeightButton{$product->id}'),
+          node   : document.querySelector('#productWeightNode{$product->id}'),
+          type   : 'text',
+          url    : '{site_url()}/admin/product/{$product->id}/weight'
         }
       );
 {/foreach}
