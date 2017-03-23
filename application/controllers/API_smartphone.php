@@ -11,6 +11,13 @@
             $this->load->model('UseList_model');
         }
 
+        /** @brief Creates a new useList from an existing list
+        *
+        *
+        *
+        *
+        *
+        */
         public function useList(int $id) {
           $response = array();
           if($this->session->userdata('logged_in') !== true )

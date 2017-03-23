@@ -77,9 +77,9 @@ $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 
-	'username' => 'u_ptut',
-	'password' => 'ptut',
-	'database' => 'u_ptut',
+	'username' => 'PTUT',
+	'password' => 'PTUT',
+	'database' => 'ptut',
     /*
 	'username' => 'u_ptut',
 	'password' => 'ptut',

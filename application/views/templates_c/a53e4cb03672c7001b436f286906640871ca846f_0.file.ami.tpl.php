@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-02-15 07:41:25
+/* Smarty version 3.1.30, created on 2017-03-23 09:02:26
   from "C:\UwAmp\www\PTUT\shopping_list\application\views\templates\Home\ami.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_58a40625854d10_52043090',
+  'unifunc' => 'content_58d38f2242fdd2_00624220',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'a53e4cb03672c7001b436f286906640871ca846f' => 
     array (
       0 => 'C:\\UwAmp\\www\\PTUT\\shopping_list\\application\\views\\templates\\Home\\ami.tpl',
-      1 => 1487142801,
+      1 => 1488314905,
       2 => 'file',
     ),
   ),
@@ -21,20 +21,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../layout.tpl' => 1,
   ),
 ),false)) {
-function content_58a40625854d10_52043090 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58d38f2242fdd2_00624220 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_2617058a40625851240_18366541', 'body');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1295658d38f2242d146_59666612', 'body');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:../layout.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'} */
-class Block_2617058a40625851240_18366541 extends Smarty_Internal_Block
+class Block_1295658d38f2242d146_59666612 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -54,7 +54,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['notif']->value) {
     <p><span class="label label-blue" style="vertical-align:middle;">
       <i class="fa fa-bell" ></i>Invitation !</span>
       L'utilisateur "<em><?php echo $_smarty_tpl->tpl_vars['notif']->value;?>
-</em>" souhaite vous donnez accès à ses listes
+</em>" souhaite vous donner accès à ses listes
     </p>
 
       <a href="<?php echo site_url();?>
@@ -116,6 +116,14 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
 </tbody>
 </table>
+
+<?php $_smarty_tpl->_assignInScope('errors', validation_errors());
+if ($_smarty_tpl->tpl_vars['errors']->value) {?>
+<div class="alert alert-red">
+  <?php echo $_smarty_tpl->tpl_vars['errors']->value;?>
+
+</div>
+<?php }?>
 
 <div class="col-4">
 <form class="form" method="post" action="<?php echo site_url();?>
