@@ -25,7 +25,10 @@
             $response->addError('not logged');
           else if(!$this->ShoppingList_model->isOwner($id, $this->session->userdata('id')))
             $response->addError('You don\'t have access to this list');
-          else {
+          else if($this->UseList_model->isStarted($id)) {
+              $response->addError('Already Started');
+              $response->addData('id_session', $this->UseList_model->getSessionId($id));
+          } else {
                 $id_list = $this->UseList_model->useList($id);
                 $response->addData('id_session',  $id_list);
                 $response->addData('products', $this->ShoppingList_model->getProducts($id));
@@ -182,7 +185,7 @@
           else {
             $lists = $this->ShoppingList_model->getLists($this->session->userdata('id'));
 
-            $response->addData('products', $lists);
+            $response->addData('lists', $lists);
           }
           $response->send();
         }
@@ -200,9 +203,24 @@
           else {
             $shops = $this->ShopList_model->getAllShops();
 
-            $response->addData('products', $shops);
+            $response->addData('shops', $shops);
           }
           $response->send();
+        }
+
+        public function sortShop(int $id_session, int $id_shop) {
+          $response = new AJAX();
+          if($this->session->userdata('logged_in') !== true )
+            $response->addError('not logged');
+           else if(!$this->UseList_model->isOwner($id_session, $this->session->userdata('id')))
+            $response->addError('You don\'t have access to this list');
+          else {
+            $products = $this->UseList_model->getProductsInShop($id_session, $id_shop);
+
+            $response->addData('products', $products);
+          }
+          $response->send();
+
         }
 
   }

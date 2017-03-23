@@ -161,7 +161,7 @@
                 $shop_data = array(
                     'name' => $this->input->post('shop_name'),
                     'location' => $this->input->post('shop_location'),
-                    'etat' => 'approved'
+
                 );
 
                 $this->session->set_flashdata('shop_add_success',$this->ShopList_model->addShop($shop_data));

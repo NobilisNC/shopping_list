@@ -25,7 +25,6 @@ class ShopList_model extends CI_Model{
         $this->db->select('name,location')
                  ->from('shop')
                  ->where("name LIKE '".$in."%'")
-                 ->where('etat','approved')
                  ->order_by('name', 'asc');
         $query = $this->db->get();
         return $query->result();
@@ -63,25 +62,46 @@ class ShopList_model extends CI_Model{
         $this->db->delete('shop');
     }
 
-    /** @brief Deletes a specified shop from a specified user's shop list
-    *
-    * @param $shop_id - A specified shop id
-    * @param $user_id - A specified user's id
-    */
-    public function deleteFromMyShops(int $shop_id,int $user_id){
-        $this->db->where('id_shop',$shop_id)
-        ->where('id_user',$user_id)
-        ->delete('user_shops');
+
+    public function getProducts(int $id) {
+      $query = $this->db->select(array('product.name', 'product.id'))
+               ->from('shop_product')
+               ->join('product', 'shop_product.id_product = product.id')
+               ->where('id_shop = '.$id)
+               ->get();
+
+      return $query->result();
     }
 
-    public function setName($id_shop,$new_name){
-        $this->db->where('id',$id_shop);
-        $this->db->update('shop',array('name' => $new_name));
+    public function addProductToShop(int $id_shop, string $id_product ) {
+
+         $data = array(
+           'id_shop' => $id_shop,
+           'id_product' => $id_product,
+         );
+
+         return $this->db->insert('shop_product', $data);
     }
+
+
+    /** @brief Deletes a product for a specified shop
+     *
+     * @param $id_shop - A specified shop id
+     * @param $id_product - The id of the product to add
+     *
+     * @return Boolean : True if the product is deleted, false if it is not.
+     */
+    public function deleteProductFromShop(int $id_shop, int $id_product) {
+        return $this->db->where(array('id_shop' => $id_shop, 'id_product' => $id_product))
+                        ->delete('shop_product');
+
+    }
+
 
     public function setLocation($id_shop,$new_location){
         $this->db->where('id',$id_shop);
         $this->db->update('shop',array('location' => $new_location));
     }
+
 }
 ?>

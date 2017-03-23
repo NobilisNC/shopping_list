@@ -26,6 +26,8 @@
 </table>
 <a class="button" href="{site_url()}/home/list/create">Ajouter une liste</a>
 </div>
+
+{if count($friend_lists) > 0 }
 <div class="row">
 <table class="table">
   <thead>
@@ -44,6 +46,7 @@
 </tbody>
 </table>
 </div>
+{/if}
 
 </div>
 {/block}

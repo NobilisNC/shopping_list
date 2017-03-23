@@ -20,6 +20,7 @@
                     <td>Nom</td>
                     <td>Lieu</td>
                     <td></td>
+                    <td></td>
                 </tr>
             </thead>
             <tbody>
@@ -27,6 +28,7 @@
                     <tr>
                         <td><span id="shopNameNode{$shop->id}">{$shop->name}</span><span id="shopNameButton{$shop->id}" class="fa fa-pencil-square-o fa-fw"></span></td>
                         <td><span id="shopLocationNode{$shop->id}">{$shop->location}</span><span id="shopLocationButton{$shop->id}" class="fa fa-pencil-square-o fa-fw"></span></td>
+                        <td><a href="{site_url()}/admin/shop/show/{$shop->id}">Voir produits</a></td>
                         <td>
                             <a href="{site_url()}/admin/shop/delete/{{$shop->id}}">
                                 <span class="fa fa-trash" aria-hidden="true" data-product_id="{$product->id}" ></span>
