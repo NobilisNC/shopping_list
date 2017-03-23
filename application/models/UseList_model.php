@@ -13,8 +13,9 @@ class UseList_model extends CI_Model {
      **/
     public function useList(int $id_list) {
       //Create instance of `use_list`
-      $this->db->insert('use_list', array('id_list' => $id_list));
-      $id_use_list = $this->db->get_where('use_list', array('id_list' => $id_list))->result()[0]->id;
+      $id_use_list = rand();
+      $this->db->insert('use_list', array('id' => $id_use_list, 'id_list' => $id_list));
+      //$id_use_list = $this->db->get_where('use_list', array('id_list' => $id_list))->result()[0]->id;
 
       $products = $this->db->get_where('list_product', array('id_list' => $id_list))->result();
 
@@ -90,7 +91,8 @@ class UseList_model extends CI_Model {
               ->from('use_list')
               ->join('list', 'use_list.id_list = list.id')
               ->join('user', 'list.id_user = user.id')
-              ->where('user.id = '.$id_user);
+              ->where('user.id = '.$id_user)
+              ->where('use_list.id = '.$id_list );
 
       $result = $this->db->get();
 
