@@ -191,6 +191,9 @@ class ShoppingList_model extends CI_Model {
       /** @brief Verifies if the specified user is the owner of the
       *          specified list
       *
+      * @param $id_list - A specified list id
+      * @param $id_user - A specified user id
+      *
       * @return Boolean - TRUE if the user is the owner, FALSE if he's not
       */
       public function isOwner(int $id_list, int $id_user) {

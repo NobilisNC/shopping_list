@@ -75,4 +75,28 @@ class UseList_model extends CI_Model {
                       ->where(array('id_list' => $id_list, 'id_product' => $id_product))
                       ->update('use_list_product');
     }
+
+    /** @brief Verifies if the specified user is the owner of the
+    *          specified useList
+    *
+    * @param $id_list - A specified useList id
+    * @param $id_user - A specified user id
+    *
+    * @return Boolean - TRUE if the user is the owner, FALSE if he's not
+    */
+    public function isOwner(int $id_list, int $id_user) {
+      $this->db->select(array('user.id'))
+              ->from('use_list')
+              ->join('list', 'use_list.id_list = list.id')
+              ->join('user', 'list.id_user = user.id')
+              ->where('user.id = '.$id_user);
+
+      $result = $this->db->get();
+
+      if($result->num_rows() > 0)
+        return true;
+      else
+        return false;
+    }
+
 }

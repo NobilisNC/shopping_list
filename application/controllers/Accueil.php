@@ -135,6 +135,14 @@ class Accueil extends CI_Controller {
 
    }
 
+   /** @ Verifies if the specified user is an admin
+   *
+   * @detail Calls valid_admin_rights($id) from user_model
+   *
+   * @param $id - A specified user id
+   *
+   * @return Boolean : returns TRUE if the user is an admin, else returns FALSE
+   */
    public function verify_admin_rights(int $id) {
        if($this->user_model->valid_admin_rights($id) == TRUE){
            return TRUE;
@@ -154,9 +162,9 @@ class Accueil extends CI_Controller {
 
      $test->send();
 
-     /* JSON : 
+     /* JSON :
      {
-        "data": 
+        "data":
         {
           "status":"OK",
           "tata":
