@@ -39,10 +39,10 @@ function editableText(options = {}) {
 
   this.send = function(e) {
     let text = this.field.value;
-    console.log(text);
+
     var x = new XMLHttpRequest();
     x.open('POST', this.URL);
-    //x.setRequestHeader('Content-Type', 'application/json');
+    x.setRequestHeader('Content-Type', 'application/json');
     x.onload = (function() {
         if (x.status === 200) {
             this.response(JSON.parse(x.responseText));
@@ -77,8 +77,12 @@ function editableText(options = {}) {
 
   }
 
-  this.response = function(data) {
-    this.static_field.innerHTML = data.data;
+  this.response = function(r) {
+    console.log(r);
+    if(r.status) {
+      this.static_field.innerHTML = r.data.text;
+      console.log(r.data.text)
+    }
     this.cancel()
   }
 

@@ -29,5 +29,8 @@
 		</footer>
 
 		<script type="text/javascript" src="{base_url()}static/js/kickstart.min.js"></script>
+		<script type="text/javascript">
+			window.__URL__ = '{site_url()}/';
+		</script>
 	</body>
 </html>

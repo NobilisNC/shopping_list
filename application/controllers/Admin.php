@@ -89,14 +89,14 @@
         */
         public function updateProductName(int $id){
             $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
-            $response = array();
+            $response = new AJAX();
             if($this->session->userdata('logged_in') !== TRUE)
-                $response['error'] = 'error_not_logged';
+                $response->addError('error_not_logged');
             else{
                 $this->Product_model->setName($id,htmlentities($data->data));
-                $response['data'] = $this->Product_model->getProductById($id)->name;
+                $response->addData('text', $this->Product_model->getProductById($id)->name);
             }
-            echo json_encode($response);
+            $response->send();
         }
 
         /** @brief Deletes the specified shop

@@ -236,8 +236,5 @@ class User_model extends CI_Model {
             return FALSE;
     }
 
-    public function get_friend_list(int $id) {
-
-    }
 
 }

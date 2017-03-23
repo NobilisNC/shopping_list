@@ -7,6 +7,7 @@ class ShoppingList extends Core_Controller {
            parent::__construct();
            $this->load->model('user_model');
            $this->load->model('ShoppingList_model');
+           $this->load->model('UseList_model');
    }
 
    /** @brief Displays all the lists of the logged user
@@ -17,6 +18,10 @@ class ShoppingList extends Core_Controller {
       $this->logged_user_only();
 
       $data['lists'] = $this->ShoppingList_model->getLists($this->session->userdata('id'));
+      $friends = $this->user_model->get_friends($this->session->userdata('login'), true);
+      if(count($friends) > 0)
+        $data['friend_lists'] = $this->UseList_model->getListsFriend($friends);
+
 
       $this->smarty->view('List/all.tpl', $data);
    }
@@ -69,16 +74,16 @@ class ShoppingList extends Core_Controller {
    */
    public function updateTitle(int $id) {
      $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
-     $response = array();
+     $response = new AJAX();
      if ($this->session->userdata('logged_in') !== TRUE)
-         $response['error'] = 'error_not_logged';
+         $response->addError('Error not logged');
     else {
       $this->ShoppingList_model->setName($id, htmlentities($data->data));
-      $response['data'] = $this->ShoppingList_model->getListById($id)->name;
+      $response->addData('text', $this->ShoppingList_model->getListById($id)->name);
 
     }
 
-      echo json_encode($response);
+      $response->send();
    }
 
    /** @brief Gets products with a name similar to the typed string
@@ -88,10 +93,10 @@ class ShoppingList extends Core_Controller {
    * @param $fragmented_name - A string typed by the user
    */
    public function getProductsLike(string $fragmented_name) {
-     $response = array();
-     $response['names'] = $this->ShoppingList_model->getProductsLike(htmlentities($fragmented_name));
+     $response = new AJAX();
+     $response->addData('names', $this->ShoppingList_model->getProductsLike(htmlentities($fragmented_name)));
 
-     echo json_encode($response);
+     $response->send();
    }
 
    /** @brief Adds a product to the specified list
@@ -100,11 +105,13 @@ class ShoppingList extends Core_Controller {
    *         getProductById($id_prod) from ShoppingList_model
    */
    public function addProduct(int $id_list, int $id_prod) {
+     $response = new AJAX();
 
-     $response = array();
-     $response["status"] = $this->ShoppingList_model->addProductToList($id_list, $id_prod);
-     $response["product"] = $this->ShoppingList_model->getProductById($id_prod);
-     echo json_encode($response);
+     if(!$this->ShoppingList_model->addProductToList($id_list, $id_prod))
+        $response->addError("Erreur lors de l'ajout du produit");
+      else
+        $response->addData("product", $this->ShoppingList_model->getProductById($id_prod));
+     $response->send();
    }
    /** @brief Deletes a product from the specified list
    *
@@ -112,11 +119,11 @@ class ShoppingList extends Core_Controller {
    *         getProductById($id_prod) from ShoppingList_model
    */
    public function deleteProduct(int $id_list, int $id_product) {
-      $response = array();
-      $response["status"] = $this->ShoppingList_model->deleteProductFromList($id_list, $id_product);
-      $response["product"] = $this->ShoppingList_model->getProductById($id_product);
+      $response = new AJAX();
+      if($this->ShoppingList_model->deleteProductFromList($id_list, $id_product))
+        $response->addData("product",$this->ShoppingList_model->getProductById($id_product));
 
-      echo json_encode($response);
+      $response->send();
    }
 
    /**
@@ -126,23 +133,24 @@ class ShoppingList extends Core_Controller {
    *
    */
    public function updateAmount(int $id_list, int $id_product, int $amount) {
-     $response = array();
-     $response["status"] =  $this->ShoppingList_model->setAmount($id_list, $id_product, $amount);
-     $response["amount"] =  $this->ShoppingList_model->getAmount($id_list, $id_product);
+     $response = new AJAX();
+     if($this->ShoppingList_model->setAmount($id_list, $id_product, $amount))
+      $response->adddata("amount", $this->ShoppingList_model->getAmount($id_list, $id_product));
 
-     echo json_encode($response);
+     $response->send();
    }
 
 
    public function updateNote(int $id_list) {
       $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
+      $response = new AJAX();
 
       $this->ShoppingList_model->updateNote($id_list, htmlentities($data->data));
 
-      $response = array();
-      $response["data"] = html_entity_decode(nl2br($this->ShoppingList_model->getListById($id_list)->note));
+
+      $response->addData('text', html_entity_decode(nl2br($this->ShoppingList_model->getListById($id_list)->note)));
 
 
-      echo json_encode($response);
+      $response->send();
    }
 }

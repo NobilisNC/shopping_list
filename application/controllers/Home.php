@@ -72,7 +72,6 @@ class Home extends Core_Controller {
            $data['amis'] = $this->user_model->get_friends($this->session->userdata('login'), TRUE);
            $data['notifications'] = $this->user_model->get_notifications($this->session->userdata('login'));
 
-           $data['friend_list'] = $this->user_model->get_friend_list($this->session->userdata('id'));
 
 
            $this->smarty->view('Home/ami.tpl',$data);
