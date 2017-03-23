@@ -236,5 +236,11 @@ class User_model extends CI_Model {
             return FALSE;
     }
 
+    public function getAllUsers(){
+        $sql = "SELECT * FROM user";
+        $query = $this->db->query($sql);
+        return $query->result();
+    }
+
 
 }
