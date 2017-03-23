@@ -33,11 +33,11 @@
 
         /** @brief Adds the specified product in the specified useList
         *
-        * @detail 
+        * @detail Calls addProduct($id_list, $id_product, $amount ) from UseList_model
         *
-        *
-        *
-        *
+        * @param $id_list - A specified useList id
+        * @param $id_product - The id of the product to be added
+        * @param $amount - The amount of product the user wants to add
         */
         public function addProduct(int $id_list, int $id_product, int $amount) {
           $response = new AJAX();
