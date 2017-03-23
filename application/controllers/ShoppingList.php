@@ -7,6 +7,7 @@ class ShoppingList extends Core_Controller {
            parent::__construct();
            $this->load->model('user_model');
            $this->load->model('ShoppingList_model');
+           $this->load->model('UseList_model');
    }
 
    /** @brief Displays all the lists of the logged user
@@ -17,6 +18,10 @@ class ShoppingList extends Core_Controller {
       $this->logged_user_only();
 
       $data['lists'] = $this->ShoppingList_model->getLists($this->session->userdata('id'));
+      $friends = $this->user_model->get_friends($this->session->userdata('login'), true);
+      if(count($friends) > 0)
+        $data['friend_lists'] = $this->UseList_model->getListsFriend($friends);
+
 
       $this->smarty->view('List/all.tpl', $data);
    }
@@ -69,16 +74,16 @@ class ShoppingList extends Core_Controller {
    */
    public function updateTitle(int $id) {
      $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
-     $response = array();
+     $response = new AJAX();
      if ($this->session->userdata('logged_in') !== TRUE)
-         $response['error'] = 'error_not_logged';
+         $response->addError('Error not logged');
     else {
       $this->ShoppingList_model->setName($id, htmlentities($data->data));
-      $response['data'] = $this->ShoppingList_model->getListById($id)->name;
+      $response->addData('text', $this->ShoppingList_model->getListById($id)->name);
 
     }
 
-      echo json_encode($response);
+      $response->send();
    }
 
    /** @brief
@@ -121,13 +126,14 @@ class ShoppingList extends Core_Controller {
 
    public function updateNote(int $id_list) {
       $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
+      $response = new AJAX();
 
       $this->ShoppingList_model->updateNote($id_list, htmlentities($data->data));
 
-      $response = array();
-      $response["data"] = html_entity_decode(nl2br($this->ShoppingList_model->getListById($id_list)->note));
+
+      $response->addData('text', html_entity_decode(nl2br($this->ShoppingList_model->getListById($id_list)->note)));
 
 
-      echo json_encode($response);
+      $response->send();
    }
 }

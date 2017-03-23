@@ -15,13 +15,14 @@ class AJAX {
     $this->response = array();
     $this->response['data'] = array();
     $this->response['errors']= array();
+    $this->response['status']= array();
 
     $this->response = (object)$this->response;
 
     $this->response->data = array();
-    $this->response->errors['numbers'] = 0;
+    $this->response->errors = array();
+    $this->response->status = true;
 
-    $this->error = false;
   }
 
   static function get() {
@@ -37,9 +38,8 @@ class AJAX {
     $this->response->data[$name] = $content;
   }
 
-  function setError($message) {
-    $this->error = true;
-    $this->response->errors['numbers'] += 1;
+  function addError($message) {
+    $this->response->status = false;
     $this->response->errors[] = $message;
   }
 

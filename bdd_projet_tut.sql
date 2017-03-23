@@ -227,3 +227,70 @@ ALTER TABLE `list_product`
 ALTER TABLE `user_shops`
   ADD CONSTRAINT `FK_ID_SHOP` FOREIGN KEY (`id_shop`) REFERENCES `shop` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_ID_USER` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Table structure for table `use_list`
+--
+
+CREATE TABLE `use_list` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `id_list` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `use_list_product`
+--
+
+CREATE TABLE `use_list_product` (
+  `id_list` bigint(20) UNSIGNED NOT NULL,
+  `id_product` bigint(20) UNSIGNED NOT NULL,
+  `checked` tinyint(1) NOT NULL DEFAULT '0',
+  `amount` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `use_list`
+--
+ALTER TABLE `use_list`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`),
+  ADD KEY `FK_USE_LIST` (`id_list`);
+
+--
+-- Indexes for table `use_list_product`
+--
+ALTER TABLE `use_list_product`
+  ADD PRIMARY KEY (`id_list`,`id_product`),
+  ADD KEY `FK_USE_LIST_PRODUCT_PRODUCT_ID` (`id_product`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `use_list`
+--
+ALTER TABLE `use_list`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `use_list`
+--
+ALTER TABLE `use_list`
+  ADD CONSTRAINT `FK_USE_LIST` FOREIGN KEY (`id_list`) REFERENCES `list` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `use_list_product`
+--
+ALTER TABLE `use_list_product`
+  ADD CONSTRAINT `FK_USE_LIST_PRODUCT_LIST_ID` FOREIGN KEY (`id_list`) REFERENCES `use_list` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_USE_LIST_PRODUCT_PRODUCT_ID` FOREIGN KEY (`id_product`) REFERENCES `product` (`id`);

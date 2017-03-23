@@ -55,8 +55,6 @@
 
 <script type="text/javascript">
 
-window.__URL__ = '{site_url()}/';
-
 let test1 = new editableText(
     {
       button : document.querySelector('#nameEdit'),

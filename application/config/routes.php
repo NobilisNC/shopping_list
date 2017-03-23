@@ -59,6 +59,9 @@ $route['API/list/(:num)/uncheck/(:num)'] = 'API_smartphone/uncheckProduct/$1/$2'
 $route['API/list/(:num)/sortWeight'] = 'API_smartphone/sortWeight/$1';
 $route['API/list/(:num)/sortColdness'] = 'API_smartphone/sortColdness/$1';
 
+$route['useList/show/(:num)'] = 'useList/showUseList/$1';
+$route['useList/(:num)/add/(:num)/amount/(:num)'] = 'useList/addProduct/$1/$2/$3';
+
 $route['admin/product'] = 'Admin/product_index';
 $route['admin/product/deleteProduct/(:num)'] = 'Admin/deleteProduct/$1';
 $route['admin/product/get'] = 'Admin/getProduct';
