@@ -55,6 +55,8 @@
 
 <script type="text/javascript">
 
+console.log();
+
 let test1 = new editableText(
     {
       button : document.querySelector('#nameEdit'),
@@ -72,6 +74,54 @@ let test1 = new editableText(
         url    : '{site_url()}/home/list/{$list->id}/note'
       }
     );
+
+  function add(r) {
+      if(r.status == true) {
+        let list = document.querySelector('#productsList');
+        let row   = list.insertRow(this.list.rows.length - 1);
+        let cell1 = row.insertCell();
+        let cell2 = row.insertCell();
+        let cell3 = row.insertCell();
+        let span = document.createElement('span');
+        span.dataset.product_id = r.data.product.id;
+        span.className = 'fa fa-trash';
+        span.addEventListener('click', deleteProduct.delete.bind(this));
+
+        cell1.innerHTML = r.data.product.name;
+        cell2.innerHTML = 1;
+        cell3.append(span);
+        row.dataset.product_id = r.data.product.id;
+        row.className = 'product';
+
+        amountButtons.add(row);
+
+        k$.growl({
+          text  : 'Le produit : ' + r.data.product.name + ' a été ajouté',
+          delay : 2000,
+          type  : 'alert-green'
+        });
+    } else {
+      k$.growl({
+        text  : 'Erreur lors de l\'ajout du produit',
+        delay : 2000,
+        type  : 'alert-red'
+      });
+    }}
+
+  let inputProduct = new productsInput(
+    {
+      action : function(id_prod) {
+        let x = new XMLHttpRequest();
+        x.open('GET', window.__URL__ + 'home/list/' + {$list->id} + '/addProduct/'+ id_prod, true);
+        x.onload = function() {
+          if (x.status === 200) {
+              add(JSON.parse(x.responseText));
+          }
+        };
+        x.send();
+      }
+    });
+
 </script>
 
 {/block}

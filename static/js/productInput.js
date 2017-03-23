@@ -1,4 +1,4 @@
-var productsInput = function(document, window, deleteProduct, amoutButtons) {
+var productsInput = function(options = {}) {
   this.__URL__ = window.__URL__;
 
 
@@ -44,20 +44,22 @@ var productsInput = function(document, window, deleteProduct, amoutButtons) {
     this.resetList();
 
     if(r.status) {
-
     products = r.data.names;
 
     products.forEach(function(p) {
       let line = document.createElement('li');
       line.innerHTML = p.name;
       line.dataset.internal_id = p.id;
-      productsList.append(line);
-    });
+
+      this.productsList.append(line);
+    }.bind(this));
 
     if(products.length > 0) {
       this.select();
       this.tooltip_box.className = '';
     }
+
+
   } else {
     console.log('Error');
   }
@@ -74,57 +76,16 @@ var productsInput = function(document, window, deleteProduct, amoutButtons) {
 
   }
 
-  this.send_add = function() {
-    let id_prod = this.productsList.children[this.selected].dataset.internal_id;
+  this.send_action = function() {
+      let id_prod = this.productsList.children[this.selected].dataset.internal_id;
 
-    let x = new XMLHttpRequest();
-    x.open('GET', this.__URL__ + 'home/list/' + this.list.dataset.list_id + '/addProduct/'+ id_prod, true);
-    x.onload = function() {
-      if (x.status === 200) {
-          this.add(JSON.parse(x.responseText));
-      }
-    }.bind(this);
-    x.send();
-  }
-
-  this.add = function(r) {
-    if(r.status == true) {
-      let row   = this.list.insertRow(this.list.rows.length - 1);
-      let cell1 = row.insertCell();
-      let cell2 = row.insertCell();
-      let cell3 = row.insertCell();
-      let span = document.createElement('span');
-      span.dataset.product_id = r.data.product.id;
-      span.className = 'fa fa-trash';
-      span.addEventListener('click', deleteProduct.delete.bind(this));
-
-      cell1.innerHTML = r.data.product.name;
-      cell2.innerHTML = 1;
-      cell3.append(span);
-      row.dataset.product_id = r.data.product.id;
-      row.className = 'product';
-
-      amoutButtons.add(row);
-
-      k$.growl({
-        text  : 'Le produit : ' + r.data.product.name + ' a été ajouté',
-        delay : 2000,
-        type  : 'alert-green'
-      });
+      this.action(id_prod)
 
       this.resetList();
       this.field.value ='';
-
-    } else {
-
-      k$.growl({
-        text  : 'Erreur lors de l\'ajout du produit',
-        delay : 2000,
-        type  : 'alert-red'
-      });
-    }
   }
 
+  this.action = options.action;
 
   this._input = function(e) {
     if(e.target.value == '') {
@@ -144,7 +105,7 @@ var productsInput = function(document, window, deleteProduct, amoutButtons) {
   this._onKeyDown  = function(e) {
 
     if(e.keyCode == 13) {// Enter
-      this.send_add();
+      this.send_action();
     } else if (e.keyCode == 38 && this.selected > 0 && this.selected != null) { //up
       this.select(this.selected - 1);
     } else if (e.keyCode == 40 && this.selected < this.productsList.childElementCount - 1 && this.selected != null) { //Down
@@ -163,4 +124,4 @@ var productsInput = function(document, window, deleteProduct, amoutButtons) {
 
   };
 
-}(document, window, deleteProduct, amoutButtons)
+};
