@@ -25,7 +25,7 @@
                     <td><a href="{site_url()}/admin/users/rankdown/{{$user->id}}">
                         <span class="fa fa-hand-o-down" aria-hidden="true"></span>
                     </a></td>
-                    <td><a href="{site_url()}/admin/users/deleteUser/{{$user->id}}">
+                    <td><a href="{site_url()}/admin/users/delete/{{$user->id}}">
                         <span class="fa fa-trash" aria-hidden="true" data-product_id="{$product->id}" ></span>
                     </a></td>
                 </tr>
@@ -58,7 +58,7 @@
                         <td><a href="{site_url()}/admin/users/rankup/{{$user->id}}">
                             <span class="fa fa-hand-o-up" aria-hidden="true"></span>
                         </a></td>
-                        <td><a href="{site_url()}/admin/users/deleteUser/{{$user->id}}">
+                        <td><a href="{site_url()}/admin/users/delete/{{$user->id}}">
                             <span class="fa fa-trash" aria-hidden="true"></span>
                         </a></td>
                     </tr>

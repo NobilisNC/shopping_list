@@ -79,6 +79,7 @@ $route['admin/shop/(:num)/location'] = 'Admin/updateShopLocation/$1';
 $route['admin/users'] = 'Admin/user_management_index';
 $route['admin/users/rankup/(:num)'] = 'Admin/switchUserRank/$1';
 $route['admin/users/rankdown/(:num)'] = 'Admin/switchUserRank/$1';
+$route['admin/users/delete/(:num)'] = 'Admin/deleteUser/$1';
 
 $route['admin/users/(:num)/login'] = 'Admin/updateUserLogin/$1';
 $route['admin/shop/show/(:num)'] = 'ShopList/show/$1';

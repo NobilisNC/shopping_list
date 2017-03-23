@@ -213,5 +213,13 @@
             $this->user_model->switchRank($id);
             redirect('admin/users','refresh');
         }
+
+        public function deleteUser(int $id){
+            $this->logged_user_only();
+            $this->admin_user_only();
+            $this->super_user_only();
+            $this->user_model->deleteUser($id);
+            redirect('admin/users','refresh');
+        }
     }
 ?>
