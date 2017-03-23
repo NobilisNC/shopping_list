@@ -19,19 +19,19 @@
         * @param $id - A specified list id
         */
         public function useList(int $id) {
-          $response = array();
+          $response = new AJAX();
           if($this->session->userdata('logged_in') !== true )
-            $response['error'] = array('not logged');
+            $response->addError('not logged');
           else if(!$this->ShoppingList_model->isOwner($id, $this->session->userdata('id')))
-            $response['error'] = array('You don\'t have access to this list');
+            $response->addError('You don\'t have access to this list');
           else {
-            $id_list = $this->UseList_model->useList($id);
+                $id_list = $this->UseList_model->useList($id);
+                $response->addData('id_list',  $id_list);
+                $response->addData('products', $this->ShoppingList_model->getProducts($id));
+            }
 
-            $response['data']['id_list'] = $id_list;
-            $response['data']['products'] = $this->ShoppingList_model->getProducts($id);
-          }
 
-          echo json_encode($response);
+          $response->send();
         }
 
 
@@ -54,15 +54,15 @@
         * @param $id_product - A specified product id
         */
         public function checkProduct(int $id_list, int $id_product) {
-          $reponse = array();
+          $response = new AJAX();
           if($this->session->userdata('logged_in') !== true )
-            $response['error'] = array('not logged');
-          /* else if(!$this->ShoppingList_model->isOwner($id, $this->session->userdata('id')))
-            $response['error'] = array('You don\'t have access to this list'); */
-          else {
-            $response['data']['status'] = $this->UseList_model->check($id_product, $id_list);
+            $response->addError('not logged');
+          else if(!$this->UseList_model->isOwner($id_list, $this->session->userdata('id')))
+            $response->addError('You don\'t have access to this list');
+          else if (!$this->UseList_model->check($id_product, $id_list)) {
+            $response->addError('Erreur lors du check');
           }
-          echo json_encode($response);
+          $response->send();
         }
 
         /** @brief Unchecks a checked product in the specified useList
@@ -74,15 +74,15 @@
         * @param $id_product - A specified product id
         */
         public function uncheckProduct(int $id_list, int $id_product) {
-          $reponse = array();
+          $response = new AJAX();
           if($this->session->userdata('logged_in') !== true )
-            $response['error'] = array('not logged');
-          /* else if(!$this->ShoppingList_model->isOwner($id, $this->session->userdata('id')))
-            $response['error'] = array('You don\'t have access to this list'); */
-          else {
-            $response['data']['status'] = $this->UseList_model->uncheck($id_product, $id_list);
+            $response->addError('Not logged');
+          else if(!$this->UseList_model->isOwner($id_list, $this->session->userdata('id')))
+            $response->addError('You don\'t have access to this list');
+          else if (!$this->UseList_model->uncheck($id_product, $id_list)){
+            $response->addError('Erreur lors de l\'uncheck');
           }
-          echo json_encode($response);
+          $response->send();
         }
 
         /** @brief Displays a specified useList
@@ -93,15 +93,15 @@
         * @param $id - A specified useList id
         */
         public function getList(int $id) {
-          $reponse = array();
+          $response = new AJAX();
           if($this->session->userdata('logged_in') !== true )
-            $response['error'] = array('not logged');
+            $response->addError('not logged');
            else if(!$this->UseList_model->isOwner($id, $this->session->userdata('id')))
-            $response['error'] = array('You don\'t have access to this list');
+            $response->addError('You don\'t have access to this list');
           else {
-            $response['data']['products'] = $this->UseList_model->getProducts($id);
+            $response->addData('products', $this->UseList_model->getProducts($id));
           }
-          echo json_encode($response);
+          $response->send();
         }
 
         /** @brief Sorts the specified useList by weight
@@ -113,11 +113,11 @@
         * @param $id - A specified useList id
         */
         public function sortWeight(int $id) {
-          $reponse = array();
+          $response = new AJAX();
           if($this->session->userdata('logged_in') !== true )
-            $response['error'] = array('not logged');
-          /* else if(!$this->ShoppingList_model->isOwner($id, $this->session->userdata('id')))
-            $response['error'] = array('You don\'t have access to this list'); */
+            $response->addError('not logged');
+          else if(!$this->UseList_model->isOwner($id, $this->session->userdata('id')))
+            $response->addError('You don\'t have access to this list');
           else {
             $products = $this->UseList_model->getProducts($id);
 
@@ -126,9 +126,10 @@
             }
 
             usort($products, 'compare');
-            $response['data']['products'] = $products;
+            $response->addData('products', $products);
           }
-          echo json_encode($response);
+
+          $response->send();
         }
 
         /** @brief Sorts the specified useList by coldness
@@ -140,11 +141,11 @@
         * @param $id - A specified useList id
         */
         public function sortColdness(int $id) {
-          $reponse = array();
+          $response = new AJAX();
           if($this->session->userdata('logged_in') !== true )
-            $response['error'] = array('not logged');
+            $response->addError('not logged');
            else if(!$this->UseList_model->isOwner($id, $this->session->userdata('id')))
-            $response['error'] = array('You don\'t have access to this list');
+            $response->addError('You don\'t have access to this list');
           else {
             $products = $this->UseList_model->getProducts($id);
 
@@ -153,9 +154,9 @@
             }
 
             usort($products, 'compare');
-            $response['data']['products'] = $products;
+            $response->addData('products', $products);
           }
-          echo json_encode($response);
+          $response->send();
         }
 
   }
