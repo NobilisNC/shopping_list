@@ -200,6 +200,7 @@ class User_model extends CI_Model {
      *
      * @param $login1 - A specified user's login
      * @param int $id2 - A specified user's id
+     * @param bool $access - False to show all friends, True to show only those who accepted
      * @return Boolean : TRUE if the specified users are friends, FALSE if they are not
      */
     public function are_friends($login1, int $id2, $access = false) {
@@ -218,6 +219,10 @@ class User_model extends CI_Model {
             return $query->result()[0]->state;
         else
             return FALSE;
+    }
+
+    public function get_friend_list(int $id) {
+
     }
 
 }

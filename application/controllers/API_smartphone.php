@@ -60,8 +60,8 @@
           $reponse = array();
           if($this->session->userdata('logged_in') !== true )
             $response['error'] = array('not logged');
-          /* else if(!$this->ShoppingList_model->isOwner($id, $this->session->userdata('id')))
-            $response['error'] = array('You don\'t have access to this list'); */
+           else if(!$this->UseList_model->isOwner($id, $this->session->userdata('id')))
+            $response['error'] = array('You don\'t have access to this list');
           else {
             $response['data']['products'] = $this->UseList_model->getProducts($id);
           }
@@ -91,8 +91,8 @@
           $reponse = array();
           if($this->session->userdata('logged_in') !== true )
             $response['error'] = array('not logged');
-          /* else if(!$this->ShoppingList_model->isOwner($id, $this->session->userdata('id')))
-            $response['error'] = array('You don\'t have access to this list'); */
+           else if(!$this->UseList_model->isOwner($id, $this->session->userdata('id')))
+            $response['error'] = array('You don\'t have access to this list');
           else {
             $products = $this->UseList_model->getProducts($id);
 
@@ -106,8 +106,4 @@
           echo json_encode($response);
         }
 
-        public function friendAddProduct(int $id_list, int $id_product) {
-          $this->logged_user_only();
-
-        }
   }
