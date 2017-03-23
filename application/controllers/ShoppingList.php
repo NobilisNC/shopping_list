@@ -126,11 +126,13 @@ class ShoppingList extends Core_Controller {
       $response->send();
    }
 
-   /**
+   /** @brief Updates the amount of a specified product in a specified list
    *
+   * @detail Calls setAmount($id_list, $id_product, $amount) from ShoppingList_model
    *
-   *
-   *
+   * @param $id_list - A specified list id
+   * @param $id_product - A specified product id
+   * @param $amount - The new amount for the product
    */
    public function updateAmount(int $id_list, int $id_product, int $amount) {
      $response = new AJAX();
@@ -140,7 +142,12 @@ class ShoppingList extends Core_Controller {
      $response->send();
    }
 
-
+   /** @brief Updates the note for the specified list
+   *
+   * @detail Calls updateNote($id_list, $note) from ShoppingList_model
+   *
+   * @param $ id_list - A specified list id
+   */
    public function updateNote(int $id_list) {
       $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
       $response = new AJAX();

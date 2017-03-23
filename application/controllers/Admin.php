@@ -22,10 +22,11 @@
             $this->smarty->view('Admin/shop_list.tpl',$data);
         }
 
-       /** @brief Displays the list of all the products in the database
+       /** @brief Displays the product administration page
         *
-        * @detail
-        *
+        * @detail Displays the list of all products in the database, and
+        *         a form to add a new product. If the form is correctly
+        *         completed, calls addproduct($product_data) from Product_model
         */
         public function product_index(){
             $this->logged_user_only();

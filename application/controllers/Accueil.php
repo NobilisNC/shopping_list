@@ -48,7 +48,9 @@ class Accueil extends CI_Controller {
    /** @brief Displays inscription page
     *
     * @detail Displays insription form, validation button, clear button
-    *  and a redirection to login page button
+    *         and a redirection to login page button
+    *         Calls addUser($user_data) from user_model if the form is
+    *         correctly completed
     */
    public function inscription() {
        $data = array();
@@ -98,7 +100,7 @@ class Accueil extends CI_Controller {
 
    /** @brief Verifies if the provided email is already used
     *
-    * @detail Calls email_exists($str)
+    * @detail Calls email_exists($str) from user_model
     *
     * @param $str - The email you check
     *
@@ -146,7 +148,7 @@ class Accueil extends CI_Controller {
    public function verify_admin_rights(int $id) {
        if($this->user_model->valid_admin_rights($id) == TRUE){
            return TRUE;
-       }else {
+       } else {
            return FALSE;
        }
    }
