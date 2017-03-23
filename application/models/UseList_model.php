@@ -76,6 +76,14 @@ class UseList_model extends CI_Model {
                       ->update('use_list_product');
     }
 
+    /** @brief Verifies if the specified user is the owner of the
+    *          specified useList
+    *
+    * @param $id_list - A specified useList id
+    * @param $id_user - A specified user id
+    *
+    * @return Boolean - TRUE if the user is the owner, FALSE if he's not
+    */
     public function isOwner(int $id_list, int $id_user) {
       $this->db->select(array('user.id'))
               ->from('use_list')
@@ -90,5 +98,5 @@ class UseList_model extends CI_Model {
       else
         return false;
     }
-    
+
 }
