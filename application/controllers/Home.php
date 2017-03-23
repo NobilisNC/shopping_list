@@ -9,9 +9,6 @@ class Home extends Core_Controller {
    }
 
    /** @brief Displays the home page
-   *
-   *
-   *
    */
    public function index() {
        $this->logged_user_only();
