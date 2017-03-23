@@ -65,7 +65,7 @@ class ShoppingList extends Core_Controller {
    *
    * @detail Calls setName($id, $name) from ShoppingList_model
    *
-   *
+   * @param $id - A specified list id
    */
    public function updateTitle(int $id) {
      $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
@@ -81,11 +81,11 @@ class ShoppingList extends Core_Controller {
       echo json_encode($response);
    }
 
-   /** @brief
+   /** @brief Gets products with a name similar to the typed string
    *
+   * @detail Calls getProductsLike($fragmented_name) from ShoppingList_model
    *
-   *
-   *
+   * @param $fragmented_name - A string typed by the user
    */
    public function getProductsLike(string $fragmented_name) {
      $response = array();
@@ -94,6 +94,11 @@ class ShoppingList extends Core_Controller {
      echo json_encode($response);
    }
 
+   /** @brief Adds a product to the specified list
+   *
+   * @detail Calls addProductToList($id_list, $id_prod) and
+   *         getProductById($id_prod) from ShoppingList_model
+   */
    public function addProduct(int $id_list, int $id_prod) {
 
      $response = array();
@@ -101,7 +106,11 @@ class ShoppingList extends Core_Controller {
      $response["product"] = $this->ShoppingList_model->getProductById($id_prod);
      echo json_encode($response);
    }
-
+   /** @brief Deletes a product from the specified list
+   *
+   * @detail Calls deleteProductToList($id_list, $id_prod) and
+   *         getProductById($id_prod) from ShoppingList_model
+   */
    public function deleteProduct(int $id_list, int $id_product) {
       $response = array();
       $response["status"] = $this->ShoppingList_model->deleteProductFromList($id_list, $id_product);
@@ -110,6 +119,12 @@ class ShoppingList extends Core_Controller {
       echo json_encode($response);
    }
 
+   /**
+   *
+   *
+   *
+   *
+   */
    public function updateAmount(int $id_list, int $id_product, int $amount) {
      $response = array();
      $response["status"] =  $this->ShoppingList_model->setAmount($id_list, $id_product, $amount);
