@@ -170,6 +170,21 @@ class UseList_model extends CI_Model {
 
     }
 
+    public function isStarted(int $id_list ) {
+      $result = $this->db->get_where('use_list', array('id_list' => $id_list));
+
+      if($result->num_rows() > 0)
+        return true;
+      else
+        return false;
+    }
+
+    public function getSessionId(int $id_list ) {
+      $result = $this->db->get_where('use_list', array('id_list' => $id_list));
+      
+      return $result->result()[0]->id;
+    }
+
 
 
 }
