@@ -7,6 +7,7 @@ class ShopList extends Core_Controller{
         parent::__construct();
         $this->load->model('user_model');
         $this->load->model('ShopList_model');
+        $this->load->model('ShoppingList_model');
     }
 
     /** @brief Displays the shop list for the logged user
@@ -49,29 +50,37 @@ class ShopList extends Core_Controller{
             echo json_encode($result);
     }
 
-    /** @brief Adds the specified shop to the logged user shop list
-    *
-    * @detail Calls addShopToUser($id, $name) from ShopList_model and
-    *         refreshes the page
-    */
-    public function addToMyShops(){
-        $this->logged_user_only();
-        $id = $this->user_model->id($this->session->userdata('login'));
+    public function show(int $id) {
+      $this->logged_user_only();
+      $this->admin_user_only();
 
-        $this->ShopList_model->addShopToUser($id,$this->input->post('name_shop_to_add'));
-        redirect('home/shops','refresh');
+      $data = array();
+      $data['shop'] = $this->ShopList_model->getShopById($id);
+      $data['products'] = $this->ShopList_model->getProducts($id);
+
+
+      $this->smarty->view('Shop/show.tpl', $data);
     }
 
-    /** @brief Deletes the specified shop from the logged user shop list
-    *
-    * @detail Calls deleteFromMyShops($id_shop, $id_user) from ShopList_model
-    *         and refreshes the page  
-    */
-    public function deleteFromMyShops(int $id_shop){
-        $this->logged_user_only();
-        $id_user = $this->user_model->id($this->session->userdata('login'));
-        $is_deleted = $this->ShopList_model->deleteFromMyShops($id_shop,$id_user);
-        redirect('home/shops','refresh');
+    public function addProduct(int $id_shop, $id_product) {
+      $response = new AJAX();
+
+      if(!$this->ShopList_model->addProductToShop($id_shop, $id_product))
+         $response->addError("Erreur lors de l'ajout du produit");
+       else
+         $response->addData("product", $this->ShoppingList_model->getProductById($id_product));
+
+      $response->send();
+    }
+
+    public function deleteProduct(int $id_shop,int $id_product) {
+      $this->logged_user_only();
+      $this->admin_user_only();
+
+      $this->ShopList_model->deleteProductFromShop($id_shop, $id_product);
+
+      redirect('admin/shop/show/'.$id_shop, 'refresh');
+
     }
 }
 

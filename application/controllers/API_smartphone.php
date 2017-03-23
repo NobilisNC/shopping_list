@@ -205,4 +205,19 @@
           $response->send();
         }
 
+        public function sortShop(int $id_session, int $id_shop) {
+          $response = new AJAX();
+          if($this->session->userdata('logged_in') !== true )
+            $response->addError('not logged');
+           else if(!$this->UseList_model->isOwner($id_session, $this->session->userdata('id')))
+            $response->addError('You don\'t have access to this list');
+          else {
+            $products = $this->UseList_model->getProductsInShop($id_session, $id_shop);
+
+            $response->addData('products', $products);
+          }
+          $response->send();
+
+        }
+
   }

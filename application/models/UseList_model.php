@@ -157,6 +157,19 @@ class UseList_model extends CI_Model {
       return $id_lists[0];
     }
 
+    public function getProductsInShop(int $id_list, int $id_shop) {
+      $this->db->select(array('product.id', 'name', 'amount', 'checked', 'weight', 'coldness'))
+               ->from('use_list_product')
+               ->join('shop_product', 'shop_product.id_product = use_list_product.id_product')
+               ->join('product', 'use_list_product.id_product = product.id')
+               ->where('shop_product.id_shop = '.$id_shop)
+               ->where('use_list_product.id_list = '.$id_list );
+
+     $results = $this->db->get()->result();
+     return $results;
+
+    }
+
 
 
 }

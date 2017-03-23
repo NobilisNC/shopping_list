@@ -58,6 +58,7 @@ $route['API/list/(:num)/check/(:num)'] = 'API_smartphone/checkProduct/$1/$2';
 $route['API/list/(:num)/uncheck/(:num)'] = 'API_smartphone/uncheckProduct/$1/$2';
 $route['API/list/(:num)/sortWeight'] = 'API_smartphone/sortWeight/$1';
 $route['API/list/(:num)/sortColdness'] = 'API_smartphone/sortColdness/$1';
+$route['API/list/(:num)/sortShop/(:num)'] = 'API_smartphone/sortShop/$1/$2';
 $route['API/list/all'] = 'API_smartphone/all_lists';
 $route['API/shop/all'] = 'API_smartphone/all_shops';
 
@@ -74,6 +75,9 @@ $route['admin/shop/addShop'] = 'Admin/addShop';
 $route['admin/users'] = 'Admin/user_management_index';
 $route['admin/users/addAdmin'] = 'Admin/addAdmin';
 $route['admin/users/(:num)/login'] = 'Admin/updateUserLogin/$1';
+$route['admin/shop/show/(:num)'] = 'ShopList/show/$1';
+$route['admin/shop/(:num)/addProduct/(:num)'] = 'ShopList/addProduct/$1/$2';
+$route['admin/shop/(:num)/deleteProduct/(:num)'] = 'ShopList/deleteProduct/$1/$2';
 
 $route['home/shops'] = 'ShopList/index';
 $route['home/shops/create'] = 'ShopList/createShop';
