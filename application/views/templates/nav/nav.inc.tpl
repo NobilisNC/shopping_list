@@ -29,7 +29,7 @@
 			{if $smarty.session.logged_super_user === TRUE}
 			<li>
 				<a href="{site_url()}/admin/users"><i class="fa fa-user-o" aria-hidden="true"></i>
-				User Management</a>
+				Gérer les utilisateurs</a>
 			</li>
 			{/if}
 		</ul>

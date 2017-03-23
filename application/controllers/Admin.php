@@ -89,13 +89,40 @@
         * @param $id - A specified product id
         */
         public function updateProductName(int $id){
+            $this->admin_user_only();
             $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
             $response = new AJAX();
-            if($this->session->userdata('logged_in') !== TRUE)
+            if($this->session->userdata('logged_admin') !== TRUE)
                 $response->addError('error_not_logged');
             else{
                 $this->Product_model->setName($id,htmlentities($data->data));
                 $response->addData('text', $this->Product_model->getProductById($id)->name);
+            }
+            $response->send();
+        }
+
+        public function updateProductColdness(int $id){
+            $this->admin_user_only();
+            $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
+            $response = new AJAX();
+            if($this->session->userdata('logged_admin') != TRUE)
+                $response->addError('error_not_logged');
+            else{
+                $this->Product_model->setColdness($id,htmlentities($data->data));
+                $response->addData('text',$this->Product_model->getProductById($id)->coldness);
+            }
+            $response->send();
+        }
+
+        public function updateProductWeight(int $id){
+            $this->admin_user_only();
+            $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
+            $response = new AJAX();
+            if($this->session->userdata('logged_admin') != TRUE)
+                $response->addError('error_not_logged');
+            else{
+                $this->Product_model->setWeight($id,htmlentities($data->data));
+                $response->addData('text',$this->Product_model->getProductById($id)->weight);
             }
             $response->send();
         }
@@ -134,7 +161,7 @@
                 $shop_data = array(
                     'name' => $this->input->post('shop_name'),
                     'location' => $this->input->post('shop_location'),
-                    
+
                 );
 
                 $this->session->set_flashdata('shop_add_success',$this->ShopList_model->addShop($shop_data));
@@ -144,6 +171,32 @@
             {
                 redirect('admin/shop','refresh');
             }
+        }
+
+        public function updateShopName(int $id){
+            $this->admin_user_only();
+            $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
+            $response = new AJAX();
+            if($this->session->userdata('logged_admin') != TRUE)
+                $response->addError('error_not_logged');
+            else{
+                $this->ShopList_model->setName($id,htmlentities($data->data));
+                $response->addData('text',$this->ShopList_model->getShopById($id)->name);
+            }
+            $response->send();
+        }
+
+        public function updateShopLocation(int $id){
+            $this->admin_user_only();
+            $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
+            $response = new AJAX();
+            if($this->session->userdata('logged_admin') != TRUE)
+                $response->addError('error_not_logged');
+            else{
+                $this->ShopList_model->setLocation($id,htmlentities($data->data));
+                $response->addData('text',$this->ShopList_model->getShopById($id)->location);
+            }
+            $response->send();
         }
 
         public function user_management_index(){

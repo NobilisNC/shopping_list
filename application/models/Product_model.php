@@ -76,5 +76,15 @@ class Product_model extends CI_Model{
         $this->db->where('id',$id_product);
         $this->db->update('product',array('name' => $new_name));
     }
+
+    public function setColdness($id_product,$new_coldness){
+        $this->db->where('id',$id_product);
+        $this->db->update('product',array('coldness' => $new_coldness));
+    }
+
+    public function setWeight($id_product,$new_weight){
+        $this->db->where('id',$id_product);
+        $this->db->update('product',array('weight' => $new_weight));
+    }
 }
 ?>
