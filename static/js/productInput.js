@@ -40,9 +40,12 @@ var productsInput = function(document, window, deleteProduct, amoutButtons) {
     this.tooltip_box.className = "no";
   }
 
-  this.show = function(data) {
+  this.show = function(r) {
     this.resetList();
-    products = data.names;
+
+    if(r.status) {
+
+    products = r.data.names;
 
     products.forEach(function(p) {
       let line = document.createElement('li');
@@ -55,6 +58,9 @@ var productsInput = function(document, window, deleteProduct, amoutButtons) {
       this.select();
       this.tooltip_box.className = '';
     }
+  } else {
+    console.log('Error');
+  }
 
   }
 
@@ -81,27 +87,27 @@ var productsInput = function(document, window, deleteProduct, amoutButtons) {
     x.send();
   }
 
-  this.add = function(data) {
-    if(data.status == true) {
+  this.add = function(r) {
+    if(r.status == true) {
       let row   = this.list.insertRow(this.list.rows.length - 1);
       let cell1 = row.insertCell();
       let cell2 = row.insertCell();
       let cell3 = row.insertCell();
       let span = document.createElement('span');
-      span.dataset.product_id = data.product.id;
+      span.dataset.product_id = r.data.product.id;
       span.className = 'fa fa-trash';
       span.addEventListener('click', deleteProduct.delete.bind(this));
 
-      cell1.innerHTML = data.product.name;
+      cell1.innerHTML = r.data.product.name;
       cell2.innerHTML = 1;
       cell3.append(span);
-      row.dataset.product_id = data.product.id;
+      row.dataset.product_id = r.data.product.id;
       row.className = 'product';
 
       amoutButtons.add(row);
 
       k$.growl({
-        text  : 'Le produit : ' + data.product.name + ' a été ajouté',
+        text  : 'Le produit : ' + r.data.product.name + ' a été ajouté',
         delay : 2000,
         type  : 'alert-green'
       });

@@ -40,9 +40,9 @@ var productsInput = function(document, window, deleteProduct, amoutButtons) {
     this.tooltip_box.className = "no";
   }
 
-  this.show = function(data) {
+  this.show = function(r) {
     this.resetList();
-    products = data.names;
+    products = r.data.names;
 
     products.forEach(function(p) {
       let line = document.createElement('li');

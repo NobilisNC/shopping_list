@@ -93,34 +93,36 @@ class ShoppingList extends Core_Controller {
    *
    */
    public function getProductsLike(string $fragmented_name) {
-     $response = array();
-     $response['names'] = $this->ShoppingList_model->getProductsLike(htmlentities($fragmented_name));
+     $response = new AJAX();
+     $response->addData('names', $this->ShoppingList_model->getProductsLike(htmlentities($fragmented_name)));
 
-     echo json_encode($response);
+     $response->send();
    }
 
    public function addProduct(int $id_list, int $id_prod) {
+     $response = new AJAX();
 
-     $response = array();
-     $response["status"] = $this->ShoppingList_model->addProductToList($id_list, $id_prod);
-     $response["product"] = $this->ShoppingList_model->getProductById($id_prod);
-     echo json_encode($response);
+     if(!$this->ShoppingList_model->addProductToList($id_list, $id_prod))
+        $response->addError("Erreur lors de l'ajout du produit");
+      else
+        $response->addData("product", $this->ShoppingList_model->getProductById($id_prod));
+     $response->send();
    }
 
    public function deleteProduct(int $id_list, int $id_product) {
-      $response = array();
-      $response["status"] = $this->ShoppingList_model->deleteProductFromList($id_list, $id_product);
-      $response["product"] = $this->ShoppingList_model->getProductById($id_product);
+      $response = new AJAX();
+      if($this->ShoppingList_model->deleteProductFromList($id_list, $id_product))
+        $response->addData("product",$this->ShoppingList_model->getProductById($id_product));
 
-      echo json_encode($response);
+      $response->send();
    }
 
    public function updateAmount(int $id_list, int $id_product, int $amount) {
-     $response = array();
-     $response["status"] =  $this->ShoppingList_model->setAmount($id_list, $id_product, $amount);
-     $response["amount"] =  $this->ShoppingList_model->getAmount($id_list, $id_product);
+     $response = new AJAX();
+     if($this->ShoppingList_model->setAmount($id_list, $id_product, $amount))
+      $response->adddata("amount", $this->ShoppingList_model->getAmount($id_list, $id_product));
 
-     echo json_encode($response);
+     $response->send();
    }
 
 

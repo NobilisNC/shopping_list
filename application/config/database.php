@@ -78,15 +78,15 @@ $db['default'] = array(
 	'hostname' => 'localhost',
 
 
-	'username' => 'bdd_projet_tut',
+	/*'username' => 'bdd_projet_tut',
 	'password' => 'shopping',
-	'database' => 'bdd_projet_tut',
+	'database' => 'bdd_projet_tut',*/
 
-    /*
+    
 	'username' => 'u_ptut',
 	'password' => 'ptut',
-	'database' => 'u_tptut',
-    */
+	'database' => 'u_ptut',
+    
 
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

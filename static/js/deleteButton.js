@@ -23,19 +23,19 @@ var deleteProduct = function(document, window) {
 
   }
 
-  this.del = function(data) {
+  this.del = function(r) {
 
-    if(data.status == true) {
+    if(r.status == true) {
       let i = 1;
 
 
-      for(; this.list.rows[i].dataset.product_id != data.product.id; i++)
+      for(; this.list.rows[i].dataset.product_id != r.data.product.id; i++)
         ;
 
       this.list.deleteRow(i);
 
       k$.growl({
-        text  : 'Le produit : ' + data.product.name + ' a été supprimé',
+        text  : 'Le produit : ' + r.data.product.name + ' a été supprimé',
         delay : 2000,
         type  : 'alert-green'
       });

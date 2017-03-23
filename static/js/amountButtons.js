@@ -76,9 +76,9 @@ var amoutButtons = function(document, window) {
 
   }
 
-  this.setAmount = function(data, node) {
-    if(data.status == true)
-      node.innerHTML = data.amount;
+  this.setAmount = function(r, node) {
+    if(r.status == true)
+      node.innerHTML = r.data.amount;
 
      this.updateButton(node.parentElement);
   }

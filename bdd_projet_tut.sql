@@ -294,3 +294,6 @@ ALTER TABLE `use_list`
 ALTER TABLE `use_list_product`
   ADD CONSTRAINT `FK_USE_LIST_PRODUCT_LIST_ID` FOREIGN KEY (`id_list`) REFERENCES `use_list` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_USE_LIST_PRODUCT_PRODUCT_ID` FOREIGN KEY (`id_product`) REFERENCES `product` (`id`);
+
+
+INSERT INTO `user` VALUES (1,'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'admin@admin.fr', 'admin', 'admin', 1);
