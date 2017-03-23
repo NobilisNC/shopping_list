@@ -105,7 +105,12 @@ class UseList_model extends CI_Model {
         return false;
     }
 
-
+    /** @brief Gets the owner of the specified list
+    *
+    * @param $id_list - A specified list id
+    *
+    * @return Information about the user owning the list
+    */
     public function getOwner(int $id_list) {
       $this->db->select(array('user.id', 'user.login'))
               ->from('use_list')
@@ -116,6 +121,12 @@ class UseList_model extends CI_Model {
       return $result;
     }
 
+    /** @brief Adds the specified product in the specified useList
+    *
+    * @param $id_list - A specified useList id
+    * @param $id_product - The id of the product to be added
+    * @param $amount - The amount of product the user wants to add
+    */
     public function addProduct(int $id_list, int $id_product, int $amount) {
       return $this->db->insert('use_list_product', array(
                                               'id_list' => $id_list,
@@ -124,6 +135,12 @@ class UseList_model extends CI_Model {
                                             ));
     }
 
+    /** @brief Gets the lists of the specified friend
+    *
+    * @param $friend_logins - One of the user's friends' login
+    *
+    * @return The id of this friend's list
+    */
     public function getListsFriend($friend_logins) {
       $id_lists = array();
 
