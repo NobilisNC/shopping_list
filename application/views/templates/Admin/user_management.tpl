@@ -10,6 +10,7 @@
                     <th>Mail</th>
                     <th>Nom</th>
                     <th>Prenom</th>
+                    <th>Augmenter privilèges</th>
                     <th></th>
                 </tr>
 
@@ -22,8 +23,11 @@
                         <td>{$user->mail}</td>
                         <td>{$user->name}</td>
                         <td>{$user->fname}</td>
-                        <td><a href="{site_url()}/admin/product/deleteProduct/{{$product->id}}">
-                            <span class="fa fa-trash" aria-hidden="true" data-product_id="{$product->id}" ></span>
+                        <td><a href="{site_url()}/admin/users/rankup/{{$user->id}}">
+                            <span class="fa fa-hand-o-down" aria-hidden="true"></span>
+                        </a></td>
+                        <td><a href="{site_url()}/admin/users/deleteUser/{{$user->id}}">
+                            <span class="fa fa-trash" aria-hidden="true"></span>
                         </a></td>
                     </tr>
                 {/if}
@@ -41,6 +45,7 @@
                 <th>Mail</th>
                 <th>Nom</th>
                 <th>Prenom</th>
+                <th>Diminuer privilèges</th>
                 <th></th>
             </tr>
 
@@ -53,7 +58,10 @@
                     <td>{$user->mail}</td>
                     <td>{$user->name}</td>
                     <td>{$user->fname}</td>
-                    <td><a href="{site_url()}/admin/product/deleteProduct/{{$product->id}}">
+                    <td><a href="{site_url()}/admin/users/rankdown/{{$user->id}}">
+                        <span class="fa fa-hand-o-up" aria-hidden="true"></span>
+                    </a></td>
+                    <td><a href="{site_url()}/admin/users/deleteUser/{{$user->id}}">
                         <span class="fa fa-trash" aria-hidden="true" data-product_id="{$product->id}" ></span>
                     </a></td>
                 </tr>

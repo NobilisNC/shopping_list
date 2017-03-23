@@ -242,5 +242,18 @@ class User_model extends CI_Model {
         return $query->result();
     }
 
+    public function switchRank($id){
+        $sql = "SELECT isAdmin FROM user WHERE id=$id";
+        $query = $this->db->query($sql);
+        if($query->result()[0]->isAdmin == TRUE)
+        {
+            $this->db->where('id',$id);
+            $this->db->update('user',array('isAdmin' => FALSE));
+        } else {
+            $this->db->where('id',$id);
+            $this->db->update('user',array('isAdmin' => TRUE));
+        }
+    }
+
 
 }

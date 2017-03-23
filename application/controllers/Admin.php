@@ -206,8 +206,12 @@
             $this->smarty->view('Admin/user_management.tpl',$data);
         }
 
-        public function addAdmin(){
-
+        public function switchUserRank(int $id){
+            $this->logged_user_only();
+            $this->admin_user_only();
+            $this->super_user_only();
+            $this->user_model->switchRank($id);
+            redirect('admin/users','refresh');
         }
     }
 ?>

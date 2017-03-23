@@ -76,7 +76,8 @@ $route['admin/shop/addShop'] = 'Admin/addShop';
 $route['admin/shop/(:num)/name'] = 'Admin/updateShopName/$1';
 $route['admin/shop/(:num)/location'] = 'Admin/updateShopLocation/$1';
 $route['admin/users'] = 'Admin/user_management_index';
-$route['admin/users/addAdmin'] = 'Admin/addAdmin';
+$route['admin/users/rankup/(:num)'] = 'Admin/switchUserRank/$1';
+$route['admin/users/rankdown/(:num)'] = 'Admin/switchUserRank/$1';
 
 $route['home/shops'] = 'ShopList/index';
 $route['home/shops/create'] = 'ShopList/createShop';
