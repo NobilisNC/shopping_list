@@ -1,4 +1,4 @@
-var amoutButtons = function(document, window) {
+var amountButtons = function(document, window) {
   this.__URL__ = window.__URL__;
 
   this.list = document.querySelector('#productsList');

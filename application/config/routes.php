@@ -58,6 +58,8 @@ $route['API/list/(:num)/check/(:num)'] = 'API_smartphone/checkProduct/$1/$2';
 $route['API/list/(:num)/uncheck/(:num)'] = 'API_smartphone/uncheckProduct/$1/$2';
 $route['API/list/(:num)/sortWeight'] = 'API_smartphone/sortWeight/$1';
 $route['API/list/(:num)/sortColdness'] = 'API_smartphone/sortColdness/$1';
+$route['API/list/all'] = 'API_smartphone/all_lists';
+$route['API/shop/all'] = 'API_smartphone/all_shops';
 
 $route['useList/show/(:num)'] = 'useList/showUseList/$1';
 $route['useList/(:num)/add/(:num)/amount/(:num)'] = 'useList/addProduct/$1/$2/$3';

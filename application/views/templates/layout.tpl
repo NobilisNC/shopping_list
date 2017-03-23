@@ -9,7 +9,11 @@
 		<meta charset="utf-8" />
 		<title>Gestion de liste de course</title>
 	</head>
+
 	<body >
+		<script type="text/javascript">
+			window.__URL__ = '{site_url()}/';
+		</script>
     		<header>
     						{include 'layout/layout_entete.inc.tpl'}
                 <div class="navbar">
@@ -29,8 +33,6 @@
 		</footer>
 
 		<script type="text/javascript" src="{base_url()}static/js/kickstart.min.js"></script>
-		<script type="text/javascript">
-			window.__URL__ = '{site_url()}/';
-		</script>
+
 	</body>
 </html>

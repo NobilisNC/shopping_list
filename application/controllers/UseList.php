@@ -41,10 +41,12 @@
         */
         public function addProduct(int $id_list, int $id_product, int $amount) {
           $response = new AJAX();
-          if($this->UseList_model->addProduct($id_list, $id_product, $amount ))
+          if($this->UseList_model->addProduct($id_list, $id_product, $amount )) {
             $response->addData('product', $this->Product_model->getProductById($id_product));
-          else
+            $response->addData('amount', $amount);
+          } else {
           $reponse.addError('Erreur lors de l\'ajout du  produit' );
+          }
 
           $response->send();
         }

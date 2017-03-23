@@ -9,6 +9,7 @@
             $this->load->model('ShoppingList_model');
             $this->load->model('user_model');
             $this->load->model('UseList_model');
+            $this->load->model('ShopList_model');
         }
 
         /** @brief Creates a new useList from an existing list
@@ -94,7 +95,7 @@
           $response->send();
         }
 
-        /** @brief Displays a specified useList
+        /** @brief Send infos about a specified useList
         *
         * @detail Verifies if the user is logged and is an owner of the useList,
         *         then calls getProducts($id) from UseList_model
@@ -164,6 +165,42 @@
 
             usort($products, 'compare');
             $response->addData('products', $products);
+          }
+          $response->send();
+        }
+
+        /** @brief Send all list of an user
+        *
+        * @detail
+        *
+        *
+        */
+        public function all_lists() {
+          $response = new AJAX();
+          if($this->session->userdata('logged_in') !== true )
+            $response->addError('not logged');
+          else {
+            $lists = $this->ShoppingList_model->getLists($this->session->userdata('id'));
+
+            $response->addData('products', $lists);
+          }
+          $response->send();
+        }
+
+        /** @brief Send all shop
+        *
+        * @detail
+        *
+        *
+        */
+        public function all_shops() {
+          $response = new AJAX();
+          if($this->session->userdata('logged_in') !== true )
+            $response->addError('not logged');
+          else {
+            $shops = $this->ShopList_model->getAllShops();
+
+            $response->addData('products', $shops);
           }
           $response->send();
         }

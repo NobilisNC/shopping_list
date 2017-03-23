@@ -29,7 +29,14 @@
 
     <tr>
         <td>
-          <div id="productsInput"></div>
+          <div class="row">
+            <div class="col-6">
+              <div id="productsInput"></div>
+            </div>
+            <div class="col-6">
+              <input type="number" id="amount" value="1">
+            </div>
+        </div>
         </td>
       <td></td>
     </tr>
@@ -46,5 +53,48 @@
 </div>
 </div>
 
-<script type="text/javascript" src="{base_url()}static/js/productInput_Only.js"></script>
+<script type="text/javascript" src="{base_url()}static/js/productInput.js"></script>
+<script type="text/javascript">
+function add(r) {
+    if(r.status == true) {
+      let list = document.querySelector('#productsList');
+      let row   = list.insertRow(list.rows.length - 1);
+      let cell1 = row.insertCell();
+      let cell2 = row.insertCell();
+      let cell3 = row.insertCell();
+
+
+      cell2.innerHTML = r.data.product.name;
+      cell3.innerHTML = r.data.amount;
+
+      k$.growl({
+        text  : 'Le produit : ' + r.data.product.name + ' a été ajouté',
+        delay : 2000,
+        type  : 'alert-green'
+      });
+  } else {
+    k$.growl({
+      text  : 'Erreur lors de l\'ajout du produit',
+      delay : 2000,
+      type  : 'alert-red'
+    });
+  }}
+
+let inputProduct = new productsInput(
+  {
+    action : function(id) {
+      let amount_field = document.querySelector("#amount");
+      let amount = amount_field.value;
+
+      let x = new XMLHttpRequest();
+      x.open('GET', window.__URL__ + 'useList/' + {$list_id} + '/add/'+ id +'/amount/' + amount, true);
+      x.onload = function() {
+        if (x.status === 200) {
+            add(JSON.parse(x.responseText));
+        }
+      };
+      x.send();
+    }
+  });
+</script>
 {/block}
