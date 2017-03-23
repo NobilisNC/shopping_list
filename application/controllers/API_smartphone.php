@@ -26,7 +26,7 @@
             $response->addError('You don\'t have access to this list');
           else {
                 $id_list = $this->UseList_model->useList($id);
-                $response->addData('id_list',  $id_list);
+                $response->addData('id_session',  $id_list);
                 $response->addData('products', $this->ShoppingList_model->getProducts($id));
             }
 
@@ -42,7 +42,16 @@
         * @param $id - A specified useList id
         */
         public function stopList(int $id) {
-          $this->UseList_model->deleteList($id);
+          $response = new AJAX();
+          if($this->session->userdata('logged_in') !== true )
+            $response->addError('not logged');
+          else if(!$this->UseList_model->isOwner($id, $this->session->userdata('id')))
+            $response->addError('You don\'t have access to this list');
+          else if(!$this->UseList_model->deleteList($id))
+            $response->addError('Error stopping the list');
+
+
+          $response->send();
         }
 
         /** @brief Checks a product as "taken" in the specified useList

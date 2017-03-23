@@ -20,7 +20,7 @@
     <tbody>
     {foreach $products as $product}
       <tr class="product" data-product_id="{$product->id}">
-        <td>{if $product->checked}checked{else}unckecked{/if}</td>
+        <td>{if $product->checked}<span class="fa fa-check" aria-hidden="true"></span>{/if}</td>
         <td>{$product->name}</td>
         <td>{$product->amount}</td>
       </tr>

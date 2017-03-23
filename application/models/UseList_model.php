@@ -10,6 +10,7 @@ class UseList_model extends CI_Model {
      *
      * @param $id_list - The id for the list to be created
      *
+     * @return $id_use_list - id of using list
      **/
     public function useList(int $id_list) {
       //Create instance of `use_list`
@@ -33,9 +34,11 @@ class UseList_model extends CI_Model {
     /** @brief Deletes the specified useList
     *
     * @param $id - The id of the list to be deleted
+    *
+    * @return Boolean - operation of deletion has worked
     */
     public function deleteList(int $id) {
-      $this->db->where(array('id' => $id))
+      return $this->db->where(array('id' => $id))
                ->delete('use_list');
     }
 
