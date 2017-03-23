@@ -52,6 +52,21 @@ class User_model extends CI_Model {
         }
     }
 
+    /** @brief Verifies if the specified user is an admin
+    *
+    * @param $id - A specified user id
+    *
+    * @return Boolean : returns TRUE if the user is an admin, else return FALSE
+    */
+    public function valid_admin_rights($id) {
+        $query = $this->db->get_where('user',array('id' => $id));
+        if($query->result()[0]->isAdmin == TRUE){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+
     /** @brief Verifies if the specified string matches a login in the database
      *
      * @param $str - a specified string

@@ -34,6 +34,11 @@ class Accueil extends CI_Controller {
            $this->session->set_userdata('logged_in', TRUE);
            $this->session->set_userdata('login', $this->input->post('login'));
            $this->session->set_userdata('id', $this->user_model->id($this->session->userdata('login')));
+           //Verification si l utilisateur est administrateur
+           $isAdmin = $this->verify_admin_rights($this->session->userdata('id'));
+           if($isAdmin == TRUE){
+            $this->session->set_userdata('logged_admin',TRUE);
+            }
            redirect('home/index','refresh');
        } else {
            $this->smarty->view('Accueil/connexion.tpl', $data);
@@ -77,6 +82,8 @@ class Accueil extends CI_Controller {
     *
     * @detail Calls login_exists($str)
     *
+    * @param $str - the login you check
+    *
     * @return Boolean : TRUE if the login is valid (isn't already used),
     *                   FALSE if the login isn't valid (already used)
     */
@@ -93,6 +100,8 @@ class Accueil extends CI_Controller {
     *
     * @detail Calls email_exists($str)
     *
+    * @param $str - The email you check
+    *
     * @return Boolean : TRUE if the email is valid (isn't already used),
     *                   FALSE if the email isn't valid (already used)
     */
@@ -106,12 +115,14 @@ class Accueil extends CI_Controller {
    }
 
 
-   /** @brief Verifies if the provided connexion info is valid
+   /** @brief Verifies if the provided connexion information is valid
    *
-   * @detail Calls valid_connexion_info($login, $password) to check if it matches
-   *         the database.
+   * @detail Calls valid_connexion_info($login, $password) from user_model
+   *        to check if it matches the database.
    *
-   * @return Boolean : TRUE if the info is valid, FALSE if it isn't.
+   * @param $str ?
+   *
+   * @return Boolean : TRUE if the information is valid, FALSE if it isn't.
    */
    public function verify_connexion_info($str) {
 
@@ -124,15 +135,52 @@ class Accueil extends CI_Controller {
 
    }
 
+   /** @ Verifies if the specified user is an admin
+   *
+   * @detail Calls valid_admin_rights($id) from user_model
+   *
+   * @param $id - A specified user id
+   *
+   * @return Boolean : returns TRUE if the user is an admin, else returns FALSE
+   */
+   public function verify_admin_rights(int $id) {
+       if($this->user_model->valid_admin_rights($id) == TRUE){
+           return TRUE;
+       }else {
+           return FALSE;
+       }
+   }
+
    public function test_AJAX() {
      $test = new AJAX();
 
 
      $test->setError('Plouf');
+     $test->setError('Plaf');
      $test->addData('status', 'OK');
      $test->addData('tata', array("plouf" => "caca", "pif" => "paf"));
 
      $test->send();
+
+     /* JSON :
+     {
+        "data":
+        {
+          "status":"OK",
+          "tata":
+          {
+              "plouf":"caca",
+              "pif":"paf"
+          }
+        },
+        "errors":
+        {
+            "numbers":2,
+            "0":"Plouf",
+            "1":"Plaf"
+        }
+     }
+     */
    }
 
 

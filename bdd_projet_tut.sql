@@ -71,8 +71,7 @@ CREATE TABLE `product` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `coldness` tinyint UNSIGNED NOT NULL DEFAULT '0',
-  `weight` float NOT NULL,
-  `volume` float NOT NULL
+  `weight` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -192,6 +191,7 @@ ALTER TABLE `shop`
   /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 ALTER TABLE `shop` ADD `etat` ENUM('submited','approved') NOT NULL AFTER `location`;
+ALTER TABLE `user`  ADD `isAdmin` BOOLEAN NOT NULL DEFAULT FALSE  AFTER `fname`;
 
 --
 -- Constraints for dumped tables

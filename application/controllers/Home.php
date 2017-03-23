@@ -8,6 +8,11 @@ class Home extends Core_Controller {
            $this->load->model('user_model');
    }
 
+   /** @brief Displays the home page
+   *
+   *
+   *
+   */
    public function index() {
        $this->logged_user_only();
            #PAGE REGROUPANT DERNIERE INFOS
@@ -17,6 +22,13 @@ class Home extends Core_Controller {
            $this->smarty->view('Home/index.tpl', $data);
    }
 
+   /** Displays the profile page
+   *
+   * @detail Displays the profile information of the logged user, and a
+   *         form to change the account password. If the form is completed
+   *         correctly it will call change_pwd($login, $new_password) from
+   *         user_model.
+   */
    public function profil() {
        $this->logged_user_only();
            $data = array();
@@ -37,7 +49,12 @@ class Home extends Core_Controller {
 
    }
 
-
+   /** Displays the friends page
+   *
+   * @detail Displays the list of friends of the logged user, and a form
+   *         to add a friend. This form will call add_friend($login, $friend_login)
+   *         from user_model.
+   */
    public function amis() {
        $this->logged_user_only();
 
@@ -63,16 +80,28 @@ class Home extends Core_Controller {
 
 
 
-
+   /** @brief Disconnects the user and redirects to connexion page
+   *
+   */
    public function logout() {
        $this->logged_user_only();
            $this->session->unset_userdata('logged_in');
+           $this->session->unset_userdata('logged_admin');
            $this->session->unset_userdata('login');
            $this->session->unset_userdata('id');
            redirect('accueil/connexion','refresh');
    }
 
 
+   /** @brief Verifies if the provided password is correct
+   *
+   * @detail Calls valid_connexion_info($login, $str) from user_model
+   *
+   * @param $str - The password typed by the user
+   *
+   * @return Boolean : returns TRUE if the password is valid, FALSE if
+   *                   it is not
+   */
    public function password_check($str) {
        if ($this->user_model->valid_connexion_info($this->session->userdata('login'), $str) == TRUE) {
            return TRUE;
@@ -82,6 +111,18 @@ class Home extends Core_Controller {
        }
    }
 
+   /** @brief Verifies if the provided login is correct
+   *
+   *  @detail When the user tries to add a friend, verifies if the login
+   *          he typed is correct (not his login, not already friends,
+   *          existing login, no invitation already sent to this login).
+   *          Calls login_exists($str) and are_friends($str, $login) from
+   *          user_model.
+   *
+   * @param $str - The login typed by the user
+   *
+   * @return Boolean : returns TRUE if the type login is valid, else returns FALSE
+   */
    public function login_check($str) {
        if ($str == $this->session->userdata('login')) {
            $this->form_validation->set_message('login_check', 'Vous ne pouvez pas vous ajouter vous-même.');
@@ -89,13 +130,13 @@ class Home extends Core_Controller {
        }
 
        if ($this->user_model->login_exists($str) == FALSE ) {
-           $this->form_validation->set_message('login_check', 'Ce login n\'a pas était trouvé.');
+           $this->form_validation->set_message('login_check', 'Ce login n\'a pas été trouvé.');
            return FALSE;
        }
 
        $ami =  $this->user_model->are_friends($str, $this->session->userdata('id'));
        if ($ami == 'access') {
-           $this->form_validation->set_message('login_check', 'Vous êtes déjà amis avec cette personne');
+           $this->form_validation->set_message('login_check', 'Vous êtes déjà ami avec cette personne');
            return FALSE;
        } elseif($ami == 'waiting') {
             $this->form_validation->set_message('login_check', 'Une invitation a déjà été envoyée.');
@@ -107,6 +148,12 @@ class Home extends Core_Controller {
    }
 
 
+   /** @brief Adds a friend to the logged user friend list from a notification
+   *
+   * @detail Checks if the user has notifications. If he has, he can choose
+   *         to accept or to delete them
+   *
+   */
    public function ajouterami() {
        $this->logged_user_only();
 
@@ -129,6 +176,13 @@ class Home extends Core_Controller {
        redirect('home/amis', 'refresh');
    }
 
+   /** @brief Deletes a friend from the logged user friend list
+   *
+   * @detail Checks if the logged user and the friend to be deleted
+   *         actually are friends (calls are_friends($login, $id) from user_model).
+   *         If they are, deletes the friend (calls delete_friend($login1, $login2) from user_model).
+   *         Refreshes the page.
+   */
    public function supprimerami() {
        $this->logged_user_only();
 

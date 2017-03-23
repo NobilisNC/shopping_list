@@ -23,7 +23,11 @@ class Sort extends Core_Controller {
 
    /** @brief Displays a selected list
    *
+<<<<<<< HEAD
    * @param - int $id : a specified list id
+=======
+   * @param int $id - a specified list id
+>>>>>>> d2db826db4f1d90791346e3007b1c0ee830d90e1
    *
    * @detail Calls getListById($id) and getProducts($id) from Sort_model
    *          to display the list
@@ -39,7 +43,11 @@ class Sort extends Core_Controller {
 
    /** @brief Display the specified list sorted by weight
    *
+<<<<<<< HEAD
    * @param - int $id : a specified list id
+=======
+   * @param int $id - a specified list id
+>>>>>>> d2db826db4f1d90791346e3007b1c0ee830d90e1
    *
    * @detail Calls getListById($id) and getProducts($id) from Sort_model
    *          to display the list. Creates a function comparer($a, $b)
@@ -62,7 +70,7 @@ class Sort extends Core_Controller {
 
    /** @brief Display the specified list sorted by coldness
    *
-   * @param - int $id : a specified list id
+   * @param int $id - a specified list id
    *
    * @detail Calls getListById($id) and getProducts($id) from Sort_model
    *          to display the list. Creates a function comparer($a, $b)

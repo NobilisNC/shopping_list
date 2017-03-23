@@ -6,9 +6,9 @@ class UseList_model extends CI_Model {
             $this->load->database();
     }
 
-    /**
+    /** @brief Creates a useList
      *
-     *
+     * @param $id_list - The id for the list to be created
      *
      **/
     public function useList(int $id_list) {
@@ -28,13 +28,21 @@ class UseList_model extends CI_Model {
       return $id_use_list;
     }
 
-
+    /** @brief Deletes the specified useList
+    *
+    * @param $id - The id of the list to be deleted
+    */
     public function deleteList(int $id) {
       $this->db->where(array('id' => $id))
                ->delete('use_list');
     }
 
-
+    /** @brief Gets the products in the specified useList
+    *
+    * @param $id - A specified useList id
+    *
+    * @return $results - An array with all the information about each product
+    */
     public function getProducts(int $id) {
       $this->db->select(array('id', 'name', 'amount', 'checked', 'modif', 'weight', 'coldness'))
                ->from('use_list_product')
@@ -46,12 +54,22 @@ class UseList_model extends CI_Model {
       return $results;
     }
 
+    /** @brief Checks a product as "taken" in the specified useList
+    *
+    * @param $id_product - The checked product id
+    * @param $id_list - The list id
+    */
     public function check(int $id_product, int $id_list) {
       return $this->db->set('checked', true)
                       ->where(array('id_list' => $id_list, 'id_product' => $id_product))
                       ->update('use_list_product');
     }
 
+    /** @brief Unchecks a checked product in the specified useList
+    *
+    * @param $id_product - The checked product id
+    * @param $id_list - The list id
+    */
     public function uncheck(int $id_product, int $id_list) {
       return $this->db->set('checked', false)
                       ->where(array('id_list' => $id_list, 'id_product' => $id_product))
