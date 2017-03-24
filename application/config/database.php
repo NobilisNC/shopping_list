@@ -82,6 +82,7 @@ $db['default'] = array(
     'password' => 'shopping',
     'database' => 'bdd_projet_tut',*/
 
+
     
     'username' => 'u_ptut',
     'password' => 'ptut',
