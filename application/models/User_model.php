@@ -249,6 +249,10 @@ class User_model extends CI_Model
         }
     }
 
+    /** @brief Return an array with all users
+     *
+     * @return array
+     */
     public function getAllUsers()
     {
         $sql = "SELECT * FROM user";
@@ -256,7 +260,15 @@ class User_model extends CI_Model
         return $query->result();
     }
 
-    public function switchRank($id)
+
+
+    /** @brief Change the privileges of an user
+     *  @param $id - A specified user id
+     *
+     * @detail If the user has no privilege, he becomes admin
+     *         else, he becomes a simple user
+     */
+    public function switchRank(int $id)
     {
         $sql = "SELECT isAdmin FROM user WHERE id=$id";
         $query = $this->db->query($sql);
@@ -268,6 +280,11 @@ class User_model extends CI_Model
             $this->db->update('user', array('isAdmin' => true));
         }
     }
+
+    /** @brief Delete an user
+     *  @param $id - A specified user id
+     *
+     */
 
     public function deleteUser($id)
     {

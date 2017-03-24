@@ -168,6 +168,12 @@ class UseList_model extends CI_Model
         return $id_lists[0];
     }
 
+    /** @brief get Products available in shop and present in a list
+     *  @param $id_list - A use_list id
+     *  @param $id_shop - A specified shop id
+     *
+     * @return $results - Array of products
+     */
     public function getProductsInShop(int $id_list, int $id_shop)
     {
         $this->db->select(array('product.id', 'name', 'amount', 'checked', 'weight', 'coldness'))
@@ -181,6 +187,12 @@ class UseList_model extends CI_Model
         return $results;
     }
 
+
+  /** @brief Check if the list is already started
+   *  @param $id_list - A list id
+   *
+   * @return BOOLEAN : True if started, else FALSE
+   */
     public function isStarted(int $id_list)
     {
         $result = $this->db->get_where('use_list', array('id_list' => $id_list));
@@ -192,10 +204,15 @@ class UseList_model extends CI_Model
         }
     }
 
+  /** @brief Return the use_list id of a list
+   *  @param $id_list - A list id
+   *
+   * @return $id_session - The use_list id
+   */
     public function getSessionId(int $id_list)
     {
         $result = $this->db->get_where('use_list', array('id_list' => $id_list));
-      
+
         return $result->result()[0]->id;
     }
 }
