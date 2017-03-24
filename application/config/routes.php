@@ -49,7 +49,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['ajax/test'] = 'accueil/test_AJAX';
 
 $route['API/start/(:num)'] = 'API_smartphone/useList/$1';
 $route['API/stop/(:num)'] = 'API_smartphone/stopList/$1';

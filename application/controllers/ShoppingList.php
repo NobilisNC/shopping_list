@@ -1,27 +1,29 @@
 <?php
 include_once('Core.php');
 
-class ShoppingList extends Core_Controller {
-
-    public function __construct() {
-           parent::__construct();
-           $this->load->model('user_model');
-           $this->load->model('ShoppingList_model');
-           $this->load->model('UseList_model');
-   }
+class ShoppingList extends Core_Controller
+{
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('user_model');
+        $this->load->model('ShoppingList_model');
+        $this->load->model('UseList_model');
+    }
 
    /** @brief Displays all the lists of the logged user
    *
    * @detail Calls getLists($id) from ShoppingList_model
    */
-   public function index() {
-      $this->logged_user_only();
+   public function index()
+   {
+       $this->logged_user_only();
 
-      $data['lists'] = $this->ShoppingList_model->getLists($this->session->userdata('id'));
+       $data['lists'] = $this->ShoppingList_model->getLists($this->session->userdata('id'));
       
 
 
-      $this->smarty->view('List/all.tpl', $data);
+       $this->smarty->view('List/all.tpl', $data);
    }
 
 
@@ -30,13 +32,14 @@ class ShoppingList extends Core_Controller {
    * @detail Calls createEmptyList($id_user) from ShoppingList_model
    *        Refreshes the page.
    */
-   public function createList() {
-     $this->logged_user_only();
-     $id = $this->user_model->id($this->session->userdata('login'));
+   public function createList()
+   {
+       $this->logged_user_only();
+       $id = $this->user_model->id($this->session->userdata('login'));
 
-     $this->ShoppingList_model->createEmptyList($id);
+       $this->ShoppingList_model->createEmptyList($id);
 
-     redirect('home/list', 'refresh');
+       redirect('home/list', 'refresh');
    }
 
    /** @brief Displays the specified list
@@ -46,12 +49,13 @@ class ShoppingList extends Core_Controller {
    * @detail Calls getListById($id) and getProducts($id) from ShoppingList_model
    *         to display the list
    */
-   public function showList(int $id) {
-     $this->logged_user_only();
-     $list = $this->ShoppingList_model->getListById($id);
-     $products = $this->ShoppingList_model->getProducts($id);
+   public function showList(int $id)
+   {
+       $this->logged_user_only();
+       $list = $this->ShoppingList_model->getListById($id);
+       $products = $this->ShoppingList_model->getProducts($id);
 
-     $this->smarty->view('List/show.tpl', array('list' => $list, 'products' => $products));
+       $this->smarty->view('List/show.tpl', array('list' => $list, 'products' => $products));
    }
 
    /** @brief Deletes the specified list
@@ -59,9 +63,10 @@ class ShoppingList extends Core_Controller {
    * @detail Calls deleteList($id) from ShoppingList_model.
    *         Redirects to home/list after the deletion
    */
-   public function deleteList(int $id) {
-     $this->ShoppingList_model->deleteList($id);
-     redirect('home/list');
+   public function deleteList(int $id)
+   {
+       $this->ShoppingList_model->deleteList($id);
+       redirect('home/list');
    }
 
    /** @brief Updates the name of the specified list
@@ -70,18 +75,18 @@ class ShoppingList extends Core_Controller {
    *
    * @param $id - A specified list id
    */
-   public function updateTitle(int $id) {
-     $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
-     $response = new AJAX();
-     if ($this->session->userdata('logged_in') !== TRUE)
-         $response->addError('Error not logged');
-    else {
-      $this->ShoppingList_model->setName($id, htmlentities($data->data));
-      $response->addData('text', $this->ShoppingList_model->getListById($id)->name);
+   public function updateTitle(int $id)
+   {
+       $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
+       $response = new AJAX();
+       if ($this->session->userdata('logged_in') !== true) {
+           $response->addError('Error not logged');
+       } else {
+           $this->ShoppingList_model->setName($id, htmlentities($data->data));
+           $response->addData('text', $this->ShoppingList_model->getListById($id)->name);
+       }
 
-    }
-
-      $response->send();
+       $response->send();
    }
 
    /** @brief Gets products with a name similar to the typed string
@@ -90,11 +95,12 @@ class ShoppingList extends Core_Controller {
    *
    * @param $fragmented_name - A string typed by the user
    */
-   public function getProductsLike(string $fragmented_name) {
-     $response = new AJAX();
-     $response->addData('names', $this->ShoppingList_model->getProductsLike(htmlentities($fragmented_name)));
+   public function getProductsLike(string $fragmented_name)
+   {
+       $response = new AJAX();
+       $response->addData('names', $this->ShoppingList_model->getProductsLike(htmlentities($fragmented_name)));
 
-     $response->send();
+       $response->send();
    }
 
    /** @brief Adds a product to the specified list
@@ -102,26 +108,30 @@ class ShoppingList extends Core_Controller {
    * @detail Calls addProductToList($id_list, $id_prod) and
    *         getProductById($id_prod) from ShoppingList_model
    */
-   public function addProduct(int $id_list, int $id_prod) {
-     $response = new AJAX();
+   public function addProduct(int $id_list, int $id_prod)
+   {
+       $response = new AJAX();
 
-     if(!$this->ShoppingList_model->addProductToList($id_list, $id_prod))
-        $response->addError("Erreur lors de l'ajout du produit");
-      else
-        $response->addData("product", $this->ShoppingList_model->getProductById($id_prod));
-     $response->send();
+       if (!$this->ShoppingList_model->addProductToList($id_list, $id_prod)) {
+           $response->addError("Erreur lors de l'ajout du produit");
+       } else {
+           $response->addData("product", $this->ShoppingList_model->getProductById($id_prod));
+       }
+       $response->send();
    }
    /** @brief Deletes a product from the specified list
    *
    * @detail Calls deleteProductToList($id_list, $id_prod) and
    *         getProductById($id_prod) from ShoppingList_model
    */
-   public function deleteProduct(int $id_list, int $id_product) {
-      $response = new AJAX();
-      if($this->ShoppingList_model->deleteProductFromList($id_list, $id_product))
-        $response->addData("product",$this->ShoppingList_model->getProductById($id_product));
+   public function deleteProduct(int $id_list, int $id_product)
+   {
+       $response = new AJAX();
+       if ($this->ShoppingList_model->deleteProductFromList($id_list, $id_product)) {
+           $response->addData("product", $this->ShoppingList_model->getProductById($id_product));
+       }
 
-      $response->send();
+       $response->send();
    }
 
    /** @brief Updates the amount of a specified product in a specified list
@@ -132,12 +142,14 @@ class ShoppingList extends Core_Controller {
    * @param $id_product - A specified product id
    * @param $amount - The new amount for the product
    */
-   public function updateAmount(int $id_list, int $id_product, int $amount) {
-     $response = new AJAX();
-     if($this->ShoppingList_model->setAmount($id_list, $id_product, $amount))
-      $response->adddata("amount", $this->ShoppingList_model->getAmount($id_list, $id_product));
+   public function updateAmount(int $id_list, int $id_product, int $amount)
+   {
+       $response = new AJAX();
+       if ($this->ShoppingList_model->setAmount($id_list, $id_product, $amount)) {
+           $response->adddata("amount", $this->ShoppingList_model->getAmount($id_list, $id_product));
+       }
 
-     $response->send();
+       $response->send();
    }
 
    /** @brief Updates the note for the specified list
@@ -146,16 +158,17 @@ class ShoppingList extends Core_Controller {
    *
    * @param $ id_list - A specified list id
    */
-   public function updateNote(int $id_list) {
-      $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
-      $response = new AJAX();
+   public function updateNote(int $id_list)
+   {
+       $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
+       $response = new AJAX();
 
-      $this->ShoppingList_model->updateNote($id_list, htmlentities($data->data));
-
-
-      $response->addData('text', html_entity_decode(nl2br($this->ShoppingList_model->getListById($id_list)->note)));
+       $this->ShoppingList_model->updateNote($id_list, htmlentities($data->data));
 
 
-      $response->send();
+       $response->addData('text', html_entity_decode(nl2br($this->ShoppingList_model->getListById($id_list)->note)));
+
+
+       $response->send();
    }
 }
