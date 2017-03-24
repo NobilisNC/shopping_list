@@ -228,6 +228,8 @@
         *
         * @param $id_session - A specified useList id
         * @param $id_shop - A specified shop id
+        *
+        * @return JSON response
         */
         public function sortShop(int $id_session, int $id_shop)
         {

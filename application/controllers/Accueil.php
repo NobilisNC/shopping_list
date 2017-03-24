@@ -10,7 +10,7 @@ class Accueil extends CI_Controller
 
    /** @brief Displays home page
     *
-    * @todo A faire
+    * 
     */
    public function index()
    {
