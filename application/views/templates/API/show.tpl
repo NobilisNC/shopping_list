@@ -26,8 +26,8 @@
       </tr>
     {/foreach}
   </tbody>
-
     <tr>
+      <td></td>
         <td>
           <div class="row">
             <div class="col-6">

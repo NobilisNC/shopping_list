@@ -1,4 +1,6 @@
-<?php  if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php  if (!defined('BASEPATH')) {
+    exit('No direct script access allowed');
+}
 
 /**
  * Smartie Class
@@ -9,36 +11,35 @@
  * @author         Kepler Gelotte
  * @link           http://www.coolphptools.com/codeigniter-smarty
  */
-require_once( APPPATH.'/third_party/smarty/libs/Smarty.class.php' );
+require_once(APPPATH.'/third_party/smarty/libs/Smarty.class.php');
 
-class Smartie extends Smarty {
+class Smartie extends Smarty
+{
+    public $debug = false;
 
-    var $debug = false;
-
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
 
         $this->template_dir = APPPATH . "views/templates";
         $this->compile_dir = APPPATH . "views/templates_c";
-        if ( ! is_writable( $this->compile_dir ) )
-        {
+        if (! is_writable($this->compile_dir)) {
             // make sure the compile directory can be written to
-            @chmod( $this->compile_dir, 0777 );
-        } 
+            @chmod($this->compile_dir, 0777);
+        }
 
         // Uncomment these 2 lines to change Smarty's delimiters
         // $this->left_delimiter = '{{';
         // $this->right_delimiter = '}}';
 
-        $this->assign( 'FCPATH', FCPATH );     // path to website
-        $this->assign( 'APPPATH', APPPATH );   // path to application directory
-        $this->assign( 'BASEPATH', BASEPATH ); // path to system directory
+        $this->assign('FCPATH', FCPATH);     // path to website
+        $this->assign('APPPATH', APPPATH);   // path to application directory
+        $this->assign('BASEPATH', BASEPATH); // path to system directory
 
         log_message('debug', "Smarty Class Initialized");
     }
 
-    function setDebug( $debug=true )
+    public function setDebug($debug=true)
     {
         $this->debug = $debug;
     }
@@ -61,34 +62,26 @@ class Smartie extends Smarty {
      * @param    bool
      * @return    string
      */
-    function view($template, $data = array(), $return = FALSE)
+    public function view($template, $data = array(), $return = false)
     {
-        if ( ! $this->debug )
-        {
+        if (! $this->debug) {
             $this->error_reporting = false;
         }
         $this->error_unassigned = false;
 
-        foreach ($data as $key => $val)
-        {
+        foreach ($data as $key => $val) {
             $this->assign($key, $val);
         }
         
-        if ($return == FALSE)
-        {
+        if ($return == false) {
             $CI =& get_instance();
-            if (method_exists( $CI->output, 'set_output' ))
-            {
-                $CI->output->set_output( $this->fetch($template) );
-            }
-            else
-            {
+            if (method_exists($CI->output, 'set_output')) {
+                $CI->output->set_output($this->fetch($template));
+            } else {
                 $CI->output->final_output = $this->fetch($template);
             }
             return;
-        }
-        else
-        {
+        } else {
             return $this->fetch($template);
         }
     }

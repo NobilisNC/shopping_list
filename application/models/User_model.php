@@ -1,9 +1,10 @@
 <?php
 
-class User_model extends CI_Model {
-
-    public function __construct() {
-            $this->load->database();
+class User_model extends CI_Model
+{
+    public function __construct()
+    {
+        $this->load->database();
     }
 
 
@@ -13,18 +14,19 @@ class User_model extends CI_Model {
      *
      * @return id - The user's id
      */
-    public function id($login) {
+    public function id($login)
+    {
         $query = $this->db->get_where('user', array('login' => $login));
 
-       return $query->result()[0]->id;
+        return $query->result()[0]->id;
     }
 
     /** @brief Adds the specified user in the database
      *
      * @param $user - an array containing all the user's information
      */
-    public function addUser($user) {
-
+    public function addUser($user)
+    {
         $data = array(
             'login' => $user['login'],
             'password' => $user['password'],
@@ -43,12 +45,13 @@ class User_model extends CI_Model {
      *
      * @return Boolean - TRUE if the information is valid, FALSE if it is not
      */
-    public function valid_connexion_info($login, $password) {
+    public function valid_connexion_info($login, $password)
+    {
         $query = $this->db->get_where('user', array('login' => $login, 'password' => sha1($password)));
-        if($query->num_rows() == 1) {
-            return TRUE;
+        if ($query->num_rows() == 1) {
+            return true;
         } else {
-            return FALSE;
+            return false;
         }
     }
 
@@ -58,12 +61,13 @@ class User_model extends CI_Model {
     *
     * @return Boolean : returns TRUE if the user is an admin, else return FALSE
     */
-    public function valid_admin_rights($id) {
-        $query = $this->db->get_where('user',array('id' => $id));
-        if($query->result()[0]->isAdmin == TRUE){
-            return TRUE;
-        }else{
-            return FALSE;
+    public function valid_admin_rights($id)
+    {
+        $query = $this->db->get_where('user', array('id' => $id));
+        if ($query->result()[0]->isAdmin == true) {
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -73,12 +77,13 @@ class User_model extends CI_Model {
      *
      * @return Boolean - TRUE if this login exists, FALSE if it doesn't
      */
-    public function login_exists($str) {
-        $query = $this->db->get_where('user',array('login' => $str));
-        if($query->num_rows() > 0) {
-            return TRUE;
+    public function login_exists($str)
+    {
+        $query = $this->db->get_where('user', array('login' => $str));
+        if ($query->num_rows() > 0) {
+            return true;
         } else {
-            return FALSE;
+            return false;
         }
     }
 
@@ -89,12 +94,13 @@ class User_model extends CI_Model {
      * @return Boolean - TRUE if this email exists, FALSE if it doesn't
      */
 
-    public function email_exists($str) {
-        $query = $this->db->get_where('user',array('mail' => strtolower($str)));
-        if($query->num_rows() > 0) {
-            return TRUE;
+    public function email_exists($str)
+    {
+        $query = $this->db->get_where('user', array('mail' => strtolower($str)));
+        if ($query->num_rows() > 0) {
+            return true;
         } else {
-            return FALSE;
+            return false;
         }
     }
 
@@ -104,24 +110,26 @@ class User_model extends CI_Model {
      *
      * @return $personnal_infos - An array containing the user's personnal info
      */
-    public function info($login) {
+    public function info($login)
+    {
         $query = $this->db->get_where('user', array('login' => $login));
         $result = $query->result()[0];
-        $personnal_infos = array (
+        $personnal_infos = array(
                 'login' => $result->login,
                 'mail' => $result->mail,
                 'nom' => $result->name,
                 'prenom' => $result->fname
         );
         return $personnal_infos;
-        }
+    }
 
       /** @brief Changes the user's password
        *
        * @param $login - A specified user login
        * @param $password - The new, modified password
        */
-    public function change_pwd($login, $password) {
+    public function change_pwd($login, $password)
+    {
         $this->db->set('password', sha1($password));
         $this->db->where('login', $login);
         $this->db->update('user');
@@ -134,14 +142,15 @@ class User_model extends CI_Model {
      * @param $login_donne_acces - Login of the user currently "adding a friend"
      * @param $login_a_acces - Login of the user receiving the "friend request"
      */
-    public function add_friend($login_donne_acces, $login_a_acces) {
+    public function add_friend($login_donne_acces, $login_a_acces)
+    {
         #$query = $this->db->get_where('user', array('login' => $login_donne_acces));
         $id_1 = $this->id($login_donne_acces);
         #$query = $this->db->get_where('user', array('login'=> $login_a_acces));
         $id_2 = $this->id($login_a_acces);#$query->result()[0]->id;
 
 
-        $data = array (
+        $data = array(
                 'id_give' => $id_1,
                 'id_get' => $id_2,
                 'state' => 'waiting'
@@ -149,13 +158,11 @@ class User_model extends CI_Model {
 
         $query = $this->db->get_where('friend', $data);
         //Si le lien existe déjà on change en 'access'
-        if ($query->num_rows() > 0 ) {
+        if ($query->num_rows() > 0) {
             $data['state'] = 'access';
-            $this->db->replace('friend',$data);
-
+            $this->db->replace('friend', $data);
         } else { // Sinon on crée le lien avec l'état 'waiting'
                     $this->db->insert('friend', $data);
-
         }
     }
 
@@ -166,9 +173,10 @@ class User_model extends CI_Model {
      *
      * @return $friends - An array containing the user's friends
      */
-    public function get_friends($login, $a_accepter = FALSE) {
+    public function get_friends($login, $a_accepter = false)
+    {
         $id = $this->id($login);
-        if ($a_accepter == TRUE) {
+        if ($a_accepter == true) {
             $sql = "SELECT login, state FROM `friend` JOIN user ON friend.id_get=user.id WHERE friend.id_give=$id AND state = 'access' UNION SELECT login,state FROM `friend` JOIN user ON friend.id_give=user.id WHERE friend.id_get=$id AND state = 'access' ORDER BY state";
         } else {
             $sql = "SELECT login, state FROM `friend` JOIN user ON friend.id_get=user.id WHERE friend.id_give=$id  UNION SELECT login,state FROM `friend` JOIN user ON friend.id_give=user.id WHERE friend.id_get=$id ORDER BY state";
@@ -176,8 +184,9 @@ class User_model extends CI_Model {
 
         $query = $this->db->query($sql);
         $friends = array();
-        foreach($query->result() as $name)
+        foreach ($query->result() as $name) {
             $friends[$name->login] = $name->state;
+        }
 
         return $friends;
     }
@@ -188,13 +197,15 @@ class User_model extends CI_Model {
      *
      * @return $notifications - An array
      */
-    public function get_notifications($login) {
+    public function get_notifications($login)
+    {
         $sql = "SELECT login FROM friend JOIN user ON user.id=friend.id_give WHERE id_get=(SELECT id FROM user WHERE  login = '".$login."') AND state = 'waiting'";
         $query = $this->db->query($sql);
 
         $notifications = array();
-        foreach($query->result() as $name)
+        foreach ($query->result() as $name) {
             $notifications[] = $name->login;
+        }
 
         return $notifications;
     }
@@ -204,7 +215,8 @@ class User_model extends CI_Model {
      * @param $login1 - A specified user's login
      * @param $login2 - A specified user's login
      */
-    public function delete_friend($login1, $login2) {
+    public function delete_friend($login1, $login2)
+    {
         $id_1 = $this->id($login1);
         $id_2 = $this->id($login2);
         $this->db->delete('friend', array('id_give' => $id_1, 'id_get' => $id_2));
@@ -218,46 +230,47 @@ class User_model extends CI_Model {
      * @param bool $access - False to show all friends, True to show only those who accepted
      * @return Boolean : TRUE if the specified users are friends, FALSE if they are not
      */
-    public function are_friends($login1, int $id2, $access = false) {
+    public function are_friends($login1, int $id2, $access = false)
+    {
         $id1 = $this->id($login1);
 
         $sql = "SELECT * FROM friend WHERE (( id_give=$id1 AND id_get = $id2 ) OR (id_give = $id2 AND id_get = $id1)) ";
 
-        if($access == TRUE) {
+        if ($access == true) {
             $sql .= " AND state = 'access' ";
-
         }
 
         $query = $this->db->query($sql);
 
-        if($query->num_rows() > 0)
+        if ($query->num_rows() > 0) {
             return $query->result()[0]->state;
-        else
-            return FALSE;
+        } else {
+            return false;
+        }
     }
 
-    public function getAllUsers(){
+    public function getAllUsers()
+    {
         $sql = "SELECT * FROM user";
         $query = $this->db->query($sql);
         return $query->result();
     }
 
-    public function switchRank($id){
+    public function switchRank($id)
+    {
         $sql = "SELECT isAdmin FROM user WHERE id=$id";
         $query = $this->db->query($sql);
-        if($query->result()[0]->isAdmin == TRUE)
-        {
-            $this->db->where('id',$id);
-            $this->db->update('user',array('isAdmin' => FALSE));
+        if ($query->result()[0]->isAdmin == true) {
+            $this->db->where('id', $id);
+            $this->db->update('user', array('isAdmin' => false));
         } else {
-            $this->db->where('id',$id);
-            $this->db->update('user',array('isAdmin' => TRUE));
+            $this->db->where('id', $id);
+            $this->db->update('user', array('isAdmin' => true));
         }
     }
 
-    public function deleteUser($id){
+    public function deleteUser($id)
+    {
         $this->db->delete('user', array('id' => $id));
     }
-
-
 }

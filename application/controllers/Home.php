@@ -1,23 +1,26 @@
 <?php
 include_once('Core.php');
 
-class Home extends Core_Controller {
-
-    public function __construct() {
-           parent::__construct();
-           $this->load->model('user_model');
-           $this->load->model('UseList_model');
-   }
+class Home extends Core_Controller
+{
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('user_model');
+        $this->load->model('UseList_model');
+    }
 
    /** @brief Displays the home page
    */
-   public function index() {
+   public function index()
+   {
        $this->logged_user_only();
        $data = array();
 
-       $friends = $this->user_model->get_friends($this->session->userdata('login'), TRUE);
-       if(count($friends) > 0)
-         $data['friend_lists'] = $this->UseList_model->getListsFriend($friends);
+       $friends = $this->user_model->get_friends($this->session->userdata('login'), true);
+       if (count($friends) > 0) {
+           $data['friend_lists'] = $this->UseList_model->getListsFriend($friends);
+       }
 
 
        $this->smarty->view('Home/index.tpl', $data);
@@ -30,24 +33,24 @@ class Home extends Core_Controller {
    *         correctly it will call change_pwd($login, $new_password) from
    *         user_model.
    */
-   public function profil() {
+   public function profil()
+   {
        $this->logged_user_only();
-           $data = array();
-           $this->load->helper('form');
-           $this->load->library('form_validation');
+       $data = array();
+       $this->load->helper('form');
+       $this->load->library('form_validation');
 
-           $this->form_validation->set_rules('old_password', 'ancien mot de passe', 'required|callback_password_check');
-           $this->form_validation->set_rules('new_password', 'nouveau mot de passe', 'required');
-           $this->form_validation->set_rules('new_password_conf', 'confirmation du nouveau mot de passe', 'required|matches[new_password]');
+       $this->form_validation->set_rules('old_password', 'ancien mot de passe', 'required|callback_password_check');
+       $this->form_validation->set_rules('new_password', 'nouveau mot de passe', 'required');
+       $this->form_validation->set_rules('new_password_conf', 'confirmation du nouveau mot de passe', 'required|matches[new_password]');
 
-           if ($this->form_validation->run() == TRUE) {
-               $this->user_model->change_pwd($this->session->userdata('login'), $this->input->post('new_password'));
-               $this->session->set_flashdata('password_changed', true);
-           }
+       if ($this->form_validation->run() == true) {
+           $this->user_model->change_pwd($this->session->userdata('login'), $this->input->post('new_password'));
+           $this->session->set_flashdata('password_changed', true);
+       }
 
-           $data = $this->user_model->info($this->session->userdata('login'));
-           $this->smarty->view('Home/profil.tpl', $data);
-
+       $data = $this->user_model->info($this->session->userdata('login'));
+       $this->smarty->view('Home/profil.tpl', $data);
    }
 
    /** Displays the friends page
@@ -56,26 +59,27 @@ class Home extends Core_Controller {
    *         to add a friend. This form will call add_friend($login, $friend_login)
    *         from user_model.
    */
-   public function amis() {
+   public function amis()
+   {
        $this->logged_user_only();
 
-           $data = array();
-           $this->load->helper('form');
-           $this->load->library('form_validation');
+       $data = array();
+       $this->load->helper('form');
+       $this->load->library('form_validation');
 
-               $this->form_validation->set_rules('ami_login', 'login_ami', 'required|callback_login_check');
+       $this->form_validation->set_rules('ami_login', 'login_ami', 'required|callback_login_check');
 
-           if ($this->form_validation->run() == TRUE) {
-               $this->user_model->add_friend($this->session->userdata('login'), $this->input->post('ami_login'));
-               $this->session->set_flashdata('new_ami',  $this->input->post('ami_login'));
-           }
+       if ($this->form_validation->run() == true) {
+           $this->user_model->add_friend($this->session->userdata('login'), $this->input->post('ami_login'));
+           $this->session->set_flashdata('new_ami', $this->input->post('ami_login'));
+       }
 
-           $data['amis'] = $this->user_model->get_friends($this->session->userdata('login'), TRUE);
-           $data['notifications'] = $this->user_model->get_notifications($this->session->userdata('login'));
+       $data['amis'] = $this->user_model->get_friends($this->session->userdata('login'), true);
+       $data['notifications'] = $this->user_model->get_notifications($this->session->userdata('login'));
 
 
 
-           $this->smarty->view('Home/ami.tpl',$data);
+       $this->smarty->view('Home/ami.tpl', $data);
    }
 
 
@@ -83,14 +87,15 @@ class Home extends Core_Controller {
    /** @brief Disconnects the user and redirects to connexion page
    *
    */
-   public function logout() {
+   public function logout()
+   {
        $this->logged_user_only();
-           $this->session->unset_userdata('logged_in');
-           $this->session->unset_userdata('logged_admin');
-           $this->session->unset_userdata('logged_super_user');
-           $this->session->unset_userdata('login');
-           $this->session->unset_userdata('id');
-           redirect('accueil/connexion','refresh');
+       $this->session->unset_userdata('logged_in');
+       $this->session->unset_userdata('logged_admin');
+       $this->session->unset_userdata('logged_super_user');
+       $this->session->unset_userdata('login');
+       $this->session->unset_userdata('id');
+       redirect('accueil/connexion', 'refresh');
    }
 
 
@@ -103,12 +108,13 @@ class Home extends Core_Controller {
    * @return Boolean : returns TRUE if the password is valid, FALSE if
    *                   it is not
    */
-   public function password_check($str) {
-       if ($this->user_model->valid_connexion_info($this->session->userdata('login'), $str) == TRUE) {
-           return TRUE;
+   public function password_check($str)
+   {
+       if ($this->user_model->valid_connexion_info($this->session->userdata('login'), $str) == true) {
+           return true;
        } else {
            $this->form_validation->set_message('password_check', 'Le mot actuel n\'est pas reconnu.');
-           return FALSE;
+           return false;
        }
    }
 
@@ -124,28 +130,29 @@ class Home extends Core_Controller {
    *
    * @return Boolean : returns TRUE if the type login is valid, else returns FALSE
    */
-   public function login_check($str) {
+   public function login_check($str)
+   {
        if ($str == $this->session->userdata('login')) {
            $this->form_validation->set_message('login_check', 'Vous ne pouvez pas vous ajouter vous-même.');
-            return FALSE;
+           return false;
        }
 
-       if ($this->user_model->login_exists($str) == FALSE ) {
+       if ($this->user_model->login_exists($str) == false) {
            $this->form_validation->set_message('login_check', 'Ce login n\'a pas été trouvé.');
-           return FALSE;
+           return false;
        }
 
        $ami =  $this->user_model->are_friends($str, $this->session->userdata('id'));
        if ($ami == 'access') {
            $this->form_validation->set_message('login_check', 'Vous êtes déjà ami avec cette personne');
-           return FALSE;
-       } elseif($ami == 'waiting') {
-            $this->form_validation->set_message('login_check', 'Une invitation a déjà été envoyée.');
-           return FALSE;
+           return false;
+       } elseif ($ami == 'waiting') {
+           $this->form_validation->set_message('login_check', 'Une invitation a déjà été envoyée.');
+           return false;
        }
 
 
-       return TRUE;
+       return true;
    }
 
 
@@ -155,22 +162,21 @@ class Home extends Core_Controller {
    *         to accept or to delete them
    *
    */
-   public function ajouterami() {
+   public function ajouterami()
+   {
        $this->logged_user_only();
 
-       if ( in_array(
+       if (in_array(
            $this->input->get('login'),
            $this->user_model->get_notifications($this->session->userdata('login'))
-           ) == TRUE ) {
-
+           ) == true) {
            if ($this->input->get('etat') == 'accepte') {
                $this->user_model->add_friend($this->input->get('login'), $this->session->userdata('login'), $this->input->get('etat'));
-           } elseif($this->input->get('etat') == 'refuser') {
+           } elseif ($this->input->get('etat') == 'refuser') {
                $this->user_model->delete_friend($this->input->get('login'), $this->session->userdata('login'));
            }
-
        } else {
-           $this->session->set_flashdata('error','Une erreur à eue lieu lors de l\'ajout d\'un ami');
+           $this->session->set_flashdata('error', 'Une erreur à eue lieu lors de l\'ajout d\'un ami');
        }
 
 
@@ -184,16 +190,16 @@ class Home extends Core_Controller {
    *         If they are, deletes the friend (calls delete_friend($login1, $login2) from user_model).
    *         Refreshes the page.
    */
-   public function supprimerami() {
+   public function supprimerami()
+   {
        $this->logged_user_only();
 
-       if ( $this->user_model->are_friends($this->input->get('login'),$this->session->userdata('id')) == TRUE ) {
-              $this->user_model->delete_friend($this->input->get('login'), $this->session->userdata('login'), $this->input->get('etat'));
+       if ($this->user_model->are_friends($this->input->get('login'), $this->session->userdata('id')) == true) {
+           $this->user_model->delete_friend($this->input->get('login'), $this->session->userdata('login'), $this->input->get('etat'));
        } else {
-           $this->session->set_flashdata('error','Une erreur à eue lieu lors de la suppression d\'un ami');
+           $this->session->set_flashdata('error', 'Une erreur à eue lieu lors de la suppression d\'un ami');
        }
 
        redirect('home/amis', 'refresh');
    }
-
 }

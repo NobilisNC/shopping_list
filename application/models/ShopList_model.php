@@ -1,7 +1,9 @@
 <?php
 
-class ShopList_model extends CI_Model{
-    public function __construct(){
+class ShopList_model extends CI_Model
+{
+    public function __construct()
+    {
         $this->load->database();
     }
 
@@ -9,7 +11,8 @@ class ShopList_model extends CI_Model{
      *
      * @return The list of all the shops
      */
-    public function getAllShops(){
+    public function getAllShops()
+    {
         $this->db->order_by('name', 'asc');
         $query = $this->db->get('shop');
         return $query->result();
@@ -21,7 +24,8 @@ class ShopList_model extends CI_Model{
      *
      * @return The name and location of corresponding shops
      */
-    public function getShopIn(string $in){
+    public function getShopIn(string $in)
+    {
         $this->db->select('name,location')
                  ->from('shop')
                  ->where("name LIKE '".$in."%'")
@@ -30,7 +34,8 @@ class ShopList_model extends CI_Model{
         return $query->result();
     }
 
-    public function getShopById($id){
+    public function getShopById($id)
+    {
         return $this->db->get_where('shop', array('id' => $id))->result()[0];
     }
 
@@ -42,13 +47,13 @@ class ShopList_model extends CI_Model{
      */
     public function addShop($shop_data)
     {
-        $query = $this->db->get_where('shop',$shop_data);
+        $query = $this->db->get_where('shop', $shop_data);
 
-        if($query->num_rows() > 0){
-            return FALSE;
-        }else{
-            $this->db->insert('shop',$shop_data);
-            return TRUE;
+        if ($query->num_rows() > 0) {
+            return false;
+        } else {
+            $this->db->insert('shop', $shop_data);
+            return true;
         }
     }
 
@@ -57,30 +62,32 @@ class ShopList_model extends CI_Model{
      *
      * @param $shop_id - A specified shop id
      */
-    public function deleteShop(int $shop_id){
-        $this->db->where('id',$shop_id);
+    public function deleteShop(int $shop_id)
+    {
+        $this->db->where('id', $shop_id);
         $this->db->delete('shop');
     }
 
 
-    public function getProducts(int $id) {
-      $query = $this->db->select(array('product.name', 'product.id'))
+    public function getProducts(int $id)
+    {
+        $query = $this->db->select(array('product.name', 'product.id'))
                ->from('shop_product')
                ->join('product', 'shop_product.id_product = product.id')
                ->where('id_shop = '.$id)
                ->get();
 
-      return $query->result();
+        return $query->result();
     }
 
-    public function addProductToShop(int $id_shop, string $id_product ) {
-
-         $data = array(
+    public function addProductToShop(int $id_shop, string $id_product)
+    {
+        $data = array(
            'id_shop' => $id_shop,
            'id_product' => $id_product,
          );
 
-         return $this->db->insert('shop_product', $data);
+        return $this->db->insert('shop_product', $data);
     }
 
 
@@ -91,17 +98,16 @@ class ShopList_model extends CI_Model{
      *
      * @return Boolean : True if the product is deleted, false if it is not.
      */
-    public function deleteProductFromShop(int $id_shop, int $id_product) {
+    public function deleteProductFromShop(int $id_shop, int $id_product)
+    {
         return $this->db->where(array('id_shop' => $id_shop, 'id_product' => $id_product))
                         ->delete('shop_product');
-
     }
 
 
-    public function setLocation($id_shop,$new_location){
-        $this->db->where('id',$id_shop);
-        $this->db->update('shop',array('location' => $new_location));
+    public function setLocation($id_shop, $new_location)
+    {
+        $this->db->where('id', $id_shop);
+        $this->db->update('shop', array('location' => $new_location));
     }
-
 }
-?>
