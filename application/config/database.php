@@ -82,11 +82,11 @@ $db['default'] = array(
 	'password' => 'shopping',
 	'database' => 'bdd_projet_tut',*/
 
-    
-	'username' => 'u_ptut',
-	'password' => 'ptut',
-	'database' => 'u_ptut',
-    
+
+	'username' => 'PTUT',
+	'password' => 'PTUT',
+	'database' => 'ptut',
+
 
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

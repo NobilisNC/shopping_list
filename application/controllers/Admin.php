@@ -86,6 +86,9 @@
 
         /** @brief Updates a specified product's name
         *
+        * @detail Verifies if the user is logged and if he is an admin, then
+        *         calls setName($id, $name) from Product_model
+        *
         * @param $id - A specified product id
         */
         public function updateProductName(int $id){
@@ -101,6 +104,13 @@
             $response->send();
         }
 
+        /** @brief Updates a specified product's coldness
+        *
+        * @detail Verifies if the user is logged and if he is an admin, then
+        *         calls setColdness($id, $coldness) from Product_model
+        *
+        * @param $id - A specified product id
+        */
         public function updateProductColdness(int $id){
             $this->admin_user_only();
             $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
@@ -114,6 +124,13 @@
             $response->send();
         }
 
+        /** @brief Updates a specified product's weight
+        *
+        * @detail Verifies if the user is logged and if he is an admin, then
+        *         calls setWeight($id, $weight) from Product_model
+        *
+        * @param $id - A specified product id
+        */
         public function updateProductWeight(int $id){
             $this->admin_user_only();
             $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
@@ -173,6 +190,13 @@
             }
         }
 
+        /** @brief Updates a specified shop name
+        *
+        * @detail Verifies if the user is logged and if he is an admin, then
+        *         calls setName($id, $name) from ShopList_model
+        *
+        * @param $id - A specified shop id
+        */
         public function updateShopName(int $id){
             $this->admin_user_only();
             $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
@@ -186,6 +210,13 @@
             $response->send();
         }
 
+        /** @brief Updates a specified shop location
+        *
+        * @detail Verifies if the user is logged and if he is an admin, then
+        *         calls setLocation($id, $loc) from ShopList_model
+        *
+        * @param $id - A specified shop id
+        */
         public function updateShopLocation(int $id){
             $this->admin_user_only();
             $data = json_decode($this->security->xss_clean($this->input->raw_input_stream));
@@ -199,6 +230,13 @@
             $response->send();
         }
 
+        /** @brief Displays the user management page
+        *
+        *
+        *
+        *
+        *
+        */
         public function user_management_index(){
             $this->super_user_only();
             $data = array();
