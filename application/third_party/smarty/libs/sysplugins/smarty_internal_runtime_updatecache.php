@@ -161,5 +161,4 @@ class Smarty_Internal_Runtime_UpdateCache
 
         return false;
     }
-
 }

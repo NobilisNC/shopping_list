@@ -32,7 +32,6 @@
  */
 class Smarty_Internal_Extension_Handler
 {
-
     public $objType = null;
 
     /**
@@ -143,5 +142,4 @@ class Smarty_Internal_Extension_Handler
     {
         return call_user_func_array(array(new Smarty_Internal_Undefined(), $name), array($this));
     }
-
 }

@@ -112,7 +112,7 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_Compile_Shared_Inher
      *
      * @return string   compiled code of child block
      */
-    static function compileChildBlock(Smarty_Internal_TemplateCompilerBase $compiler, $_name = null)
+    public static function compileChildBlock(Smarty_Internal_TemplateCompilerBase $compiler, $_name = null)
     {
         if (!isset($compiler->_cache[ 'blockNesting' ])) {
             $compiler->trigger_template_error(' tag {$smarty.block.child} used outside {block} tags ',
@@ -133,7 +133,7 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_Compile_Shared_Inher
      *
      * @return string   compiled code of child block
      */
-    static function compileParentBlock(Smarty_Internal_TemplateCompilerBase $compiler, $_name = null)
+    public static function compileParentBlock(Smarty_Internal_TemplateCompilerBase $compiler, $_name = null)
     {
         if (!isset($compiler->_cache[ 'blockNesting' ])) {
             $compiler->trigger_template_error(' tag {$smarty.block.parent} used outside {block} tags ',

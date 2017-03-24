@@ -41,14 +41,14 @@ class Smarty_Internal_Runtime_TplFunction
             }
             if (function_exists($function)) {
                 $this->saveTemplateVariables($tpl, $name);
-                $function ($tpl, $params);
+                $function($tpl, $params);
                 $this->restoreTemplateVariables($tpl, $name);
                 return;
             }
             // try to load template function dynamically
             if ($this->addTplFuncToCache($tpl, $name, $function)) {
                 $this->saveTemplateVariables($tpl, $name);
-                $function ($tpl, $params);
+                $function($tpl, $params);
                 $this->restoreTemplateVariables($tpl, $name);
                 return;
             }

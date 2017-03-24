@@ -1109,7 +1109,7 @@ class Smarty extends Smarty_Internal_TemplateBase
             $tpl = $do_clone ? clone $this->_cache[ 'isCached' ][ $_templateId ] :
                 $this->_cache[ 'isCached' ][ $_templateId ];
             $tpl->tpl_vars = $tpl->config_vars = array();
-        } else if (!$do_clone && isset($this->_cache[ 'tplObjects' ][ $_templateId ])) {
+        } elseif (!$do_clone && isset($this->_cache[ 'tplObjects' ][ $_templateId ])) {
             $tpl = clone $this->_cache[ 'tplObjects' ][ $_templateId ];
         } else {
             /* @var Smarty_Internal_Template $tpl */
@@ -1201,7 +1201,7 @@ class Smarty extends Smarty_Internal_TemplateBase
     public function _realpath($path, $realpath = null)
     {
         $nds = DS == '/' ? '\\' : '/';
-        // normalize DS 
+        // normalize DS
         $path = str_replace($nds, DS, $path);
         preg_match('%^(?<root>(?:[[:alpha:]]:[\\\\]|/|[\\\\]{2}[[:alpha:]]+|[[:print:]]{2,}:[/]{2}|[\\\\])?)(?<path>(?:[[:print:]]*))$%',
                    $path, $parts);

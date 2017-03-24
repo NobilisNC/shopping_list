@@ -48,7 +48,7 @@ class Smartie extends Smarty
      *  Parse a template using the Smarty engine
      *
      * This is a convenience method that combines assign() and
-     * display() into one step. 
+     * display() into one step.
      *
      * Values to assign are passed in an associative array of
      * name => value pairs.

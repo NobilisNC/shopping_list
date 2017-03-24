@@ -98,8 +98,7 @@ class Smarty_Internal_Compile_Private_Print_Expression extends Smarty_Internal_C
                 }
                 // auto loaded filters
                 if (isset($compiler->smarty->autoload_filters[ Smarty::FILTER_VARIABLE ])) {
-                    foreach ((array) $compiler->template->smarty->autoload_filters[ Smarty::FILTER_VARIABLE ] as $name)
-                    {
+                    foreach ((array) $compiler->template->smarty->autoload_filters[ Smarty::FILTER_VARIABLE ] as $name) {
                         $result = $this->compile_output_filter($compiler, $name, $output);
                         if ($result !== false) {
                             $output = $result;

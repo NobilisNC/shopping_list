@@ -157,5 +157,4 @@ class Smarty_Internal_Runtime_Capture
             $this->captureCount = array_pop($this->countStack);
         }
     }
-
 }
