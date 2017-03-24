@@ -243,10 +243,7 @@
 
         /** @brief Displays the user management page
         *
-        *
-        *
-        *
-        *
+        * @detail Calls getAllUsers() from user_model
         */
         public function user_management_index()
         {
@@ -256,6 +253,13 @@
             $this->smarty->view('Admin/user_management.tpl', $data);
         }
 
+        /** @brief Changes the specified user privilege
+        *
+        * @detail Verifies if the user is logged and is the super admin, then
+        *         changes the rank of the user (admin or user)
+        *
+        * @param $id - A specified user id
+        */
         public function switchUserRank(int $id)
         {
             $this->logged_user_only();
@@ -265,6 +269,13 @@
             redirect('admin/users', 'refresh');
         }
 
+        /** @brief Deletes the specified user
+        *
+        * @detail Verifies if the user is logged and is the super admin
+        *
+        * @param $id - A specified user id
+        * 
+        */
         public function deleteUser(int $id)
         {
             $this->logged_user_only();

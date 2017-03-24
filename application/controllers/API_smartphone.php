@@ -185,9 +185,9 @@
 
         /** @brief Send all list of an user
         *
-        * @detail
         *
         *
+        * @return JSON response
         */
         public function all_lists()
         {
@@ -204,9 +204,9 @@
 
         /** @brief Send all shop
         *
-        * @detail
         *
         *
+        * @return JSON response
         */
         public function all_shops()
         {
@@ -221,6 +221,14 @@
             $response->send();
         }
 
+        /** @brief Sorts products on their availability in the specified shop
+        *
+        * @detail Verifies if the user is logged and owner of the list, the calls
+        *         getProductsInShop($id_session, $id_shop) from UseList_model.
+        *
+        * @param $id_session - A specified useList id
+        * @param $id_shop - A specified shop id
+        */
         public function sortShop(int $id_session, int $id_shop)
         {
             $response = new AJAX();

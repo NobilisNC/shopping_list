@@ -24,18 +24,6 @@ class ShopList extends Core_Controller
         $this->smarty->view('Shop/all.tpl', $data);
     }
 
-    /** @brief ?
-    *
-    *
-    *
-    */
-    public function createShop()
-    {
-        $this->logged_user_only();
-        //Cree un nouveau ShopList
-        redirect('home/shops', 'refresh');
-    }
-
     /** @brief Searches for a shop with a specified name
     *
     * @detail Calls getShopIn($q) from ShopList_model to find the shop
@@ -52,6 +40,14 @@ class ShopList extends Core_Controller
         echo json_encode($result);
     }
 
+    /** @brief Displays the list of all products available in the specified shop
+    *
+    * @detail If the user isn't admin, redirects to home page. Else, calls
+    *         getShopById($id) and getProducts($id) from ShopList_model
+    *
+    * @param $id - A specified shop id
+    *
+    */
     public function show(int $id)
     {
         $this->logged_user_only();
@@ -65,6 +61,11 @@ class ShopList extends Core_Controller
         $this->smarty->view('Shop/show.tpl', $data);
     }
 
+    /** @brief Adds the specified product to the specified shop
+    *
+    * @param $id_shop - A specified shop id
+    * @param $id_product - A specified product id
+    */
     public function addProduct(int $id_shop, $id_product)
     {
         $response = new AJAX();
@@ -78,6 +79,14 @@ class ShopList extends Core_Controller
         $response->send();
     }
 
+    /** @Deletes the specified product from the specified shop
+    *
+    * @detail Verifies if the user is logged and is admin, then calls
+    *         deleteProductFromShop($id_shop, $id_product) from ShopList_model
+    *
+    * @param $id_shop - A specified shop id
+    * @param $id_product - A specified product id
+    */
     public function deleteProduct(int $id_shop, int $id_product)
     {
         $this->logged_user_only();
