@@ -31,7 +31,7 @@ class Smarty_Internal_Runtime_CacheModify
                     break;
 
                 case 'cli':
-                    if ( /* ^phpunit */
+                    if (/* ^phpunit */
                     !empty($_SERVER[ 'SMARTY_PHPUNIT_DISABLE_HEADERS' ]) /* phpunit$ */
                     ) {
                         $_SERVER[ 'SMARTY_PHPUNIT_HEADERS' ][] = '304 Not Modified';
@@ -39,7 +39,7 @@ class Smarty_Internal_Runtime_CacheModify
                     break;
 
                 default:
-                    if ( /* ^phpunit */
+                    if (/* ^phpunit */
                     !empty($_SERVER[ 'SMARTY_PHPUNIT_DISABLE_HEADERS' ]) /* phpunit$ */
                     ) {
                         $_SERVER[ 'SMARTY_PHPUNIT_HEADERS' ][] = '304 Not Modified';
@@ -51,7 +51,7 @@ class Smarty_Internal_Runtime_CacheModify
         } else {
             switch (PHP_SAPI) {
                 case 'cli':
-                    if ( /* ^phpunit */
+                    if (/* ^phpunit */
                     !empty($_SERVER[ 'SMARTY_PHPUNIT_DISABLE_HEADERS' ]) /* phpunit$ */
                     ) {
                         $_SERVER[ 'SMARTY_PHPUNIT_HEADERS' ][] =

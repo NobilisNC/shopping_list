@@ -46,14 +46,14 @@ abstract class Smarty_Internal_CompileBase
 
     /**
      * Mapping array for boolqn option value
-     * 
+     *
      * @var array
      */
     public $optionMap = array(1 => true, 0 => false, 'true' => true, 'false' => false);
 
     /**
      * Mapping array with attributes as key
-     * 
+     *
      * @var array
      */
     public $mapCache = array();

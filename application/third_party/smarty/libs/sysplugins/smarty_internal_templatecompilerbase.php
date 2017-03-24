@@ -56,7 +56,7 @@ abstract class Smarty_Internal_TemplateCompilerBase
      *
      * @var array
      */
-    static $_tag_objects = array();
+    public static $_tag_objects = array();
 
     /**
      * tag stack
@@ -402,8 +402,7 @@ abstract class Smarty_Internal_TemplateCompilerBase
                 $_content = $this->template->source->getContent();
             }
             $_compiled_code = $this->postFilter($this->doCompile($this->preFilter($_content), true));
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             if ($this->smarty->debugging) {
                 $this->smarty->_debug->end_compile($this->template);
             }
@@ -575,8 +574,7 @@ abstract class Smarty_Internal_TemplateCompilerBase
                     }
                 }
                 // check if tag is registered
-                foreach (array(Smarty::PLUGIN_COMPILER, Smarty::PLUGIN_FUNCTION, Smarty::PLUGIN_BLOCK,) as $plugin_type)
-                {
+                foreach (array(Smarty::PLUGIN_COMPILER, Smarty::PLUGIN_FUNCTION, Smarty::PLUGIN_BLOCK,) as $plugin_type) {
                     if (isset($this->smarty->registered_plugins[ $plugin_type ][ $tag ])) {
                         // if compiler function plugin call it now
                         if ($plugin_type == Smarty::PLUGIN_COMPILER) {
@@ -1291,5 +1289,4 @@ abstract class Smarty_Internal_TemplateCompilerBase
         $this->prefix_code = array();
         return $code;
     }
-
 }

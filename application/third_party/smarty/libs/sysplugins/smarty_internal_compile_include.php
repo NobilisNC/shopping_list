@@ -208,7 +208,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase
             $t_hash = sha1($c_id . ($_caching ? '--caching' : '--nocaching'));
             $compiler->smarty->allow_ambiguous_resources = true;
             /* @var Smarty_Internal_Template $tpl */
-            $tpl = new $compiler->smarty->template_class (trim($fullResourceName, '"\''), $compiler->smarty,
+            $tpl = new $compiler->smarty->template_class(trim($fullResourceName, '"\''), $compiler->smarty,
                                                           $compiler->template, $compiler->template->cache_id, $c_id,
                                                           $_caching);
             $uid = $tpl->source->type . $tpl->source->uid;

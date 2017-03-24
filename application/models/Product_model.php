@@ -1,7 +1,9 @@
 <?php
 
-class Product_model extends CI_Model{
-    public function __construct(){
+class Product_model extends CI_Model
+{
+    public function __construct()
+    {
         $this->load->database();
     }
 
@@ -9,7 +11,8 @@ class Product_model extends CI_Model{
     *
     * @return The list of all products in the database
     */
-    public function getAllProduct(){
+    public function getAllProduct()
+    {
         $query = $this->db->get('product');
         return $query->result();
     }
@@ -20,7 +23,8 @@ class Product_model extends CI_Model{
     *
     * @return The product with the specified id
     */
-    public function getProductById($id){
+    public function getProductById($id)
+    {
         return $this->db->get_where('product', array('id' => $id))->result()[0];
     }
 
@@ -28,12 +32,13 @@ class Product_model extends CI_Model{
      *
      * @param $product_data - All the data about a product : id, name, coldness and weight
      */
-     public function addproduct($product_data){
-       ///@todo Doit renvoyer un booléen
-        if ($this->db->insert('product',$product_data) == TRUE) {
-          return TRUE;
+     public function addproduct($product_data)
+     {
+         ///@todo Doit renvoyer un booléen
+        if ($this->db->insert('product', $product_data) == true) {
+            return true;
         } else {
-          return FALSE;
+            return false;
         }
      }
 
@@ -41,11 +46,12 @@ class Product_model extends CI_Model{
      *
      * @param $id_product - The product id
      */
-     public function deleteProduct($id_product){
-       ///@todo Doit renvoyer un booléen
-       return $this->db->where('id',$id_product)
+     public function deleteProduct($id_product)
+     {
+         ///@todo Doit renvoyer un booléen
+       return $this->db->where('id', $id_product)
                      ->delete('product');
-    }
+     }
 
     /** @brief Verifies if the specified name exists in the database
     *
@@ -57,14 +63,15 @@ class Product_model extends CI_Model{
     * @return Boolean - TRUE if the name doesn't exist (and the product is added)
     *                   FALSE if the name already exists (and the product isn't added)
     */
-    public function name_exist($name) {
-      $query = $this->db->get_where('product', array('name' => $name));
+    public function name_exist($name)
+    {
+        $query = $this->db->get_where('product', array('name' => $name));
 
-      if($query->num_rows() > 0)
-          return TRUE;
-      else
-          return FALSE;
-
+        if ($query->num_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /** @detail Changes the name of a specified product
@@ -72,19 +79,21 @@ class Product_model extends CI_Model{
     * @param $id_product - A specified product id
     * @param $new_name - The new name for the specified product
     */
-    public function setName($id_product,$new_name){
-        $this->db->where('id',$id_product);
-        $this->db->update('product',array('name' => $new_name));
+    public function setName($id_product, $new_name)
+    {
+        $this->db->where('id', $id_product);
+        $this->db->update('product', array('name' => $new_name));
     }
 
-    public function setColdness($id_product,$new_coldness){
-        $this->db->where('id',$id_product);
-        $this->db->update('product',array('coldness' => $new_coldness));
+    public function setColdness($id_product, $new_coldness)
+    {
+        $this->db->where('id', $id_product);
+        $this->db->update('product', array('coldness' => $new_coldness));
     }
 
-    public function setWeight($id_product,$new_weight){
-        $this->db->where('id',$id_product);
-        $this->db->update('product',array('weight' => $new_weight));
+    public function setWeight($id_product, $new_weight)
+    {
+        $this->db->where('id', $id_product);
+        $this->db->update('product', array('weight' => $new_weight));
     }
 }
-?>

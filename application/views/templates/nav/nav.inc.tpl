@@ -1,6 +1,10 @@
 <nav data-ks-navbar>
 <ul class="">
-	<li><a href="{site_url()}/index">Accueil</a></li>
+	{if $smarty.session.logged_in === TRUE}
+		<li><a href="{site_url()}/home/index">Accueil</a></li>
+	{else}
+		<li><a href="{site_url()}/index">Accueil</a></li>
+	{/if}
 </ul>
 <ul>
 	{if $smarty.session.logged_in === TRUE}
