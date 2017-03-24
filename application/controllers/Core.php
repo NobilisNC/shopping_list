@@ -31,6 +31,10 @@ class Core_Controller extends CI_Controller
        }
    }
 
+   /** @brief Checks if the user is the super admin
+   *
+   * @detail If the user isn't super admin, redirects to home page
+   */
     protected function super_user_only()
     {
         if ($this->session->userdata('id') != 1) {

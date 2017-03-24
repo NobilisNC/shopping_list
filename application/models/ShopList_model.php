@@ -69,6 +69,12 @@ class ShopList_model extends CI_Model
     }
 
 
+    /** @brief Gets all products from the specified shop
+    *
+    * @param $id - A specified shop id
+    *
+    * @return An array with all the data from all the products
+    */
     public function getProducts(int $id)
     {
         $query = $this->db->select(array('product.name', 'product.id'))
@@ -80,6 +86,11 @@ class ShopList_model extends CI_Model
         return $query->result();
     }
 
+    /** @brief Adds the specified product to the specified shop
+    *
+    * @param $id_sop - A specified shop id
+    * @param $id_product - A specified product id
+    */
     public function addProductToShop(int $id_shop, string $id_product)
     {
         $data = array(
@@ -105,12 +116,23 @@ class ShopList_model extends CI_Model
     }
 
 
+    /** @brief Sets location of the specified shop
+    *
+    * @param $id_shop - A specified shop id
+    * @param $new_location - The new location for this shop
+    *
+    */
     public function setLocation(int $id_shop, $new_location)
     {
         $this->db->where('id', $id_shop);
         $this->db->update('shop', array('location' => $new_location));
     }
 
+    /** @brief Sets the name of the specified shop
+    *
+    * @param $id_shop - A specified shop id
+    * @param $new_location - The new name for this shop
+    */
     public function setName(int $id_shop, $new_name)
     {
         $this->db->where('id', $id_shop);
