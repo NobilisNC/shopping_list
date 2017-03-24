@@ -105,9 +105,15 @@ class ShopList_model extends CI_Model
     }
 
 
-    public function setLocation($id_shop, $new_location)
+    public function setLocation(int $id_shop, $new_location)
     {
         $this->db->where('id', $id_shop);
         $this->db->update('shop', array('location' => $new_location));
+    }
+
+    public function setName(int $id_shop, $new_name)
+    {
+        $this->db->where('id', $id_shop);
+        $this->db->update('shop', array('name' => $new_name));
     }
 }
