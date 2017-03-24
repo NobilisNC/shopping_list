@@ -18,9 +18,7 @@ class ShoppingList extends Core_Controller {
       $this->logged_user_only();
 
       $data['lists'] = $this->ShoppingList_model->getLists($this->session->userdata('id'));
-      $friends = $this->user_model->get_friends($this->session->userdata('login'), TRUE);
-      if(count($friends) > 0)
-        $data['friend_lists'] = $this->UseList_model->getListsFriend($friends);
+      
 
 
       $this->smarty->view('List/all.tpl', $data);

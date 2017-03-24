@@ -6,17 +6,21 @@ class Home extends Core_Controller {
     public function __construct() {
            parent::__construct();
            $this->load->model('user_model');
+           $this->load->model('UseList_model');
    }
 
    /** @brief Displays the home page
    */
    public function index() {
        $this->logged_user_only();
-           #PAGE REGROUPANT DERNIERE INFOS
-           #liste
-           #notification
-           $data = array();
-           $this->smarty->view('Home/index.tpl', $data);
+       $data = array();
+
+       $friends = $this->user_model->get_friends($this->session->userdata('login'), TRUE);
+       if(count($friends) > 0)
+         $data['friend_lists'] = $this->UseList_model->getListsFriend($friends);
+
+
+       $this->smarty->view('Home/index.tpl', $data);
    }
 
    /** Displays the profile page

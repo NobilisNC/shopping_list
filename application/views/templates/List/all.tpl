@@ -27,26 +27,5 @@
 <a class="button" href="{site_url()}/home/list/create">Ajouter une liste</a>
 </div>
 
-{if count($friend_lists) > 0 }
-<div class="row">
-<table class="table">
-  <thead>
-  <tr>
-    <th>Ami</th>
-    <th>Liste</th>
-  </tr>
-</thead>
-<tbody>
-{foreach $friend_lists as $list}
-<tr>
-  <td>{$list->login}</td>
-  <td><a href="{site_url()}/useList/show/{$list->id}">{$list->name}</a></td>
-</tr>
-{/foreach}
-</tbody>
-</table>
-</div>
-{/if}
-
 </div>
 {/block}

@@ -92,6 +92,7 @@ $route['home/shops/create'] = 'ShopList/createShop';
 $route['home/shops/deleteFromMyShops/(:num)'] = 'ShopList/deleteFromMyShops/$1';
 $route['home/shops/get'] = 'ShopList/getShops';
 $route['home/shops/addToMyShops'] = 'ShopList/addToMyShops';
+$route['home/index'] = 'Home/index';
 
 
 $route['home/list/(:num)/note'] = 'ShoppingList/updateNote/$1';
